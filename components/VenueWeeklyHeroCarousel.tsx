@@ -2,8 +2,10 @@
 
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import Image from 'next/image';
+import { Pause, Play } from 'lucide-react';
 import Link from '@/components/LocalizedLink';
 import { toCardPoster4x5 } from '@/lib/cardPoster4x5';
+import { useHumanAutoScroll } from '@/components/HumanEventCarousel';
 import type {
   VenueWeeklyHeroSchedule,
   VenueWeeklyHeroUi,
@@ -43,6 +45,7 @@ function computeClientRomeNightDayKey(): string {
 
 export default function VenueWeeklyHeroCarousel({
   venueName,
+  locale = 'en',
   ui,
   schedule,
 }: VenueWeeklyHeroCarouselProps) {
@@ -70,19 +73,35 @@ export default function VenueWeeklyHeroCarousel({
     return schedule.cards.filter((c) => c.dayKey === selectedDay);
   }, [schedule.cards, selectedDay]);
 
-  const handleScroll = (dir: 'prev' | 'next') => {
-    if (!scrollRef.current) return;
-    const offset = dir === 'next' ? 350 : -350;
-    scrollRef.current.scrollBy({ left: offset, behavior: 'smooth' });
-  };
+  const {
+    copy: humanCopy,
+    state: autoState,
+    canScroll,
+    canScrollPrev,
+    canScrollNext,
+    userPaused,
+    stepPrev,
+    stepNext,
+    toggleUserPause,
+    setWrapperNode,
+    wrapperHandlers,
+    trackHandlers,
+  } = useHumanAutoScroll(scrollRef, { locale, resetKey: selectedDay });
 
   return (
     <section
       id="serate-settimana-locale"
+      ref={setWrapperNode}
+      role="region"
+      aria-roledescription="carousel"
       data-venue-weekly-hero-carousel="true"
+      data-human-event-carousel="true"
+      data-human-autoscroll-state={autoState}
+      data-human-autoscroll-scrollable={canScroll ? 'true' : 'false'}
       data-schedule-mode={schedule.mode}
       aria-label={`${venueName} · ${ui.title}`}
       className="w-full border-y border-[#F6F1E7]/16 bg-[#0B0A09] text-[#F6F1E7] scroll-mt-24"
+      {...wrapperHandlers}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
         {/* Header & Carousel Controls */}
@@ -104,17 +123,39 @@ export default function VenueWeeklyHeroCarousel({
             <div className="flex items-center gap-2 self-start lg:self-end shrink-0">
               <button
                 type="button"
-                onClick={() => handleScroll('prev')}
+                onClick={toggleUserPause}
+                aria-label={userPaused ? humanCopy.play : humanCopy.pause}
+                data-human-carousel-toggle="true"
+                data-paused={userPaused ? 'true' : 'false'}
+                className="min-h-[44px] min-w-[44px] border border-[#F6F1E7]/25 bg-[#141311] px-3 text-[#F6F1E7] hover:bg-[#F6F1E7] hover:text-[#050505] inline-flex items-center justify-center gap-1.5 font-mono text-[11px] font-bold uppercase tracking-wider transition-colors"
+              >
+                {userPaused ? (
+                  <>
+                    <Play className="h-3.5 w-3.5 fill-current" aria-hidden="true" />
+                    <span>{humanCopy.playShort}</span>
+                  </>
+                ) : (
+                  <>
+                    <Pause className="h-3.5 w-3.5" aria-hidden="true" />
+                    <span>{humanCopy.pauseShort}</span>
+                  </>
+                )}
+              </button>
+              <button
+                type="button"
+                onClick={stepPrev}
+                disabled={!canScrollPrev}
                 aria-label={ui.prevSlideAria}
-                className="min-h-[44px] min-w-[44px] border border-[#F6F1E7]/25 bg-[#141311] text-[#F6F1E7] hover:bg-[#F6F1E7] hover:text-[#050505] flex items-center justify-center font-mono text-lg font-bold transition-colors"
+                className="min-h-[44px] min-w-[44px] border border-[#F6F1E7]/25 bg-[#141311] text-[#F6F1E7] hover:bg-[#F6F1E7] hover:text-[#050505] disabled:opacity-40 flex items-center justify-center font-mono text-lg font-bold transition-colors"
               >
                 ‹
               </button>
               <button
                 type="button"
-                onClick={() => handleScroll('next')}
+                onClick={stepNext}
+                disabled={!canScrollNext}
                 aria-label={ui.nextSlideAria}
-                className="min-h-[44px] min-w-[44px] border border-[#F6F1E7]/25 bg-[#141311] text-[#F6F1E7] hover:bg-[#F6F1E7] hover:text-[#050505] flex items-center justify-center font-mono text-lg font-bold transition-colors"
+                className="min-h-[44px] min-w-[44px] border border-[#F6F1E7]/25 bg-[#141311] text-[#F6F1E7] hover:bg-[#F6F1E7] hover:text-[#050505] disabled:opacity-40 flex items-center justify-center font-mono text-lg font-bold transition-colors"
               >
                 ›
               </button>
@@ -193,10 +234,11 @@ export default function VenueWeeklyHeroCarousel({
 
         {/* Horizontal 4:5 Weekly Nights Carousel */}
         {visibleCards.length > 0 && (
-          <div className="grid grid-cols-1">
+          <div className="w-full min-w-0 max-w-full">
             <div
               ref={scrollRef}
-              className="col-span-full flex gap-4 sm:gap-5 overflow-x-auto pb-3 snap-x snap-mandatory scrollbar-thin"
+              className="flex w-full min-w-0 max-w-full gap-4 sm:gap-5 overflow-x-auto overscroll-x-contain pb-3 snap-x snap-proximity cursor-grab active:cursor-grabbing select-none [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+              {...trackHandlers}
             >
               {visibleCards.map((card, idx) => {
                 const isTonight = card.dayKey === liveTodayKey;

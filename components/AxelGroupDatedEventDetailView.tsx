@@ -16,6 +16,7 @@ import {
 import EventVenueMap from '@/components/EventVenueMap';
 import Link from '@/components/LocalizedLink';
 import SeoAuthorityHub from '@/components/SeoAuthorityHub';
+import { HumanEventCarousel } from '@/components/HumanEventCarousel';
 import { getAxelGroupEventLocalized } from '@/lib/axel-group-events/events35';
 import { getEventVenueCopy } from '@/lib/i18n/eventVenueCopy';
 import { getLocalizedDir35 } from '@/lib/i18n/dirTokens35';
@@ -571,8 +572,8 @@ export default function AxelGroupDatedEventDetailView({
         <section
           data-no-lightbox="true"
           data-event-crosslink-cards="axel-group-dated"
-          className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4"
         >
+          <HumanEventCarousel locale={rawLocale} cardSize="compact">
           <div className="flex flex-col justify-between space-y-4 overflow-hidden rounded-xl border border-white/15 bg-white/[0.03] p-5">
             <div className="space-y-4">
               <Link
@@ -702,6 +703,7 @@ export default function AxelGroupDatedEventDetailView({
               {detail.specialLabel} <ArrowRight className="h-3.5 w-3.5" />
             </Link>
           </div>
+          </HumanEventCarousel>
         </section>
 
         {/* Section 6: 12 Verified FAQs */}

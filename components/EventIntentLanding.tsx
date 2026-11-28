@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from '@/components/LocalizedLink';
 import { CalendarDays, Check, Clock, MessageCircle, Users } from 'lucide-react';
 import EventCard from '@/components/EventCard';
+import { HumanEventCarousel } from '@/components/HumanEventCarousel';
 import { CONTACT } from '@/config/contact';
 import { getAllCalendarEvents, isUpcomingRome } from '@/lib/calendarEvents';
 import { getLocaleDef, hreflangAlternates, localePrefix, canonicalPageUrl } from '@/lib/i18n/locales';
@@ -355,9 +356,9 @@ export default async function EventIntentLanding({ intent, locale }: { intent: E
           <CalendarDays className="w-7 h-7 text-champagne/60" />
         </div>
         {items.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          <HumanEventCarousel locale={locale} ariaLabel={COMMON.events[lang]}>
             {items.map(({ event, venue }, index) => <EventCard key={event.id} event={event} venue={venue} lang={locale} priority={index < 2} />)}
-          </div>
+          </HumanEventCarousel>
         ) : (
           <p className="border-y border-white/10 py-10 text-white/60">{COMMON.noEvents[lang]}</p>
         )}

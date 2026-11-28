@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Link from '@/components/LocalizedLink';
 import EventVenueMap from '@/components/EventVenueMap';
 import SeoAuthorityHub from '@/components/SeoAuthorityHub';
+import { HumanEventCarousel } from '@/components/HumanEventCarousel';
 import { SITE_CONTACT } from '@/config/contact';
 import { getPaymentTerms35 } from '@/lib/capodanno/paymentTerms35';
 import { capodannoEventPath } from '@/lib/capodanno/routes';
@@ -318,8 +319,9 @@ export default function OrthodoxNyeJustMeDetailView({ locale }: { locale: string
         <section
           data-no-lightbox="true"
           data-event-crosslink-cards="orthodox-nye-justme"
-          className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-2"
+          className="mt-8"
         >
+          <HumanEventCarousel locale={locale}>
           <div className="flex flex-col justify-between gap-4 border border-[#24242C] bg-[#0D0E13] p-5">
             <div className="space-y-4">
               <Link
@@ -381,6 +383,7 @@ export default function OrthodoxNyeJustMeDetailView({ locale }: { locale: string
               {c.dec31BannerCta}
             </Link>
           </div>
+          </HumanEventCarousel>
         </section>
 
         {/* 1. Overview & Timeline */}

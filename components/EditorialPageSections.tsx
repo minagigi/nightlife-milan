@@ -1,4 +1,5 @@
 import SeoAuthorityHub from './SeoAuthorityHub';
+import { HumanEventCarousel } from './HumanEventCarousel';
 import React from 'react';
 import Image from 'next/image';
 import Link from '@/components/LocalizedLink';
@@ -945,7 +946,13 @@ export default function EditorialPageSections({ locale, path }: Props) {
     <>
       <aside className="w-full border-t border-[#F6F1E7]/14 bg-[#0B0A09] text-[#F6F1E7]" aria-label="Special & Thematic Events Hub">
         <div className="mx-auto max-w-[1280px] border-x border-[#F6F1E7]/14 divide-y divide-[#F6F1E7]/14">
-          <section id="categorie-eventi" className="scroll-mt-24 px-6 py-14 sm:px-14" data-aiso-direct-answer="true">
+          <section
+            id="categorie-eventi"
+            className="scroll-mt-24 px-6 py-14 sm:px-14"
+            data-aiso-direct-answer="true"
+            data-events-thematic-grid
+            data-no-lightbox="true"
+          >
             <p className="mb-2 font-sans tabular-nums text-[13px] font-bold uppercase tracking-[0.04em] text-[#C2B9AA]">
               {isIt ? 'CALENDARIO GRANDI EVENTI & SERATE TEMATICHE · MILANO 2026/2027' : 'MAJOR EVENTS & THEMATIC NIGHTS CALENDAR · MILAN 2026/2027'}
             </p>
@@ -959,11 +966,7 @@ export default function EditorialPageSections({ locale, path }: Props) {
                 ? 'Filtra per appuntamento stagionale, fascia anagrafica o pubblico universitario nei club partner di Milano.'
                 : 'Filter Milan partner club nights by seasonal peak date, age policy, or international student format.'}
             </p>
-            <div
-              data-events-thematic-grid
-              data-no-lightbox="true"
-              className="grid gap-5 md:grid-cols-2 lg:grid-cols-3"
-            >
+            <HumanEventCarousel locale={locale}>
               <article className="flex flex-col overflow-hidden border border-[#F6F1E7]/14 bg-[#141311]">
                 <Link
                   href={`${lp}/events/halloween-2026`}
@@ -1130,7 +1133,7 @@ export default function EditorialPageSections({ locale, path }: Props) {
                   </p>
                 </div>
               </article>
-            </div>
+            </HumanEventCarousel>
           </section>
         </div>
       </aside>

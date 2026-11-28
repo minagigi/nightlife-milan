@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import Link from '@/components/LocalizedLink';
+import { HumanEventCarousel } from '@/components/HumanEventCarousel';
 import { localePrefix, type LocaleCode } from '@/lib/i18n/locales';
 import { CAPODANNO_NAVIGATION } from '@/lib/capodanno/routes';
 import { SLUG_TOKENS_35 } from '@/lib/i18n/localizedSlugs35';
@@ -87,7 +88,7 @@ export default function EventMoneyPillarsStrip({ locale }: Props) {
       className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 border-t border-[#F6F1E7]/14"
     >
       <h2 className="font-serif text-2xl font-bold text-[#F6F1E7] mb-6">{ui35.servicesTitle}</h2>
-      <div className="grid gap-5 md:grid-cols-3">
+      <HumanEventCarousel locale={loc} ariaLabel={ui35.servicesTitle}>
         {cards.map((card) => (
           <Link
             key={card.href}
@@ -100,7 +101,7 @@ export default function EventMoneyPillarsStrip({ locale }: Props) {
                 alt={card.title}
                 fill
                 quality={92}
-                sizes="(max-width: 768px) 100vw, 33vw"
+                sizes="(max-width: 768px) 78vw, 340px"
                 className="object-cover transition-transform duration-300 group-hover:scale-[1.02]"
               />
             </div>
@@ -115,7 +116,7 @@ export default function EventMoneyPillarsStrip({ locale }: Props) {
             </div>
           </Link>
         ))}
-      </div>
+      </HumanEventCarousel>
     </section>
   );
 }

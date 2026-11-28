@@ -16,7 +16,9 @@ import { getConciergeBookingUrl } from '@/lib/conciergeBooking';
 import type { CalendarControlsCopy } from '@/lib/calendarControlsCopy';
 import { getChrome } from '@/lib/i18n/chrome';
 import { getScarcityAndChatCopy } from '@/lib/i18n/scarcityAndChatCopy';
+import { getHumanCarouselCopy } from '@/lib/i18n/humanCarouselCopy35';
 import { toCardPoster4x5 } from '@/lib/cardPoster4x5';
+import { HumanEventCarousel } from '@/components/HumanEventCarousel';
 
 export type DateSensitiveCalendarCopy = {
   verified: string;
@@ -228,7 +230,18 @@ export default function DateSensitiveCalendar({
 
   const available = useMemo(() => {
     const selected = getDateSensitiveEvents(events, mode, now);
-    return groupByDay ? selected.filter((event, index) => selected.findIndex(candidate => candidate.id === event.id) === index) : selected;
+    const deduped = groupByDay
+      ? selected.filter((event, index) => selected.findIndex(candidate => candidate.id === event.id) === index)
+      : selected;
+    if (mode === 'past') return deduped;
+    const monthNum = now.getMonth() + 1;
+    const isWinter = monthNum < 5 || monthNum > 9;
+    if (!isWinter) return deduped;
+    return deduped.filter(event => {
+      const hay = `${event.id} ${event.slug} ${event.venueId || ''} ${event.venueName}`.toLowerCase();
+      if (!hay.includes('aria')) return true;
+      return hay.includes('capodanno') || hay.includes('12-31');
+    });
   }, [events, mode, now, groupByDay]);
   const [requestedMonth, setRequestedMonth] = useState('');
   const [requestedDay, setRequestedDay] = useState('');
@@ -244,6 +257,7 @@ export default function DateSensitiveCalendar({
   const shortDateFormatter = new Intl.DateTimeFormat(localeTag, { timeZone: 'Europe/Rome', weekday: 'short', day: 'numeric', month: 'short' });
   const monthFormatter = new Intl.DateTimeFormat(localeTag, { timeZone: 'Europe/Rome', month: 'long', year: 'numeric' });
   const langKey = localeTag.toLowerCase().split('-')[0];
+  const carouselCopy = getHumanCarouselCopy(langKey);
   const featuredLabelByLang: Record<string, string> = {
     en: 'Featured Nights', it: 'Serate in Programma', es: 'Noches Destacadas', fr: 'Soirées à l’Affiche',
     de: 'Kommende Clubnächte', pt: 'Noites em Destaque', nl: 'Uitgelichte Avonden', ru: 'Ближайшие Вечеринки',
@@ -270,15 +284,39 @@ export default function DateSensitiveCalendar({
     return venueEvents.length > 0 ? [{ key: `priority-${venueId}`, label, isDay: false, events: venueEvents }] : [];
   });
   const nonPriorityVisible = visible
-    .filter(event => getVenuePriorityRank(event.venueId || event.venueName) >= 999)
+    .filter(event => getVenuePriorityRank(event.venueId || event.venueName) > 5)
     .sort((a, b) => Date.parse(a.dateISO) - Date.parse(b.dateISO) || a.id.localeCompare(b.id));
-  const dayGroups: Array<{ key: string; label: string; isDay: boolean; events: DateSensitiveEventPresentation[] }> = [...new Set(nonPriorityVisible.map(event => romeDayKeyAt(new Date(event.dateISO))))].map(key => ({
-    key,
-    label: dateFormatter.format(new Date(`${key}T12:00:00Z`)),
-    isDay: true,
-    events: nonPriorityVisible.filter(event => romeDayKeyAt(new Date(event.dateISO)) === key),
-  }));
-  const groups = [...priorityGroups, ...dayGroups];
+  const consolidatedOtherGroups: Array<{ key: string; label: string; isDay: boolean; events: DateSensitiveEventPresentation[] }> = (() => {
+    if (nonPriorityVisible.length === 0) return [];
+    if (day) {
+      return [{
+        key: day,
+        label: dateFormatter.format(new Date(`${day}T12:00:00Z`)),
+        isDay: true,
+        events: nonPriorityVisible,
+      }];
+    }
+    if (month) {
+      return [{
+        key: `month-${month}`,
+        label: monthFormatter.format(new Date(`${month}-01T12:00:00Z`)),
+        isDay: false,
+        events: nonPriorityVisible,
+      }];
+    }
+    const horizonMs = now.getTime() + 7 * 24 * 60 * 60 * 1000;
+    const withinWeek = nonPriorityVisible.filter(ev => Date.parse(ev.dateISO) <= horizonMs);
+    const laterDates = nonPriorityVisible.filter(ev => Date.parse(ev.dateISO) > horizonMs);
+    const bands: Array<{ key: string; label: string; isDay: boolean; events: DateSensitiveEventPresentation[] }> = [];
+    if (withinWeek.length > 0) {
+      bands.push({ key: 'curated-this-week', label: carouselCopy.thisWeekTitle, isDay: false, events: withinWeek });
+    }
+    if (laterDates.length > 0) {
+      bands.push({ key: 'curated-upcoming-dates', label: carouselCopy.upcomingDatesTitle, isDay: false, events: laterDates });
+    }
+    return bands;
+  })();
+  const groups = [...priorityGroups, ...consolidatedOtherGroups];
   const gallery = variant === 'gallery';
   const noPrefetch = false;
   const schema = useMemo(() => JSON.stringify({
@@ -307,26 +345,34 @@ export default function DateSensitiveCalendar({
   );
 
   const results = visible.length === 0 ? emptyResults : groupByDay ? (
-    <div className="space-y-20">
+    <div className="space-y-16">
       {groups.map(group => <section key={group.key} data-date-sensitive-day={group.key}>
-        <h2 className="mb-6 border-b border-[#F6F1E7]/14 pb-3 font-display text-2xl italic text-[#F6F1E7] sm:text-3xl">
+        <h2 className="mb-4 border-b border-[#F6F1E7]/14 pb-3 font-display text-2xl italic text-[#F6F1E7] sm:text-3xl">
           {group.isDay ? <time dateTime={group.key}>{group.label}</time> : <span>{group.label}</span>}
         </h2>
-        <ol aria-label={group.label} className="grid grid-cols-1 gap-6 p-0 sm:grid-cols-2 lg:grid-cols-3" data-date-sensitive-track>
+        <HumanEventCarousel
+          as="ol"
+          locale={langKey}
+          ariaLabel={group.label}
+          resetKey={`${group.key}-${month}-${day}`}
+          trackDataAttributes={{ 'data-date-sensitive-track': 'true' }}
+        >
           {group.events.map(event => <DateSensitiveGalleryCard key={event.id} event={event} localePrefix={localePrefix} viewEvent={copy.viewEvent} bookingLocale={bookingLocale} fullPoster prioritizeImage={prioritizeFirstImage && event.id === visible[0]?.id} />)}
-        </ol>
+        </HumanEventCarousel>
       </section>)}
     </div>
   ) : (
-    <ol
-      aria-label={schemaName}
-      className="grid grid-cols-1 gap-6 p-0 sm:grid-cols-2 lg:grid-cols-3"
-      data-date-sensitive-track
+    <HumanEventCarousel
+      as="ol"
+      locale={langKey}
+      ariaLabel={schemaName}
+      resetKey={`${mode}-${month}-${day}`}
+      trackDataAttributes={{ 'data-date-sensitive-track': 'true' }}
     >
       {visible.map((event, eventIndex) => gallery
         ? <DateSensitiveGalleryCard key={`date-sensitive-event-${eventIndex}`} event={event} localePrefix={localePrefix} viewEvent={copy.viewEvent} bookingLocale={bookingLocale} prioritizeImage={prioritizeFirstImage && eventIndex === 0} />
         : <DateSensitiveCard key={`date-sensitive-event-${eventIndex}`} event={event} localePrefix={localePrefix} viewEvent={copy.viewEvent} verified={copy.verified} prioritizeImage={prioritizeFirstImage && eventIndex === 0} />)}
-    </ol>
+    </HumanEventCarousel>
   );
 
   return (

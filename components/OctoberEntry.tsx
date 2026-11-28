@@ -13,6 +13,7 @@ import { getCapodannoLocalizedEventContent } from '@/lib/capodanno/i18n';
 import { isRepvblicNyeSlug } from '@/lib/capodanno/repvblic35';
 import { getScarcityAndChatCopy } from '@/lib/i18n/scarcityAndChatCopy';
 import { toCardPoster4x5 } from '@/lib/cardPoster4x5';
+import { HumanEventCarousel } from '@/components/HumanEventCarousel';
 
 export function HomeHalloweenAndCapodannoSections({
   locale,
@@ -214,8 +215,8 @@ export function HomeHalloweenAndCapodannoSections({
             </div>
           </div>
 
-          {/* Griglia 6 Club Simbolo con Serate della Settimana */}
-          <div className="mt-8 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
+          {/* Carosello Orizzontale Umano: 6 Club Simbolo con Serate della Settimana */}
+          <HumanEventCarousel locale={locale} className="mt-8">
             {weeklyPriorityCards.map((card) => (
               <div
                 key={card.venue}
@@ -266,7 +267,7 @@ export function HomeHalloweenAndCapodannoSections({
                 </div>
               </div>
             ))}
-          </div>
+          </HumanEventCarousel>
         </div>
       </section>
 
@@ -326,8 +327,8 @@ export function HomeHalloweenAndCapodannoSections({
             </span>
           </div>
 
-          {/* Griglia 13 Location Prioritarie Capodanno 2027 con Locandine */}
-          <div className="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          {/* Carosello Orizzontale Umano: 13 Location Prioritarie Capodanno 2027 con Locandine */}
+          <HumanEventCarousel locale={locale} className="mt-8">
             {capodannoPriorityCards.map((card) => (
               <Link
                 key={card.href}
@@ -378,10 +379,10 @@ export function HomeHalloweenAndCapodannoSections({
                 </div>
               </Link>
             ))}
-          </div>
+          </HumanEventCarousel>
 
           {/* 4 Hub Principali Capodanno + 12 Categorie */}
-          <div className="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          <HumanEventCarousel locale={locale} cardSize="compact" className="mt-8">
             {[
               {
                 href: capodannoPath(locale),
@@ -426,7 +427,7 @@ export function HomeHalloweenAndCapodannoSections({
                 </div>
               </Link>
             ))}
-          </div>
+          </HumanEventCarousel>
 
           <div className="mt-5 pt-5 border-t border-[#F6F1E7]/14 flex flex-wrap gap-2">
             <Link href={capodannoCategoryPath('capodanno-rooftop-milano', locale)} prefetch={false} className="px-3.5 py-2 text-[13px] font-bold border border-[#EAE3D5]/40 bg-[#141311] text-[#F6F1E7] hover:bg-[#F6F1E7] hover:text-[#050505] transition-colors">{isIt ? 'Rooftop & Terrazze (Voya N°1 · 300€)' : 'Rooftops (Voya #1 · €300)'}</Link>

@@ -16,6 +16,7 @@ import {
 import EditorialPageSections from '@/components/EditorialPageSections';
 import EventVenueMap from '@/components/EventVenueMap';
 import Link from '@/components/LocalizedLink';
+import { HumanEventCarousel } from '@/components/HumanEventCarousel';
 import {
   computeActiveNightWindowISO,
   getBergamoBresciaNightLocalized,
@@ -512,11 +513,11 @@ export default function BergamoBresciaEventDetailView({
             ))}
           </div>
 
-          <div
+          <nav
             data-no-lightbox="true"
             data-event-crosslink-cards="bergamo-brescia"
-            className="grid grid-cols-1 gap-4 sm:grid-cols-2"
           >
+            <HumanEventCarousel locale={rawLocale}>
             <div className="flex flex-col justify-between gap-4 border border-white/15 bg-[#141311] p-5">
               <div className="space-y-4">
                 <Link
@@ -593,7 +594,8 @@ export default function BergamoBresciaEventDetailView({
                 {ui.openNyeCta}
               </Link>
             </div>
-          </div>
+            </HumanEventCarousel>
+          </nav>
 
           <EventVenueMap
             id={`map-${seed.id}`}

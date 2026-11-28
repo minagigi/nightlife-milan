@@ -26,6 +26,7 @@ import { withWhatsApp } from '@/lib/seoMetadata';
 import { getScarcityAndChatCopy } from '@/lib/i18n/scarcityAndChatCopy';
 import { toCardPoster4x5 } from '@/lib/cardPoster4x5';
 import { resolveCardImageByHref } from '@/lib/siteCardAssets4x5';
+import { HumanEventCarousel } from '@/components/HumanEventCarousel';
 
 const BASE = 'https://nightlifemilan.com';
 export function halloweenItemList(name: string, publicPath: string, cards: readonly OctoberCalendarCard[]) {
@@ -123,9 +124,9 @@ export default async function HalloweenHub({ locale }: { locale: LocaleCode }) {
     {featuredCards.length && selection ? <section className="mx-auto max-w-7xl px-5 lg:px-8" aria-labelledby="halloween-featured-heading" data-halloween-featured>
       <h2 id="halloween-featured-heading" className="font-serif text-3xl font-bold">{selection.featuredHeading}</h2>
       <p className="mt-4 max-w-4xl text-base leading-7 text-white/80">{selection.featuredIntroduction}</p>
-      <ol className="mt-8 grid grid-cols-1 items-start gap-6 md:grid-cols-2 xl:grid-cols-4">{featuredCards.map(card => {
+      <HumanEventCarousel as="ol" locale={locale} ariaLabel={selection.featuredHeading} className="mt-8">{featuredCards.map(card => {
         const details = <>
-          {card.image ? <div className="relative aspect-[4/5] w-full overflow-hidden bg-[#050505]"><Image quality={92} src={toCardPoster4x5(card.image.src)} alt={card.image.alt} title={card.image.alt} width={1080} height={1350} priority={card.id===featuredCards[0].id} sizes="(max-width: 768px) 100vw, (max-width: 1279px) 50vw, 38vw" className="h-full w-full object-cover"/></div> : null}
+          {card.image ? <div className="relative aspect-[4/5] w-full overflow-hidden bg-[#050505]"><Image quality={92} src={toCardPoster4x5(card.image.src)} alt={card.image.alt} title={card.image.alt} width={1080} height={1350} priority={card.id===featuredCards[0].id} sizes="(max-width: 768px) 78vw, 340px" className="h-full w-full object-cover"/></div> : null}
           <div className="p-5"><div className="flex flex-wrap gap-2"><span className="inline-flex rounded-full bg-champagne px-3 py-1 text-sm font-semibold text-black">{selection.recommendedLabel}</span><span className="inline-flex rounded-full border border-[#F6F1E7]/35 bg-[#050505]/90 px-3 py-1 text-xs font-bold uppercase tracking-wider text-[#EAE3D5]" data-selling-fast-badge>{scarcity.almostSoldOutBadge}</span></div><p className="mt-4 text-base text-champagne">{card.dateLabel}</p><p data-halloween-featured-hours={card.id} className="mt-2 text-base text-white/80">{featuredViews.get(card.id)!.labels.hours}: {featuredViews.get(card.id)!.hours}</p><h3 className="mt-3 font-serif text-2xl font-bold leading-tight">{card.title}</h3><p className="mt-3 text-base text-white/80">{card.venueName}</p><p data-halloween-featured-summary={card.id} className="mt-4 text-base leading-7 text-white/75">{card.summary}</p></div>
         </>;
         return <li key={card.id}><article id={halloweenEventAnchor(card.id)} className="overflow-hidden rounded-2xl border border-champagne/30 bg-white/[0.035]" data-no-lightbox="true" data-halloween-featured-card={card.id}>
@@ -134,7 +135,7 @@ export default async function HalloweenHub({ locale }: { locale: LocaleCode }) {
             : <div>{details}</div>}
           <div className="px-5 pb-5"><Link href={card.href} prefetch={false} data-halloween-booking={card.id} className="inline-flex min-h-12 w-full items-center justify-center rounded-full bg-champagne px-4 py-3 text-center text-base font-bold text-black transition hover:bg-white focus-visible:ring-2 focus-visible:ring-white">{scarcity.openEventCardCta}</Link></div>
         </article></li>;
-      })}</ol>
+      })}</HumanEventCarousel>
       <section className="mt-12 rounded-2xl border border-white/15 p-5 sm:p-7" aria-labelledby="halloween-comparison-heading">
         <h2 id="halloween-comparison-heading" className="font-serif text-2xl font-bold">{selection.comparisonHeading}</h2><p className="mt-4 text-base leading-7 text-white/80">{selection.comparisonIntroduction}</p><p data-halloween-offer-notice className="mt-4 text-base leading-7 text-white/80">{featuredViews.get(featuredCards[0].id)!.labels.notice}</p>
         <ul className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">{featuredCards.map(card => <li key={card.id}><Link href={card.href} prefetch={false} className="block min-h-11 text-base font-semibold underline underline-offset-4"><bdi>{card.title}</bdi></Link><p className="mt-2 text-base leading-7 text-white/75">{card.venueName}<br/>{card.dateLabel}</p><dl className="mt-4 space-y-3 text-base leading-7"><div><dt className="font-semibold text-champagne">{featuredViews.get(card.id)!.labels.hours}</dt><dd data-halloween-comparison-hours={card.id}>{featuredViews.get(card.id)!.hours}</dd></div><div><dt className="font-semibold text-champagne">{featuredViews.get(card.id)!.labels.admission}</dt><dd data-halloween-comparison-admission={card.id}>{featuredViews.get(card.id)!.admission.map((line,index)=><p key={index}>{line}</p>)}</dd></div><div><dt className="font-semibold text-champagne">{featuredViews.get(card.id)!.labels.tables}</dt><dd data-halloween-comparison-tables={card.id}>{featuredViews.get(card.id)!.tables}</dd></div></dl></li>)}</ul>
@@ -157,10 +158,10 @@ export default async function HalloweenHub({ locale }: { locale: LocaleCode }) {
       </div>
     </div>
     <section className="mx-auto mt-16 max-w-5xl px-5 lg:px-8" aria-labelledby="halloween-faq-heading"><h2 id="halloween-faq-heading" className="font-serif text-3xl font-bold">{copy.faqHeading}</h2><div className="mt-8 space-y-8">{body.faqs.map((faq, index) => <article key={faq.question}><h3 id={faqEntries[index].id} className="text-xl font-semibold text-champagne">{faq.question}</h3><p className="mt-2 text-base leading-8 text-white/80">{faq.answer}</p></article>)}</div></section>
-    <aside data-related-navigation="card" className="mx-auto mt-16 max-w-5xl px-5 lg:px-8" aria-labelledby="halloween-related-heading"><h2 id="halloween-related-heading" className="font-serif text-3xl font-bold">{body.h1}</h2><nav aria-label={body.h1}><ul className="mt-6 grid grid-cols-1 gap-5 md:grid-cols-2">{cards.map((card, cIdx) => {
+    <aside data-related-navigation="card" className="mx-auto mt-16 max-w-5xl px-5 lg:px-8" aria-labelledby="halloween-related-heading"><h2 id="halloween-related-heading" className="font-serif text-3xl font-bold">{body.h1}</h2><nav aria-label={body.h1}><HumanEventCarousel as="ul" locale={locale} cardSize="compact" ariaLabel={body.h1} className="mt-6">{cards.map((card, cIdx) => {
       const cardPoster = card.image?.src ? toCardPoster4x5(card.image.src) : resolveCardImageByHref(card.href, cIdx);
-      return <li key={card.id}><Link href={card.href} prefetch={false} className="group flex flex-col justify-between overflow-hidden rounded-xl border border-white/12 bg-[#0B0A09] hover:border-champagne/50 transition-colors"><div data-no-lightbox="true" className="relative aspect-[4/5] w-full overflow-hidden bg-[#050505] border-b border-white/10"><Image quality={92} src={cardPoster} alt={card.title} width={1080} height={1350} sizes="(max-width: 768px) 100vw, 460px" className="h-full w-full object-cover" /></div><div className="p-4 text-base font-semibold text-white group-hover:text-champagne transition-colors">{card.title} →</div></Link></li>;
-    })}</ul></nav></aside>
+      return <li key={card.id}><Link href={card.href} prefetch={false} className="group flex flex-col justify-between overflow-hidden rounded-xl border border-white/12 bg-[#0B0A09] hover:border-champagne/50 transition-colors"><div data-no-lightbox="true" className="relative aspect-[4/5] w-full overflow-hidden bg-[#050505] border-b border-white/10"><Image quality={92} src={cardPoster} alt={card.title} width={1080} height={1350} sizes="(max-width: 768px) 74vw, 280px" className="h-full w-full object-cover" /></div><div className="p-4 text-base font-semibold text-white group-hover:text-champagne transition-colors">{card.title} →</div></Link></li>;
+    })}</HumanEventCarousel></nav></aside>
     <EditorialPageSections locale={locale} path={`${localePrefix(locale)}/events/${HALLOWEEN_LEGACY_SLUG}`} />
   </main>;
 }

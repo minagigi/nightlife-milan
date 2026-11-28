@@ -18,6 +18,7 @@ import {
 } from 'lucide-react';
 import EventVenueMap from '@/components/EventVenueMap';
 import Link from '@/components/LocalizedLink';
+import { HumanEventCarousel } from '@/components/HumanEventCarousel';
 import SeoAuthorityHub from '@/components/SeoAuthorityHub';
 import { getConciergeBookingUrl } from '@/lib/conciergeBooking';
 import { getPaymentTerms35 } from '@/lib/capodanno/paymentTerms35';
@@ -736,8 +737,8 @@ export default function ThanksgivingJustMeDetailView({ locale: rawLocale }: { lo
         <section
           data-no-lightbox="true"
           data-event-crosslink-cards="thanksgiving-justme"
-          className="grid grid-cols-1 gap-4 lg:grid-cols-3"
         >
+          <HumanEventCarousel locale={locale}>
           <div className="flex flex-col justify-between overflow-hidden rounded-xl border border-white/15 bg-white/[0.03] p-5 space-y-4">
             <div className="space-y-4">
               <Link
@@ -830,6 +831,7 @@ export default function ThanksgivingJustMeDetailView({ locale: rawLocale }: { lo
               {c.orthodoxBannerCta} <ArrowRight className="h-3.5 w-3.5" />
             </Link>
           </div>
+          </HumanEventCarousel>
         </section>
 
         {/* Section 6: 12 FAQs — Alternativa 02 Capitolo Carta Calda #F6F1E7 */}

@@ -15,6 +15,7 @@ import BergamoBresciaExplorer, {
 } from '@/components/BergamoBresciaExplorer';
 import EditorialPageSections from '@/components/EditorialPageSections';
 import EventVenueMap from '@/components/EventVenueMap';
+import { HumanEventCarousel } from '@/components/HumanEventCarousel';
 import Link from '@/components/LocalizedLink';
 import {
   getBergamoBresciaActiveNightCards,
@@ -553,7 +554,7 @@ export default async function BergamoBresciaHubPage({
             <p className="font-sans text-base text-[#C2B9AA]">{copy.nyeSubtitle}</p>
           </div>
 
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <HumanEventCarousel locale={locale} ariaLabel={copy.nyeHeading}>
             {nyeCards.map((nye) => (
               <article
                 key={nye.id}
@@ -613,7 +614,7 @@ export default async function BergamoBresciaHubPage({
                 </div>
               </article>
             ))}
-          </div>
+          </HumanEventCarousel>
         </section>
 
         {/* 4. A4 Motorway Comparison Matrix */}

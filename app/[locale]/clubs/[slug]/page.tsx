@@ -27,6 +27,7 @@ import { getTocHeading35, getTocLabel35 } from '@/lib/i18n/contextualSilo35';
 import TasteMotionLayer from '@/components/TasteMotionLayer';
 import VenueEventsAutoCarousel from '@/components/VenueEventsAutoCarousel';
 import VenueWeeklyHeroCarousel from '@/components/VenueWeeklyHeroCarousel';
+import { HumanEventCarousel } from '@/components/HumanEventCarousel';
 import EventVenueMap from '@/components/EventVenueMap';
 import { getEventVenueCopy } from '@/lib/i18n/eventVenueCopy';
 import { getVenueWeeklyHeroUi35, resolveVenueWeeklyHeroSchedule } from '@/lib/venueWeeklyHero35';
@@ -1931,6 +1932,7 @@ export default async function ClubPage({ params }: Props) {
       {/* Dedicated Post-Hero Weekly Nights Carousel (All Scheduled Nights of the Week) */}
       <VenueWeeklyHeroCarousel
         venueName={name}
+        locale={locale}
         ui={weeklyHeroUi}
         schedule={weeklyHeroSchedule}
       />
@@ -2241,7 +2243,7 @@ export default async function ClubPage({ params }: Props) {
                 <Calendar className="w-6 h-6 text-champagne" />
                 {tr(locale, 'Upcoming Events at', 'Prossimi Eventi da')} {name}
               </h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-5" data-taste-stagger>
+              <HumanEventCarousel locale={locale}>
                 {futureVenueEvents.map((ev) => {
                   const evTitle = getLocalizedText(ev.localizedContent.title, locale).replace(/[\u2014–]/g, ' - ');
                   const evSlug = getLocalizedText(ev.localizedContent.slug, locale);
@@ -2266,7 +2268,7 @@ export default async function ClubPage({ params }: Props) {
                             alt={`${evTitle} - ${name}`}
                             width={1080}
                             height={1350}
-                            sizes="(max-width: 768px) 100vw, 420px"
+                            sizes="(max-width: 768px) 78vw, 340px"
                             quality={92}
                             className="h-full w-full object-cover"
                           />
@@ -2287,7 +2289,7 @@ export default async function ClubPage({ params }: Props) {
                     </Link>
                   );
                 })}
-              </div>
+              </HumanEventCarousel>
             </section>
           )}
 

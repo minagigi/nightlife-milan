@@ -27,6 +27,7 @@ import EditorialPageSections from '@/components/EditorialPageSections';
 import PageContextualToc from '@/components/PageContextualToc';
 import { getTocLabel35 } from '@/lib/i18n/contextualSilo35';
 import VerticalHubsAndEventsSection from '@/components/VerticalHubsAndEventsSection';
+import { HumanEventCarousel } from '@/components/HumanEventCarousel';
 import type { LocaleCode } from '@/lib/i18n/locales';
 
 // ISR Configuration
@@ -406,7 +407,7 @@ export default async function SpecialEventsPage({ params }: Props) {
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <HumanEventCarousel locale={locale}>
           {MAJOR_SPECIAL_EVENTS.filter((ev) => !ev.activeOnly || isJustSingingRainActive()).map((ev, evIdx) => {
             const rainLoc = ev.linkKind === 'just-singing-rain' ? getJustSingingRainContent(locale) : null;
             const badgeText = rainLoc ? `#1 · ${rainLoc.dateBadge} · ${rainLoc.offerPhrase}` : isIt ? ev.badgeIt : ev.badgeEn;
@@ -490,7 +491,7 @@ export default async function SpecialEventsPage({ params }: Props) {
               </div>
             );
           })}
-        </div>
+        </HumanEventCarousel>
       </section>
 
       {/* Discovery Grid */}

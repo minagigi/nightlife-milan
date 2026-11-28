@@ -16,8 +16,10 @@ import {
 import { isRepvblicNyeSlug } from '@/lib/capodanno/repvblic35';
 import { isGateNyeSlug } from '@/lib/capodanno/gate35';
 import { getScarcityAndChatCopy } from '@/lib/i18n/scarcityAndChatCopy';
+import { getHumanCarouselCopy } from '@/lib/i18n/humanCarouselCopy35';
 import { toCardPoster4x5 } from '@/lib/cardPoster4x5';
 import { getCapodannoCategoryCardPoster4x5 } from '@/lib/siteCardAssets4x5';
+import { HumanEventCarousel } from '@/components/HumanEventCarousel';
 import type {
   CapodannoEventItem,
   CapodannoVenueType,
@@ -94,6 +96,7 @@ export default function CapodannoInteractiveFilter({
 
   const ui = getCapodannoUiCopy(locale);
   const scarcity = getScarcityAndChatCopy(locale);
+  const carouselCopy = getHumanCarouselCopy(locale);
   const {
     w,
     venueTypeOptions,
@@ -104,9 +107,140 @@ export default function CapodannoInteractiveFilter({
     budgetOptions,
   } = getCapodannoFilterOptions35(locale);
 
+  const filterResetKey = `${venueType}-${audience}-${formula}-${musicTag}-${zoneTag}-${budget}-${query}`;
+
+  const catalogBands = useMemo(() => {
+    if (activeSlug === 'capodanno-2027' && !hasActiveFilter && filtered.length > 20) {
+      const head13 = filtered.slice(0, 13);
+      const bands: Array<{ key: string; heading: string; items: CapodannoEventItem[]; startIndex: number }> = [
+        { key: 'nye-head-13', heading: carouselCopy.nyeTop13Title, items: head13, startIndex: 0 },
+      ];
+      const chunkStep = 22;
+      let bandNum = 1;
+      for (let pos = 13; pos < filtered.length; pos += chunkStep) {
+        const sliceItems = filtered.slice(pos, pos + chunkStep);
+        bands.push({
+          key: `nye-band-${bandNum}`,
+          heading: `${carouselCopy.nyeMoreBandPrefix} · ${bandNum}`,
+          items: sliceItems,
+          startIndex: pos,
+        });
+        bandNum += 1;
+      }
+      return bands;
+    }
+    return [
+      {
+        key: 'nye-single-band',
+        heading: '',
+        items: [...filtered],
+        startIndex: 0,
+      },
+    ];
+  }, [activeSlug, carouselCopy.nyeMoreBandPrefix, carouselCopy.nyeTop13Title, filtered, hasActiveFilter]);
+
+  const renderCapodannoCard = (event: CapodannoEventItem, index: number) => {
+    const localized = getCapodannoLocalizedEventContent(event, locale);
+    const title = localized.title;
+    const description = localized.description;
+    const music = localized.musicAndFormat;
+    const dress = localized.dressCode;
+    const tiers = localized.tiers;
+    const detailHref = capodannoEventPath(event.slug, locale);
+    return (
+      <article
+        key={event.slug}
+        className="flex flex-col justify-between border border-[#F6F1E7]/16 bg-[#0B0A09] p-4 pb-5 text-[#F6F1E7]"
+      >
+        <div>
+          <Link
+            href={detailHref}
+            data-no-lightbox="true"
+            className="relative block aspect-[4/5] w-full overflow-hidden border border-[#F6F1E7]/16 bg-[#050505]"
+            aria-label={title}
+          >
+            <Image
+              quality={92}
+              src={toCardPoster4x5(event.image)}
+              alt={title}
+              fill
+              loading={index < 4 ? 'eager' : 'lazy'}
+              sizes="(max-width: 768px) 78vw, 340px"
+              className="object-cover"
+            />
+          </Link>
+
+          <div className="pt-4">
+            <div className="mb-2.5 flex flex-wrap items-center justify-between gap-2">
+              <div className="flex flex-wrap items-center gap-2">
+                <span className="font-mono text-[11px] font-bold uppercase tracking-wider text-[#EAE3D5]">
+                  {event.city} ({event.province})
+                </span>
+                {!isRepvblicNyeSlug(event.slug) && !isGateNyeSlug(event.slug) && (
+                  <span className="bg-[#25D366] px-2 py-0.5 font-mono text-[10px] font-extrabold uppercase text-[#050505]" data-selling-fast-badge>
+                    {scarcity.sellingFastBadge}
+                  </span>
+                )}
+              </div>
+              <span className="font-display text-2xl font-bold tabular-nums text-[#F6F1E7]">
+                {formatCapodannoPriceBadge35(event, locale)}
+              </span>
+            </div>
+            <p className="font-mono text-xs font-bold uppercase tracking-wider text-[#C2B9AA]">{event.venueName}</p>
+            <h3 className="mt-1 mb-2 font-display text-xl font-bold leading-tight text-[#F6F1E7] sm:text-2xl">
+              <Link href={detailHref} className="hover:underline">
+                {title}
+              </Link>
+            </h3>
+            <p className="text-xs text-[#C2B9AA]">
+              <strong className="text-[#F6F1E7]">{w.addressLabel}</strong> {event.address} ·{' '}
+              <strong className="text-[#F6F1E7]">{w.hoursLabel}</strong> {formatCapodannoHours35(event.hours, locale)}
+            </p>
+            <p className="mt-2 line-clamp-3 text-sm leading-relaxed text-[#C2B9AA]">{description}</p>
+
+            <div className="mt-3.5 border-t border-[#F6F1E7]/12 pt-2.5">
+              <p className="mb-1.5 font-mono text-[11px] font-bold uppercase tracking-wider text-[#EAE3D5]">
+                {w.priceTiersHeading}
+              </p>
+              <ul className="divide-y divide-[#F6F1E7]/10 text-xs">
+                {tiers.slice(0, 2).map((tier) => (
+                  <li key={tier.label} className="py-1.5 first:pt-0 last:pb-0">
+                    <div className="flex items-baseline justify-between gap-2 tabular-nums">
+                      <span className="font-semibold text-[#F6F1E7]">{tier.label}</span>
+                      <span className="shrink-0 font-mono font-bold text-[#EAE3D5]">{tier.price}</span>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="mt-3 space-y-1 border-t border-[#F6F1E7]/12 pt-2.5 text-xs text-[#C2B9AA]">
+              <p className="line-clamp-1">
+                <strong className="text-[#F6F1E7]">{ui.musicLabel}:</strong> {music}
+              </p>
+              <p className="line-clamp-1">
+                <strong className="text-[#F6F1E7]">{w.dressCodeLabel}:</strong> {dress}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-4">
+          <Link
+            href={detailHref}
+            data-capodanno-open-event={event.slug}
+            className="inline-flex min-h-[46px] w-full items-center justify-center bg-[#EAE3D5] px-4 py-2.5 text-center text-xs font-extrabold uppercase tracking-wider text-[#050505] transition hover:bg-[#25D366] hover:text-[#050505] sm:text-sm"
+          >
+            {scarcity.openEventCardCta}
+          </Link>
+        </div>
+      </article>
+    );
+  };
+
   return (
     <div className="mt-8 space-y-10" data-capodanno-interactive-filter>
-      {/* 16 Dedicated SEO Category Pages — 1 col below md:, hairline dividers */}
+      {/* 16 Dedicated SEO Category Pages — Horizontal Human Carousel */}
       <div id="categorie-capodanno" className="border-b border-[#F6F1E7]/14 pb-8 text-[#F6F1E7]">
         <div className="mb-4 flex flex-col justify-between gap-2 sm:flex-row sm:items-center">
           <div>
@@ -118,7 +252,7 @@ export default function CapodannoInteractiveFilter({
             </h2>
           </div>
         </div>
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
+        <HumanEventCarousel locale={locale} cardSize="compact" resetKey={activeSlug}>
           {[
             ...categoryPages.filter((c) => c.slug === activeSlug),
             ...categoryPages.filter((c) => c.slug !== activeSlug),
@@ -143,7 +277,7 @@ export default function CapodannoInteractiveFilter({
                     alt={catLabel}
                     width={1080}
                     height={1350}
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 320px"
+                    sizes="(max-width: 768px) 74vw, 280px"
                     quality={92}
                     className="h-full w-full object-cover"
                   />
@@ -160,7 +294,7 @@ export default function CapodannoInteractiveFilter({
               </Link>
             );
           })}
-        </div>
+        </HumanEventCarousel>
       </div>
 
       {/* Interactive Multi-Filter Controls — open editorial section without heavy box */}
@@ -324,106 +458,23 @@ export default function CapodannoInteractiveFilter({
           </button>
         </div>
       ) : (
-        <div id="catalogo-eventi" className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3">
-          {filtered.map((event, index) => {
-            const localized = getCapodannoLocalizedEventContent(event, locale);
-            const title = localized.title;
-            const description = localized.description;
-            const music = localized.musicAndFormat;
-            const dress = localized.dressCode;
-            const tiers = localized.tiers;
-            const detailHref = capodannoEventPath(event.slug, locale);
-            return (
-              <article
-                key={event.slug}
-                className="flex flex-col justify-between border-b border-[#F6F1E7]/16 pb-6 text-[#F6F1E7]"
+        <div id="catalogo-eventi" data-no-lightbox="true" className="space-y-12">
+          {catalogBands.map((band) => (
+            <section key={band.key} className="space-y-3">
+              {band.heading ? (
+                <h3 className="border-b border-[#F6F1E7]/14 pb-2.5 font-display text-xl font-bold uppercase text-[#F6F1E7] sm:text-2xl">
+                  {band.heading}
+                </h3>
+              ) : null}
+              <HumanEventCarousel
+                locale={locale}
+                ariaLabel={band.heading || ui.filterHeadingPrefix}
+                resetKey={`${band.key}-${filterResetKey}`}
               >
-                <div>
-                  <Link
-                    href={detailHref}
-                    data-no-lightbox="true"
-                    className="relative block aspect-[4/5] w-full overflow-hidden border border-[#F6F1E7]/16 bg-[#050505]"
-                    aria-label={title}
-                  >
-                    <Image
-                      quality={92}
-                      src={toCardPoster4x5(event.image)}
-                      alt={title}
-                      fill
-                      loading={index < 6 ? 'eager' : 'lazy'}
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                      className="object-cover"
-                    />
-                  </Link>
-
-                  <div className="pt-4">
-                    <div className="mb-2.5 flex flex-wrap items-center justify-between gap-2">
-                      <div className="flex flex-wrap items-center gap-2">
-                        <span className="font-mono text-[11px] font-bold uppercase tracking-wider text-[#EAE3D5]">
-                          {event.city} ({event.province})
-                        </span>
-                        {!isRepvblicNyeSlug(event.slug) && !isGateNyeSlug(event.slug) && (
-                          <span className="bg-[#25D366] px-2 py-0.5 font-mono text-[10px] font-extrabold uppercase text-[#050505]" data-selling-fast-badge>
-                            {scarcity.sellingFastBadge}
-                          </span>
-                        )}
-                      </div>
-                      <span className="font-display text-2xl font-bold tabular-nums text-[#F6F1E7]">
-                        {formatCapodannoPriceBadge35(event, locale)}
-                      </span>
-                    </div>
-                    <p className="font-mono text-xs font-bold uppercase tracking-wider text-[#C2B9AA]">{event.venueName}</p>
-                    <h3 className="mt-1 mb-2.5 font-display text-2xl font-bold leading-tight text-[#F6F1E7]">
-                      <Link href={detailHref} className="hover:underline">
-                        {title}
-                      </Link>
-                    </h3>
-                    <p className="text-xs text-[#C2B9AA]">
-                      <strong className="text-[#F6F1E7]">{w.addressLabel}</strong> {event.address} ·{' '}
-                      <strong className="text-[#F6F1E7]">{w.hoursLabel}</strong> {formatCapodannoHours35(event.hours, locale)}
-                    </p>
-                    <p className="mt-2.5 text-sm leading-relaxed text-[#C2B9AA]">{description}</p>
-
-                    <div className="mt-4 border-t border-[#F6F1E7]/12 pt-3">
-                      <p className="mb-2 font-mono text-[11px] font-bold uppercase tracking-wider text-[#EAE3D5]">
-                        {w.priceTiersHeading}
-                      </p>
-                      <ul className="divide-y divide-[#F6F1E7]/10 text-xs">
-                        {tiers.slice(0, 3).map((tier) => (
-                          <li key={tier.label} className="py-2 first:pt-0 last:pb-0">
-                            <div className="flex items-baseline justify-between gap-2 tabular-nums">
-                              <span className="font-semibold text-[#F6F1E7]">{tier.label}</span>
-                              <span className="shrink-0 font-mono font-bold text-[#EAE3D5]">{tier.price}</span>
-                            </div>
-                            <p className="mt-0.5 text-xs text-[#C2B9AA]">{tier.details}</p>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-
-                    <div className="mt-3 space-y-1 border-t border-[#F6F1E7]/12 pt-2.5 text-xs text-[#C2B9AA]">
-                      <p>
-                        <strong className="text-[#F6F1E7]">{ui.musicLabel}:</strong> {music}
-                      </p>
-                      <p>
-                        <strong className="text-[#F6F1E7]">{w.dressCodeLabel}:</strong> {dress}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="mt-5">
-                  <Link
-                    href={detailHref}
-                    data-capodanno-open-event={event.slug}
-                    className="inline-flex min-h-[46px] w-full items-center justify-center bg-[#EAE3D5] px-4 py-2.5 text-center text-xs font-extrabold uppercase tracking-wider text-[#050505] transition hover:bg-[#25D366] hover:text-[#050505] sm:text-sm"
-                  >
-                    {scarcity.openEventCardCta}
-                  </Link>
-                </div>
-              </article>
-            );
-          })}
+                {band.items.map((event, idx) => renderCapodannoCard(event, band.startIndex + idx))}
+              </HumanEventCarousel>
+            </section>
+          ))}
         </div>
       )}
     </div>

@@ -18,6 +18,7 @@ import type { LocaleCode } from '@/lib/i18n/locales';
 import { getConciergeBookingUrl } from '@/lib/conciergeBooking';
 import { getJustSingingRainContent, isJustSingingRainActive } from '@/lib/just-singing-rain/justme35';
 import { getVenueCardPhoto4x5 } from '@/lib/siteCardAssets4x5';
+import { HumanEventCarousel } from '@/components/HumanEventCarousel';
 
 export const dynamic = 'force-dynamic';
 
@@ -405,7 +406,7 @@ export default async function EventsTonightPage({ params }: Props) {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <HumanEventCarousel locale={locale}>
           {PRIORITY_SIX_TONIGHT.map((club) => {
             const isAria = club.slug === 'aria-club-milano';
             const curMonth = Number(romeDayKeyOffset(0).slice(5, 7));
@@ -423,7 +424,7 @@ export default async function EventsTonightPage({ params }: Props) {
                         alt={club.name}
                         width={1080}
                         height={1350}
-                        sizes="(max-width: 768px) 100vw, 480px"
+                        sizes="(max-width: 768px) 78vw, 340px"
                         quality={92}
                         className="h-full w-full object-cover"
                       />
@@ -465,7 +466,7 @@ export default async function EventsTonightPage({ params }: Props) {
               </div>
             );
           })}
-        </div>
+        </HumanEventCarousel>
       </section>
 
       {/* Interactive Modules */}
@@ -527,9 +528,9 @@ function TimeSlot({
         <span className="text-white/30 font-mono text-xs">{time}</span>
         <div className="flex-grow h-px bg-white/8" />
       </div>
-      <div className="space-y-4">
+      <HumanEventCarousel locale={locale} ariaLabel={title}>
         {items.map(({ event, venue }) => {
-          const title = getLocalizedText(event.localizedContent.title, locale);
+          const evTitle = getLocalizedText(event.localizedContent.title, locale);
           const slug = getLocalizedText(event.localizedContent.slug, locale);
           const venueName = getLocalizedText(venue.localizedContent.name, locale);
           const timeStr = new Intl.DateTimeFormat(locale, {
@@ -543,53 +544,56 @@ function TimeSlot({
             <Link
               key={event.id}
               href={`${lp}/events/${slug}`}
-              className="group flex flex-col sm:flex-row bg-white/[0.03] rounded-lg overflow-hidden border border-white/5 hover:border-champagne/30 transition-all duration-300"
+              className="group flex flex-col bg-white/[0.03] rounded-lg overflow-hidden border border-white/10 hover:border-champagne/40 transition-all duration-300"
             >
-              <div className="sm:w-1/3 aspect-[4/5] w-full relative shrink-0">
+              <div data-no-lightbox="true" className="aspect-[4/5] w-full relative shrink-0 border-b border-white/10">
                 <Image
                   src={event.image || venue.image || '/images/milan-nightclub-luxury-vip-champagne.webp'}
-                  alt={title}
+                  alt={evTitle}
                   fill
-                  sizes="(max-width: 640px) 100vw, 45vw"
+                  sizes="(max-width: 640px) 78vw, 330px"
                   quality={92}
                   className="object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t sm:bg-gradient-to-r from-[#050505] via-[#050505]/40 to-transparent" />
                 {event.isSpecial && (
                   <div className="absolute top-3 left-3 bg-champagne text-black text-[9px] font-bold px-2 py-1 rounded uppercase tracking-wider">
                     {tr(locale, 'Special', 'Speciale')}
                   </div>
                 )}
               </div>
-              <div className="p-5 flex flex-col justify-center flex-grow">
-                <div className="flex items-center gap-2 text-champagne mb-2">
-                  <Clock className="w-3.5 h-3.5" />
-                  <span className="font-mono text-xs">{timeStr}</span>
-                  <span className="text-white/20 text-xs">·</span>
-                  <span className="text-white/40 text-xs uppercase tracking-wider">{genre}</span>
+              <div className="p-5 flex flex-col justify-between flex-grow">
+                <div>
+                  <div className="flex items-center gap-2 text-champagne mb-2">
+                    <Clock className="w-3.5 h-3.5" />
+                    <span className="font-mono text-xs">{timeStr}</span>
+                    <span className="text-white/20 text-xs">·</span>
+                    <span className="text-white/40 text-xs uppercase tracking-wider">{genre}</span>
+                  </div>
+                  <h3 className="font-serif text-xl text-white group-hover:text-champagne transition-colors leading-tight mb-2">
+                    {evTitle}
+                  </h3>
                 </div>
-                <h3 className="font-serif text-xl text-white group-hover:text-champagne transition-colors leading-tight mb-2">
-                  {title}
-                </h3>
-                <div className="flex items-center gap-1.5 text-white/40">
-                  <MapPin className="w-3.5 h-3.5" />
-                  <span className="text-sm">{venueName}</span>
+                <div>
+                  <div className="flex items-center gap-1.5 text-white/40">
+                    <MapPin className="w-3.5 h-3.5" />
+                    <span className="text-sm">{venueName}</span>
+                  </div>
+                  {event.id === 'just-singing-in-the-rain-2026' && rainSlotNote ? (
+                    <p className="text-champagne text-xs font-medium mt-2">{rainSlotNote}</p>
+                  ) : (
+                    event.pricing.entry !== null &&
+                    event.pricing.entry > 0 && (
+                      <p className="text-white/30 text-xs mt-2">
+                        {tr(locale, 'Entry', 'Ingresso')} €{event.pricing.entry}
+                      </p>
+                    )
+                  )}
                 </div>
-                {event.id === 'just-singing-in-the-rain-2026' && rainSlotNote ? (
-                  <p className="text-champagne text-xs font-medium mt-2">{rainSlotNote}</p>
-                ) : (
-                  event.pricing.entry !== null &&
-                  event.pricing.entry > 0 && (
-                    <p className="text-white/30 text-xs mt-2">
-                      {tr(locale, 'Entry', 'Ingresso')} €{event.pricing.entry}
-                    </p>
-                  )
-                )}
               </div>
             </Link>
           );
         })}
-      </div>
+      </HumanEventCarousel>
     </div>
   );
 }

@@ -1,5 +1,6 @@
 import { Event, Venue } from '@/lib/types';
 import EventCard from './EventCard';
+import { HumanEventCarousel } from './HumanEventCarousel';
 
 interface RelatedEventsProps {
   events: Event[];
@@ -17,7 +18,7 @@ export default function RelatedEvents({ events, venues, lang }: RelatedEventsPro
       <h2 id="related-events-title" className="text-2xl md:text-3xl font-serif font-bold text-champagne mb-8">
         {title}
       </h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <HumanEventCarousel locale={lang} ariaLabel={title}>
         {events.map((event) => {
           const venue = venues.find(v => v.id === event.venueId);
           if (!venue) return null;
@@ -31,7 +32,7 @@ export default function RelatedEvents({ events, venues, lang }: RelatedEventsPro
             />
           );
         })}
-      </div>
+      </HumanEventCarousel>
     </section>
   );
 }

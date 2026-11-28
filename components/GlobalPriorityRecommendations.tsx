@@ -3,6 +3,7 @@ import Link from '@/components/LocalizedLink';
 import type { PriorityRecommendationPresentation } from '@/lib/priorityVenueRecommendations';
 import { localePrefix } from '@/lib/i18n/locales';
 import { toCardPoster4x5 } from '@/lib/cardPoster4x5';
+import { HumanEventCarousel } from '@/components/HumanEventCarousel';
 
 export default function GlobalPriorityRecommendations({
   events,
@@ -30,7 +31,7 @@ export default function GlobalPriorityRecommendations({
         <p className="font-sans text-[13px] font-semibold text-[#C2B9AA] mb-6">
           Milano · Selezione Top Club
         </p>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <HumanEventCarousel locale={locale} ariaLabel={heading}>
           {topEvents.map((ev) => {
             const poster = toCardPoster4x5(ev.image || '/images/events/cards-4x5/flagship-weekly/justme-weekly.webp');
             return (
@@ -43,7 +44,7 @@ export default function GlobalPriorityRecommendations({
                         alt={ev.title}
                         width={1080}
                         height={1350}
-                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 400px"
+                        sizes="(max-width: 768px) 78vw, 340px"
                         quality={92}
                         className="h-full w-full object-cover"
                       />
@@ -67,7 +68,7 @@ export default function GlobalPriorityRecommendations({
               </article>
             );
           })}
-        </div>
+        </HumanEventCarousel>
       </div>
     </section>
   );

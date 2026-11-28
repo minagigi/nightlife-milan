@@ -7,6 +7,7 @@ import { getVenueCardPhoto4x5 } from '@/lib/siteCardAssets4x5';
 import { getAllCalendarEvents, romeDayKey, romeDayKeyOffset, romeUpcomingSundayKey } from '@/lib/calendarEvents';
 import { generateEventListSchema, jsonLdString } from '@/lib/seo';
 import DiscoveryGrid from '@/components/DiscoveryGrid';
+import { HumanEventCarousel } from '@/components/HumanEventCarousel';
 import { getEventDiscoveryItems, slimDiscoveryItemsForClient } from '@/lib/eventDiscovery';
 import { WeeklyNightlifeNavigator, VipQuoteCalculator } from '@/components/NightlifeExpansionModules';
 import { getConciergeBookingUrl } from '@/lib/conciergeBooking';
@@ -311,7 +312,7 @@ export default async function ThisWeekPage({ params }: Props) {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          <HumanEventCarousel locale={locale}>
             {PRIORITY_SIX_WEEK.map((club) => {
               const isAria = club.slug === 'aria-club-milano';
               const curMonth = Number(romeDayKeyOffset(0).slice(5, 7));
@@ -329,7 +330,7 @@ export default async function ThisWeekPage({ params }: Props) {
                           alt={club.name}
                           width={1080}
                           height={1350}
-                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 380px"
+                          sizes="(max-width: 768px) 78vw, 340px"
                           quality={92}
                           className="h-full w-full object-cover"
                         />
@@ -371,7 +372,7 @@ export default async function ThisWeekPage({ params }: Props) {
                 </div>
               );
             })}
-          </div>
+          </HumanEventCarousel>
         </section>
 
         {/* Interactive Modules */}

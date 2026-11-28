@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { Metadata } from 'next';
 import Link from '@/components/LocalizedLink';
 import EventCard from '@/components/EventCard';
+import { HumanEventCarousel } from '@/components/HumanEventCarousel';
 import { getVenueById, mockEvents } from '@/lib/data';
 import { romeDayKey, romeDayKeyOffset, dedupeEventsByIdentity } from '@/lib/calendarEvents';
 import { hreflangAlternates, canonicalPageUrl, localePrefix, getLocaleDef, DEFAULT_LOCALE } from '@/lib/i18n/locales';
@@ -108,11 +109,11 @@ export default async function PastEventsPage({ params }: Props) {
         {items.length === 0 ? (
           <p className="text-white/60">{emptyMsg}</p>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <HumanEventCarousel locale={locale} ariaLabel={heading}>
             {items.map(({ event, venue }) => (
               <EventCard key={event.id} event={event} venue={venue} lang={locale} />
             ))}
-          </div>
+          </HumanEventCarousel>
         )}
       </section>
 

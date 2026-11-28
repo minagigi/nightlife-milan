@@ -2,8 +2,11 @@
 
 import { useEffect, useMemo, useState } from 'react';
 import Image from 'next/image';
+import { usePathname } from 'next/navigation';
 import { ArrowRight, Calendar, MapPin, MessageCircle, Sparkles } from 'lucide-react';
 import Link from '@/components/LocalizedLink';
+import { HumanEventCarousel } from '@/components/HumanEventCarousel';
+import { isEnabledLocale } from '@/lib/i18n/locales';
 import type { BergamoBresciaCardViewModel } from '@/lib/bergamo-brescia/activeNights35';
 
 export interface BergamoBresciaHomeClubItem {
@@ -60,6 +63,10 @@ export default function BergamoBresciaHomeSection({
   activeNightCards: BergamoBresciaCardViewModel[];
   labels: BergamoBresciaHomeLabels;
 }) {
+  const pathname = usePathname() || '/';
+  const firstSegment = pathname.split('/').filter(Boolean)[0] || '';
+  const activeLocale = isEnabledLocale(firstSegment) ? firstSegment : 'en';
+
   const [nowMs, setNowMs] = useState<number>(() => Date.parse(initialNow) || Date.now());
   const [province, setProvince] = useState<'ALL' | 'BG' | 'BS'>('ALL');
   const [selectedClub, setSelectedClub] = useState<
@@ -241,7 +248,11 @@ export default function BergamoBresciaHomeSection({
           <h3 className="font-serif text-2xl text-[#F6F1E7] sm:text-3xl">
             {labels.clubsSubheading}
           </h3>
-          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
+          <HumanEventCarousel
+            locale={activeLocale}
+            cardSize="compact"
+            resetKey={`clubs-${province}-${selectedClub}`}
+          >
             {filteredClubs.map((clubItem) => (
               <article
                 key={clubItem.id}
@@ -257,7 +268,7 @@ export default function BergamoBresciaHomeSection({
                         width={1080}
                         height={1350}
                         quality={92}
-                        sizes="(max-width: 640px) 100vw, (max-width: 1280px) 33vw, 240px"
+                        sizes="(max-width: 640px) 78vw, (max-width: 1280px) 33vw, 280px"
                         className="h-full w-full object-cover transition-transform duration-500 hover:scale-[1.02]"
                       />
                     </div>
@@ -296,7 +307,7 @@ export default function BergamoBresciaHomeSection({
                 </div>
               </article>
             ))}
-          </div>
+          </HumanEventCarousel>
         </div>
 
         {/* 2. Capodanno 2027 (All 6 Bergamo & Brescia NYE Sheets) */}
@@ -305,7 +316,10 @@ export default function BergamoBresciaHomeSection({
             <h3 className="font-serif text-2xl text-[#F6F1E7] sm:text-3xl">
               {labels.nyeSubheading}
             </h3>
-            <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            <HumanEventCarousel
+              locale={activeLocale}
+              resetKey={`nye-${province}-${selectedClub}`}
+            >
               {filteredNye.map((card) => (
                 <article
                   key={card.id}
@@ -321,7 +335,7 @@ export default function BergamoBresciaHomeSection({
                           width={1080}
                           height={1350}
                           quality={92}
-                          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 440px"
+                          sizes="(max-width: 640px) 78vw, (max-width: 1024px) 50vw, 380px"
                           className="h-full w-full object-cover transition-transform duration-500 hover:scale-[1.02]"
                         />
                       </div>
@@ -371,7 +385,7 @@ export default function BergamoBresciaHomeSection({
                   </div>
                 </article>
               ))}
-            </div>
+            </HumanEventCarousel>
           </div>
         )}
 
@@ -381,7 +395,11 @@ export default function BergamoBresciaHomeSection({
             <h3 className="font-serif text-2xl text-[#F6F1E7] sm:text-3xl">
               {labels.activeSubheading}
             </h3>
-            <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            <HumanEventCarousel
+              locale={activeLocale}
+              cardSize="compact"
+              resetKey={`active-${province}-${selectedClub}`}
+            >
               {filteredActive.map((card) => (
                 <article
                   key={card.id}
@@ -397,7 +415,7 @@ export default function BergamoBresciaHomeSection({
                           width={1080}
                           height={1350}
                           quality={92}
-                          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 340px"
+                          sizes="(max-width: 640px) 78vw, (max-width: 1024px) 50vw, 340px"
                           className="h-full w-full object-cover transition-transform duration-500 hover:scale-[1.02]"
                         />
                       </div>
@@ -448,7 +466,7 @@ export default function BergamoBresciaHomeSection({
                   </div>
                 </article>
               ))}
-            </div>
+            </HumanEventCarousel>
           </div>
         )}
       </div>

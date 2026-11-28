@@ -7,6 +7,7 @@ import type { DateSensitiveEventPresentation } from '@/lib/dateSensitiveInventor
 import { getDateSensitiveEvents } from '@/lib/dateSensitiveView';
 import { toCardPoster4x5 } from '@/lib/cardPoster4x5';
 import { useRomeClock } from './useRomeClock';
+import { HumanEventCarousel } from './HumanEventCarousel';
 
 export default function VenueEventDates({
   events,
@@ -49,7 +50,7 @@ export default function VenueEventDates({
             <Calendar className="w-6 h-6 text-champagne" />
             {upcomingHeading}
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <HumanEventCarousel locale={locale} ariaLabel={upcomingHeading}>
             {upcoming.map((event) => {
               const poster = toCardPoster4x5(
                 event.image && !event.image.startsWith('/images/venues/')
@@ -71,7 +72,7 @@ export default function VenueEventDates({
                         alt={event.title}
                         width={1080}
                         height={1350}
-                        sizes="(max-width: 768px) 100vw, 400px"
+                        sizes="(max-width: 768px) 78vw, 340px"
                         quality={92}
                         className="h-full w-full object-cover"
                       />
@@ -91,7 +92,7 @@ export default function VenueEventDates({
                 </Link>
               );
             })}
-          </div>
+          </HumanEventCarousel>
         </section>
       )}
       {past.length > 0 && (
@@ -100,22 +101,22 @@ export default function VenueEventDates({
             <Clock className="w-6 h-6 text-champagne" />
             {pastHeading}
           </h2>
-          <div className="space-y-3">
+          <HumanEventCarousel locale={locale} cardSize="compact" ariaLabel={pastHeading}>
             {past.map((event) => (
               <Link
                 key={event.id}
                 data-date-sensitive-event-id={event.id}
                 href={`${prefix}/events/${event.slug}`}
                 prefetch={false}
-                className="grid gap-2 md:grid-cols-[9rem_minmax(0,1fr)] py-4 px-4 rounded-lg bg-white/[0.03] border border-white/15 hover:border-champagne/50 focus-visible:ring-2 focus-visible:ring-champagne"
+                className="flex flex-col justify-between py-4 px-4 rounded-lg bg-white/[0.03] border border-white/15 hover:border-champagne/50 focus-visible:ring-2 focus-visible:ring-champagne"
               >
-                <time dateTime={event.dateISO} className="text-champagne text-sm leading-relaxed">
+                <time dateTime={event.dateISO} className="text-champagne text-sm leading-relaxed mb-1.5">
                   {event.labels.dateTime}
                 </time>
-                <span className="text-white/90 text-base leading-relaxed">{event.title}</span>
+                <span className="text-white/90 text-base leading-relaxed font-medium">{event.title}</span>
               </Link>
             ))}
-          </div>
+          </HumanEventCarousel>
         </section>
       )}
     </div>

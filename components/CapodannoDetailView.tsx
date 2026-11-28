@@ -27,6 +27,7 @@ import {
 import Image from 'next/image';
 import Link from '@/components/LocalizedLink';
 import { toCardPoster4x5 } from '@/lib/cardPoster4x5';
+import { HumanEventCarousel } from '@/components/HumanEventCarousel';
 import { SITE_CONTACT } from '@/config/contact';
 import { getConciergeBookingUrl } from '@/lib/conciergeBooking';
 import { localePrefix } from '@/lib/i18n/locales';
@@ -564,7 +565,7 @@ export default function CapodannoDetailView({ locale, event }: Props) {
                   <p className="mt-2 max-w-[54ch] text-base text-[#3D3830]">
                     {localized.alternativesSubheading}
                   </p>
-                  <div className="mt-6 grid grid-cols-1 gap-8 md:grid-cols-2">
+                  <HumanEventCarousel locale={locale} variant="light" className="mt-6">
                     {rooftopAlternatives.map((alt) => {
                       const altTitle = getCapodannoLocalizedEventTitle(alt, locale);
                       const altSub = getCapodannoLocalizedEventSubtitle(alt, locale);
@@ -606,7 +607,7 @@ export default function CapodannoDetailView({ locale, event }: Props) {
                         </article>
                       );
                     })}
-                  </div>
+                  </HumanEventCarousel>
                   <div className="mt-6 flex flex-wrap gap-3 bg-[#050505] p-4 text-[#F6F1E7]">
                     <a
                       href={getConciergeBookingUrl(
@@ -822,7 +823,7 @@ export default function CapodannoDetailView({ locale, event }: Props) {
                         {localized.alternativesSubheading}
                       </p>
                     )}
-                    <div className="mt-6 grid grid-cols-1 gap-8 md:grid-cols-2">
+                    <HumanEventCarousel locale={locale} variant="light" className="mt-6">
                       {confirmedAlternatives.map((alt) => {
                         const altTitle = getCapodannoLocalizedEventTitle(alt, locale);
                         const altSub = getCapodannoLocalizedEventSubtitle(alt, locale);
@@ -865,7 +866,7 @@ export default function CapodannoDetailView({ locale, event }: Props) {
                           </article>
                         );
                       })}
-                    </div>
+                    </HumanEventCarousel>
                     <div className="mt-6 flex flex-wrap gap-3">
                       <Link
                         href={partnerGuideHref}
@@ -1331,7 +1332,7 @@ export default function CapodannoDetailView({ locale, event }: Props) {
                 <h2 className="font-display text-2xl font-bold text-[#F6F1E7]">
                   {ui.relatedHeading}
                 </h2>
-                <div className="mt-6 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+                <HumanEventCarousel locale={locale} ariaLabel={ui.relatedHeading} className="mt-6">
                   {related.map((item) => {
                     const relTitle = getCapodannoLocalizedEventTitle(item, locale);
                     return (
@@ -1346,7 +1347,7 @@ export default function CapodannoDetailView({ locale, event }: Props) {
                             alt={relTitle}
                             fill
                             quality={92}
-                            sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
+                            sizes="(max-width: 768px) 78vw, 340px"
                             className="object-cover transition-transform duration-300 group-hover:scale-[1.02]"
                           />
                         </div>
@@ -1364,7 +1365,7 @@ export default function CapodannoDetailView({ locale, event }: Props) {
                       </Link>
                     );
                   })}
-                </div>
+                </HumanEventCarousel>
               </section>
             )}
           </div>

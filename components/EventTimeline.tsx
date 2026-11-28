@@ -3,6 +3,7 @@
 import React from 'react';
 import { Event, Venue } from '@/lib/types';
 import EventCard from './EventCard';
+import { HumanEventCarousel } from './HumanEventCarousel';
 
 interface EventTimelineProps {
   items: { event: Event; venue: Venue }[];
@@ -87,13 +88,15 @@ export default function EventTimeline({ items, lang }: EventTimelineProps) {
                     </div>
                   </div>
 
-                  {/* Events Grid */}
-                  <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {section.events
-                      .sort((a, b) => new Date(a.event.dateISO).getTime() - new Date(b.event.dateISO).getTime())
-                      .map(({ event, venue }) => (
-                      <EventCard key={event.id} event={event} venue={venue} lang={lang} />
-                    ))}
+                  {/* Events Horizontal Human Carousel */}
+                  <div className="flex-1 min-w-0">
+                    <HumanEventCarousel locale={lang} ariaLabel={section.title}>
+                      {section.events
+                        .sort((a, b) => new Date(a.event.dateISO).getTime() - new Date(b.event.dateISO).getTime())
+                        .map(({ event, venue }) => (
+                        <EventCard key={event.id} event={event} venue={venue} lang={lang} />
+                      ))}
+                    </HumanEventCarousel>
                   </div>
                 </div>
               </div>

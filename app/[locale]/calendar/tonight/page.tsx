@@ -12,6 +12,7 @@ import { WeeklyNightlifeNavigator, VipQuoteCalculator } from '@/components/Night
 import { getConciergeBookingUrl } from '@/lib/conciergeBooking';
 import { getJustSingingRainContent, isJustSingingRainActive } from '@/lib/just-singing-rain/justme35';
 import { getVenueCardPhoto4x5 } from '@/lib/siteCardAssets4x5';
+import { HumanEventCarousel } from '@/components/HumanEventCarousel';
 
 export const dynamic = 'force-dynamic';
 
@@ -320,29 +321,29 @@ export default async function TonightPage({ params }: Props) {
             <div className="space-y-16">
               {aperitivoEvents.length > 0 && (
                 <div>
-                  <div className="flex items-center space-x-4 mb-8">
+                  <div className="flex items-center space-x-4 mb-6">
                     <h2 className="font-serif text-3xl text-white">Aperitivo</h2>
                     <span className="text-white/40 font-mono text-sm">19:30 - 22:30</span>
                     <div className="flex-grow h-px bg-white/10"></div>
                   </div>
-                  <div className="space-y-6">
+                  <HumanEventCarousel locale={locale} ariaLabel="Aperitivo">
                     {aperitivoEvents.map((item) => (
                       <EventCard key={item.event.id} item={item} locale={locale} renderedAtMs={renderedAtMs} />
                     ))}
-                  </div>
+                  </HumanEventCarousel>
                 </div>
               )}
 
               {dinnerEvents.length > 0 && (
                 <div>
-                  <div className="flex items-center space-x-4 mb-8">
+                  <div className="flex items-center space-x-4 mb-6">
                     <h2 className="font-serif text-3xl text-white">
                       {rainContent?.formats[1]?.title || tr(locale, 'Dinner', 'Cena')}
                     </h2>
                     <span className="text-white/40 font-mono text-sm">20:30 - 23:00</span>
                     <div className="flex-grow h-px bg-white/10"></div>
                   </div>
-                  <div className="space-y-6">
+                  <HumanEventCarousel locale={locale}>
                     {dinnerEvents.map((item) => (
                       <EventCard
                         key={`${item.event.id}-dinner`}
@@ -352,37 +353,37 @@ export default async function TonightPage({ params }: Props) {
                         note={rainContent?.formats[1]?.title}
                       />
                     ))}
-                  </div>
+                  </HumanEventCarousel>
                 </div>
               )}
 
               {primeTimeEvents.length > 0 && (
                 <div>
-                  <div className="flex items-center space-x-4 mb-8">
+                  <div className="flex items-center space-x-4 mb-6">
                     <h2 className="font-serif text-3xl text-white">Prime Time</h2>
                     <span className="text-white/40 font-mono text-sm">23:30 - 01:00</span>
                     <div className="flex-grow h-px bg-white/10"></div>
                   </div>
-                  <div className="space-y-6">
+                  <HumanEventCarousel locale={locale} ariaLabel="Prime Time">
                     {primeTimeEvents.map((item) => (
                       <EventCard key={item.event.id} item={item} locale={locale} renderedAtMs={renderedAtMs} />
                     ))}
-                  </div>
+                  </HumanEventCarousel>
                 </div>
               )}
 
               {afterHoursEvents.length > 0 && (
                 <div>
-                  <div className="flex items-center space-x-4 mb-8">
+                  <div className="flex items-center space-x-4 mb-6">
                     <h2 className="font-serif text-3xl text-white">After Hours</h2>
                     <span className="text-white/40 font-mono text-sm">02:00 - 05:00</span>
                     <div className="flex-grow h-px bg-white/10"></div>
                   </div>
-                  <div className="space-y-6">
+                  <HumanEventCarousel locale={locale} ariaLabel="After Hours">
                     {afterHoursEvents.map((item) => (
                       <EventCard key={item.event.id} item={item} locale={locale} renderedAtMs={renderedAtMs} />
                     ))}
-                  </div>
+                  </HumanEventCarousel>
                 </div>
               )}
             </div>
@@ -402,46 +403,46 @@ export default async function TonightPage({ params }: Props) {
             <div className="space-y-16">
               {tomorrowAperitivo.length > 0 && (
                 <div>
-                  <div className="flex items-center space-x-4 mb-8">
+                  <div className="flex items-center space-x-4 mb-6">
                     <h3 className="font-serif text-3xl text-white">Aperitivo</h3>
                     <span className="text-white/40 font-mono text-sm">19:30 - 22:30</span>
                     <div className="flex-grow h-px bg-white/10"></div>
                   </div>
-                  <div className="space-y-6">
+                  <HumanEventCarousel locale={locale}>
                     {tomorrowAperitivo.map((item) => (
                       <EventCard key={item.event.id} item={item} locale={locale} renderedAtMs={renderedAtMs} />
                     ))}
-                  </div>
+                  </HumanEventCarousel>
                 </div>
               )}
 
               {tomorrowPrimeTime.length > 0 && (
                 <div>
-                  <div className="flex items-center space-x-4 mb-8">
+                  <div className="flex items-center space-x-4 mb-6">
                     <h3 className="font-serif text-3xl text-white">Prime Time</h3>
                     <span className="text-white/40 font-mono text-sm">23:30 - 01:00</span>
                     <div className="flex-grow h-px bg-white/10"></div>
                   </div>
-                  <div className="space-y-6">
+                  <HumanEventCarousel locale={locale}>
                     {tomorrowPrimeTime.map((item) => (
                       <EventCard key={item.event.id} item={item} locale={locale} renderedAtMs={renderedAtMs} />
                     ))}
-                  </div>
+                  </HumanEventCarousel>
                 </div>
               )}
 
               {tomorrowAfterHours.length > 0 && (
                 <div>
-                  <div className="flex items-center space-x-4 mb-8">
+                  <div className="flex items-center space-x-4 mb-6">
                     <h3 className="font-serif text-3xl text-white">After Hours</h3>
                     <span className="text-white/40 font-mono text-sm">02:00 - 05:00</span>
                     <div className="flex-grow h-px bg-white/10"></div>
                   </div>
-                  <div className="space-y-6">
+                  <HumanEventCarousel locale={locale}>
                     {tomorrowAfterHours.map((item) => (
                       <EventCard key={item.event.id} item={item} locale={locale} renderedAtMs={renderedAtMs} />
                     ))}
-                  </div>
+                  </HumanEventCarousel>
                 </div>
               )}
             </div>
@@ -474,7 +475,7 @@ export default async function TonightPage({ params }: Props) {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <HumanEventCarousel locale={locale}>
             {PRIORITY_SIX_TONIGHT.map((club) => {
               const isAria = club.slug === 'aria-club-milano';
               const curMonth = Number(romeDayKeyOffset(0).slice(5, 7));
@@ -492,7 +493,7 @@ export default async function TonightPage({ params }: Props) {
                           alt={club.name}
                           width={1080}
                           height={1350}
-                          sizes="(max-width: 768px) 100vw, 480px"
+                          sizes="(max-width: 768px) 78vw, 340px"
                           quality={92}
                           className="h-full w-full object-cover"
                         />
@@ -534,7 +535,7 @@ export default async function TonightPage({ params }: Props) {
                 </div>
               );
             })}
-          </div>
+          </HumanEventCarousel>
         </section>
 
         {/* Interactive Modules */}
@@ -579,26 +580,25 @@ function EventCard({
   const category = event.genre[0]?.replace(/_/g, ' ') ?? '';
 
   return (
-    <div className="group relative flex flex-col md:flex-row bg-white/[0.03] rounded-lg overflow-hidden border border-white/5 hover:border-champagne/30 transition-colors duration-500">
-      <div className="w-full md:w-1/3 aspect-[4/5] relative shrink-0">
+    <div className="group relative flex flex-col bg-white/[0.03] rounded-lg overflow-hidden border border-white/10 hover:border-champagne/40 transition-colors duration-500">
+      <div data-no-lightbox="true" className="w-full aspect-[4/5] relative shrink-0 border-b border-white/10">
         <Image
           src={event.image || venue.image || '/images/milan-nightclub-luxury-vip-champagne.webp'}
           alt={title}
           fill
-          sizes="(max-width: 768px) 100vw, 33vw"
+          sizes="(max-width: 768px) 78vw, 330px"
           quality={92}
           className="object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-[#050505] via-transparent to-transparent" />
 
-        <div className="absolute top-4 left-4 bg-black/50 backdrop-blur-md border border-white/10 text-white px-3 py-1 rounded-full text-xs font-medium tracking-wider uppercase">
+        <div className="absolute top-4 left-4 bg-black/65 backdrop-blur-md border border-white/15 text-white px-3 py-1 rounded-full text-xs font-medium tracking-wider uppercase">
           {category}
         </div>
       </div>
 
-      <div className="p-6 md:p-8 flex flex-col justify-center flex-grow relative">
+      <div className="p-6 flex flex-col justify-between flex-grow relative">
         {isLive && (
-          <div className="absolute top-6 right-6 flex items-center space-x-2">
+          <div className="mb-3 flex items-center space-x-2">
             <span className="relative flex h-3 w-3">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
               <span className="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
@@ -607,20 +607,24 @@ function EventCard({
           </div>
         )}
 
-        <div className="flex items-center space-x-2 text-champagne mb-3">
-          <Clock className="w-4 h-4" />
-          <span className="font-mono text-sm">{timeStr}</span>
+        <div>
+          <div className="flex items-center space-x-2 text-champagne mb-2">
+            <Clock className="w-4 h-4" />
+            <span className="font-mono text-sm">{timeStr}</span>
+          </div>
+
+          <h3 className="font-serif text-xl sm:text-2xl text-white mb-2 group-hover:text-champagne transition-colors">
+            <Link href={`${lp}/events/${slug}`}>{title}</Link>
+          </h3>
         </div>
 
-        <h3 className="font-serif text-2xl text-white mb-2 group-hover:text-champagne transition-colors">
-          <Link href={`${lp}/events/${slug}`}>{title}</Link>
-        </h3>
-
-        <div className="flex items-center space-x-2 text-white/40">
-          <MapPin className="w-4 h-4" />
-          <span className="text-sm tracking-wide">{venueName}</span>
+        <div>
+          <div className="flex items-center space-x-2 text-white/40">
+            <MapPin className="w-4 h-4" />
+            <span className="text-sm tracking-wide">{venueName}</span>
+          </div>
+          {note && <p className="text-xs font-medium text-champagne mt-2">{note}</p>}
         </div>
-        {note && <p className="text-xs font-medium text-champagne mt-2">{note}</p>}
       </div>
     </div>
   );

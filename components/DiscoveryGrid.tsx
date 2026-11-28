@@ -3,6 +3,7 @@
 import { Suspense, useRef } from 'react';
 import { Event, Venue } from '@/lib/types';
 import EventCard from './EventCard';
+import { HumanEventCarousel } from './HumanEventCarousel';
 import { useSearchParams } from 'next/navigation';
 import { motion, useInView } from 'motion/react';
 
@@ -79,19 +80,22 @@ function GridContent({ items, lang, title, subtitle }: DiscoveryGridProps) {
         </p>
       </motion.div>
       
-      {/* Semantic Grid Layout */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8">
+      {/* Horizontal Human Auto-Scroll Carousel */}
+      <HumanEventCarousel
+        locale={lang}
+        ariaLabel={title || defaultTitle}
+        resetKey={`${genreFilter || ''}-${zoneFilter || ''}-${priceFilter || ''}`}
+      >
         {filteredItems.map(({ event, venue }) => (
           <EventCard 
             key={event.id} 
             event={event} 
             venue={venue} 
             lang={lang} 
-            // Grid items are typically below the fold, so priority is false by default
             priority={false} 
           />
         ))}
-      </div>
+      </HumanEventCarousel>
     </section>
   );
 }

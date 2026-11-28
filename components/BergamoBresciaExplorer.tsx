@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from 'react';
 import Image from 'next/image';
 import { ArrowRight, Calendar, MapPin, MessageCircle, Sparkles } from 'lucide-react';
 import Link from '@/components/LocalizedLink';
+import { HumanEventCarousel } from '@/components/HumanEventCarousel';
 import type { BergamoBresciaCardViewModel } from '@/lib/bergamo-brescia/activeNights35';
 
 export interface BergamoBresciaClubFilterItem {
@@ -192,9 +193,8 @@ export default function BergamoBresciaExplorer({
           {labels.emptyState}
         </div>
       ) : (
-        <div
-          className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
-          data-no-lightbox="true"
+        <HumanEventCarousel
+          resetKey={`${province}-${club}-${format}`}
         >
           {combined.map((card) => {
             const badge =
@@ -283,7 +283,7 @@ export default function BergamoBresciaExplorer({
               </article>
             );
           })}
-        </div>
+        </HumanEventCarousel>
       )}
     </div>
   );

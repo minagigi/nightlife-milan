@@ -2,9 +2,10 @@
 
 import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import Image from 'next/image';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Pause, Play } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import Link from '@/components/LocalizedLink';
+import { useHumanAutoScroll } from '@/components/HumanEventCarousel';
 import { getConciergeBookingUrl } from '@/lib/conciergeBooking';
 import { getDateSensitiveEvents, millisecondsUntilNextDateSensitiveChange } from '@/lib/dateSensitiveView';
 import type { TableConciergeEvent } from '@/lib/tableConcierge';
@@ -51,6 +52,7 @@ type Props = {
 
 function CarouselBand({
   id,
+  locale,
   cialdini,
   surfaceClass,
   copy,
@@ -61,6 +63,7 @@ function CarouselBand({
   children,
 }: {
   id: string;
+  locale: string;
   cialdini: 'scarcity' | 'social-proof';
   surfaceClass: string;
   copy: V01CarouselCopy;
@@ -71,17 +74,33 @@ function CarouselBand({
   children: ReactNode;
 }) {
   const trackRef = useRef<HTMLDivElement>(null);
-
-  const scrollTrack = (direction: -1 | 1) => {
-    trackRef.current?.scrollBy({ left: direction * 360, behavior: 'smooth' });
-  };
+  const {
+    copy: humanCopy,
+    state,
+    canScroll,
+    canScrollPrev,
+    canScrollNext,
+    userPaused,
+    stepPrev,
+    stepNext,
+    toggleUserPause,
+    setWrapperNode,
+    wrapperHandlers,
+    trackHandlers,
+  } = useHumanAutoScroll(trackRef, { locale });
 
   return (
     <section
       id={id}
+      ref={setWrapperNode}
       data-cialdini={cialdini}
+      data-human-event-carousel="true"
+      data-human-autoscroll-state={state}
+      data-human-autoscroll-scrollable={canScroll ? 'true' : 'false'}
+      data-no-lightbox="true"
       className={`w-full border-b border-[#F6F1E7]/14 ${surfaceClass} text-[#F6F1E7]`}
       aria-labelledby={`${id}-heading`}
+      {...wrapperHandlers}
     >
       <div className="mx-auto max-w-[1440px] border-x border-[#F6F1E7]/14 px-5 py-14 sm:px-14 sm:py-16">
         <div className="mb-8 flex flex-col gap-5 border-b border-[#F6F1E7]/12 pb-6 lg:flex-row lg:items-end lg:justify-between">
@@ -107,22 +126,52 @@ function CarouselBand({
           </div>
 
           <div className="flex flex-wrap items-center gap-3">
-            <div className="flex items-center gap-2">
+            <div
+              aria-hidden={!canScroll ? 'true' : undefined}
+              className={`flex items-center gap-2 transition-opacity duration-200 ${
+                canScroll ? 'opacity-100' : 'pointer-events-none opacity-0 select-none'
+              }`}
+            >
               <button
                 type="button"
-                onClick={() => scrollTrack(-1)}
-                aria-label={prevAria}
-                className="inline-flex h-11 w-11 items-center justify-center border border-[#EAE3D5]/35 bg-[#141311] text-[#F6F1E7] transition-colors hover:border-[#EAE3D5] hover:bg-[#1E1C19]"
+                tabIndex={canScroll ? 0 : -1}
+                onClick={toggleUserPause}
+                aria-label={userPaused ? humanCopy.play : humanCopy.pause}
+                data-human-carousel-toggle="true"
+                data-paused={userPaused ? 'true' : 'false'}
+                className="inline-flex min-h-[44px] min-w-[44px] items-center justify-center gap-1.5 border border-[#EAE3D5]/35 bg-[#141311] px-3 font-mono text-[11px] font-bold uppercase tracking-[0.08em] text-[#F6F1E7] transition-colors hover:border-[#EAE3D5] hover:bg-[#1E1C19]"
               >
-                <ChevronLeft className="h-5 w-5" aria-hidden="true" />
+                {userPaused ? (
+                  <>
+                    <Play className="h-3.5 w-3.5 shrink-0 fill-current" aria-hidden="true" />
+                    <span>{humanCopy.playShort}</span>
+                  </>
+                ) : (
+                  <>
+                    <Pause className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
+                    <span>{humanCopy.pauseShort}</span>
+                  </>
+                )}
               </button>
               <button
                 type="button"
-                onClick={() => scrollTrack(1)}
-                aria-label={nextAria}
-                className="inline-flex h-11 w-11 items-center justify-center border border-[#EAE3D5]/35 bg-[#141311] text-[#F6F1E7] transition-colors hover:border-[#EAE3D5] hover:bg-[#1E1C19]"
+                tabIndex={canScroll ? 0 : -1}
+                onClick={stepPrev}
+                disabled={!canScrollPrev}
+                aria-label={prevAria}
+                className="inline-flex min-h-[44px] min-w-[44px] items-center justify-center border border-[#EAE3D5]/35 bg-[#141311] text-[#F6F1E7] transition-colors hover:border-[#EAE3D5] hover:bg-[#1E1C19] disabled:opacity-40"
               >
-                <ChevronRight className="h-5 w-5" aria-hidden="true" />
+                <ChevronLeft className="h-5 w-5 rtl:rotate-180" aria-hidden="true" />
+              </button>
+              <button
+                type="button"
+                tabIndex={canScroll ? 0 : -1}
+                onClick={stepNext}
+                disabled={!canScrollNext}
+                aria-label={nextAria}
+                className="inline-flex min-h-[44px] min-w-[44px] items-center justify-center border border-[#EAE3D5]/35 bg-[#141311] text-[#F6F1E7] transition-colors hover:border-[#EAE3D5] hover:bg-[#1E1C19] disabled:opacity-40"
+              >
+                <ChevronRight className="h-5 w-5 rtl:rotate-180" aria-hidden="true" />
               </button>
             </div>
             <Link
@@ -137,7 +186,8 @@ function CarouselBand({
 
         <div
           ref={trackRef}
-          className="v01-carousel-track flex gap-5 overflow-x-auto snap-x snap-mandatory pb-3"
+          className="v01-carousel-track flex gap-5 overflow-x-auto overscroll-x-contain snap-x snap-proximity pb-3 cursor-grab active:cursor-grabbing select-none [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+          {...trackHandlers}
         >
           {children}
         </div>
@@ -281,6 +331,7 @@ export default function V01HomeCarousels({
   const staseraBand = (
     <CarouselBand
       id="stasera"
+      locale={locale}
       cialdini="scarcity"
       surfaceClass={hasTonightRainSpecial ? 'bg-[#050505]' : 'bg-[#0B0A09]'}
       copy={v01.stasera}
@@ -296,6 +347,7 @@ export default function V01HomeCarousels({
   const capodannoBand = (
     <CarouselBand
       id="capodanno"
+      locale={locale}
       cialdini="scarcity"
       surfaceClass={hasTonightRainSpecial ? 'bg-[#0B0A09]' : 'bg-[#050505]'}
       copy={v01.capodanno}
@@ -380,6 +432,7 @@ export default function V01HomeCarousels({
       {/* 3. CAROSELLO ORIZZONTALE — QUESTA SETTIMANA & WEEKEND */}
       <CarouselBand
         id="settimana"
+        locale={locale}
         cialdini="social-proof"
         surfaceClass="bg-[#050505]"
         copy={v01.settimana}
@@ -394,6 +447,7 @@ export default function V01HomeCarousels({
       {/* 4. CAROSELLO ORIZZONTALE — I NOSTRI LOCALI PARTNER (18 CLUB IN ORDINE UFFICIALE) */}
       <CarouselBand
         id="locali-partner"
+        locale={locale}
         cialdini="social-proof"
         surfaceClass="bg-[#0B0A09]"
         copy={v01.partner}

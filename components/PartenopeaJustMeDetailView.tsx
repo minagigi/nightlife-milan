@@ -18,6 +18,7 @@ import {
 } from 'lucide-react';
 import EventVenueMap from '@/components/EventVenueMap';
 import Link from '@/components/LocalizedLink';
+import { HumanEventCarousel } from '@/components/HumanEventCarousel';
 import SeoAuthorityHub from '@/components/SeoAuthorityHub';
 import { getPaymentTerms35 } from '@/lib/capodanno/paymentTerms35';
 import { getConciergeBookingUrl } from '@/lib/conciergeBooking';
@@ -781,8 +782,8 @@ export default function PartenopeaJustMeDetailView({
         <section
           data-no-lightbox="true"
           data-event-crosslink-cards="partenopea-justme"
-          className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4"
         >
+          <HumanEventCarousel locale={locale} cardSize="compact">
           <div className="flex flex-col justify-between overflow-hidden rounded-xl border border-white/15 bg-white/[0.03] p-5 space-y-4">
             <div className="space-y-4">
               <Link
@@ -906,6 +907,7 @@ export default function PartenopeaJustMeDetailView({
               {c.orthodoxBannerCta} <ArrowRight className="h-3.5 w-3.5" />
             </Link>
           </div>
+          </HumanEventCarousel>
         </section>
 
         {/* Section 6: 12 FAQs — Alternativa 02 Capitolo Carta Calda #F6F1E7 */}

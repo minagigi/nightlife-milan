@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from '@/components/LocalizedLink';
 import { buildMoreVenueEventsHeading } from '@/lib/eventPageLocale';
+import { HumanEventCarousel } from '@/components/HumanEventCarousel';
 
 export interface MoreVenueEventItem {
   href: string;
@@ -30,7 +31,7 @@ export default function MoreVenueEvents({ items, locale, venueName }: MoreVenueE
       <h2 className="text-2xl font-serif font-bold text-champagne mb-5">
         {buildMoreVenueEventsHeading(locale, venueName)}
       </h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <HumanEventCarousel locale={locale} cardSize="compact" ariaLabel={buildMoreVenueEventsHeading(locale, venueName)}>
         {items.map((item) => (
           <Link
             key={item.href}
@@ -43,7 +44,7 @@ export default function MoreVenueEvents({ items, locale, venueName }: MoreVenueE
                 alt={item.title}
                 fill
                 quality={92}
-                sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 25vw"
+                sizes="(max-width: 768px) 74vw, 280px"
                 className="object-cover transition-transform duration-300 group-hover:scale-[1.02]"
               />
             </div>
@@ -57,7 +58,7 @@ export default function MoreVenueEvents({ items, locale, venueName }: MoreVenueE
             </div>
           </Link>
         ))}
-      </div>
+      </HumanEventCarousel>
     </section>
   );
 }

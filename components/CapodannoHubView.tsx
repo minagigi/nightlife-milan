@@ -28,6 +28,7 @@ import { getConciergeBookingUrl } from '@/lib/conciergeBooking';
 import { localePrefix, canonicalPageUrl } from '@/lib/i18n/locales';
 import { getScarcityAndChatCopy } from '@/lib/i18n/scarcityAndChatCopy';
 import CapodannoInteractiveFilter from '@/components/CapodannoInteractiveFilter';
+import { HumanEventCarousel } from '@/components/HumanEventCarousel';
 import SinglePassStorefront from '@/components/single-pass/SinglePassStorefront';
 import { getSinglePassCopy } from '@/lib/single-pass/i18n35';
 import {
@@ -467,7 +468,7 @@ export default function CapodannoHubView({ locale, mode, canonicalPath }: Props)
               {masterSeo.partnerIntro}
             </p>
 
-            <div className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+            <HumanEventCarousel locale={locale} ariaLabel={masterSeo.partnerTitle} className="mt-6">
               {OFFICIAL_21_PARTNER_VENUES.map((partner, idx) => {
                 const nyeHref = capodannoEventPath(partner.capodannoSlug, locale);
                 const clubSlug = getLocalizedVenueSlug35(partner.venueId, locCode);
@@ -490,7 +491,7 @@ export default function CapodannoHubView({ locale, mode, canonicalPath }: Props)
                             alt={partner.brandName}
                             width={1080}
                             height={1350}
-                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 400px"
+                            sizes="(max-width: 768px) 78vw, 340px"
                             quality={92}
                             className="h-full w-full object-cover"
                           />
@@ -536,7 +537,7 @@ export default function CapodannoHubView({ locale, mode, canonicalPath }: Props)
                   </article>
                 );
               })}
-            </div>
+            </HumanEventCarousel>
           </section>
         )}
 

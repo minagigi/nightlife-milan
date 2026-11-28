@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Link from '@/components/LocalizedLink';
 import SeoAuthorityHub from '@/components/SeoAuthorityHub';
 import EventVenueMap from '@/components/EventVenueMap';
+import { HumanEventCarousel } from '@/components/HumanEventCarousel';
 import SinglePassVenueModule from '@/components/single-pass/SinglePassVenueModule';
 import { getSinglePassCopy } from '@/lib/single-pass/i18n35';
 import { SITE_CONTACT } from '@/config/contact';
@@ -411,11 +412,11 @@ export default function ChristmasVoyaDetailView({ locale }: Props) {
                 </div>
               </div>
 
-              <div
+              <nav
                 data-no-lightbox="true"
                 data-event-crosslink-cards="christmas-voya"
-                className="grid grid-cols-1 gap-4 sm:grid-cols-2"
               >
+                <HumanEventCarousel locale={locale} variant="light">
                 <div
                   data-venue-authority-backlink
                   className="flex flex-col justify-between gap-4 bg-[#050505] p-5 text-[#F6F1E7]"
@@ -481,7 +482,8 @@ export default function ChristmasVoyaDetailView({ locale }: Props) {
                     {c.nyeCrossCta.replace(/\s*→+$/, '')} →
                   </Link>
                 </div>
-              </div>
+                </HumanEventCarousel>
+              </nav>
             </div>
           </div>
         </div>

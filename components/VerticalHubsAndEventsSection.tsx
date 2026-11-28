@@ -1,11 +1,12 @@
 'use client';
 
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { usePathname } from 'next/navigation';
 import Image from 'next/image';
 import { toCardPoster4x5 } from '@/lib/cardPoster4x5';
 import { getConciergeBookingUrl } from '@/lib/conciergeBooking';
 import Link from '@/components/LocalizedLink';
+import { HumanEventCarousel } from '@/components/HumanEventCarousel';
 import {
   getVerticalHubUi35,
   getOccasionsCatalog,
@@ -29,7 +30,6 @@ export default function VerticalHubsAndEventsSection({
     initialTab
   );
   const pathname = usePathname() || (locale === 'en' ? '/' : `/${locale}`);
-  const carouselRef = useRef<HTMLDivElement | null>(null);
 
   const ui = getVerticalHubUi35(locale);
   const occasions = getOccasionsCatalog(locale);
@@ -39,14 +39,6 @@ export default function VerticalHubsAndEventsSection({
 
   const activeCards =
     activeTab === 'occasions' ? occasions : activeTab === 'fairs' ? fairs : holidays;
-
-  const scrollCarousel = (dir: 'prev' | 'next') => {
-    if (!carouselRef.current) return;
-    carouselRef.current.scrollBy({
-      left: dir === 'next' ? 370 : -370,
-      behavior: 'smooth',
-    });
-  };
 
   return (
     <section
@@ -103,10 +95,17 @@ export default function VerticalHubsAndEventsSection({
         </div>
 
         {/* Tab Content: Cards */}
-        <div className="mt-8 grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <HumanEventCarousel
+          locale={locale}
+          variant="light"
+          cardSize="wide"
+          resetKey={activeTab}
+          className="mt-8"
+        >
           {activeCards.map((card) => (
             <article
               key={card.id}
+              data-no-lightbox="true"
               className="border border-[#050505]/16 bg-[#EFE9DC] overflow-hidden flex flex-col justify-between hover:border-[#050505] transition"
             >
               <div>
@@ -115,7 +114,7 @@ export default function VerticalHubsAndEventsSection({
                     src={toCardPoster4x5(card.imageSrc)}
                     alt={card.title}
                     fill
-                    sizes="(max-width: 1024px) 100vw, 50vw"
+                    sizes="(max-width: 1024px) 82vw, 420px"
                     quality={92}
                     className="object-cover"
                   />
@@ -197,47 +196,25 @@ export default function VerticalHubsAndEventsSection({
               </div>
             </article>
           ))}
-        </div>
+        </HumanEventCarousel>
       </div>
 
       {/* 2. AUTO-UPDATING SUGGESTED EVENTS CAROUSEL (60% Couture Noir Chapter) */}
       <div className="border border-[#F6F1E7]/16 bg-[#0B0A09] p-6 sm:p-8">
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6">
-          <div>
-            <span className="font-mono text-xs font-bold uppercase tracking-widest text-[#EAE3D5]">
-              LIVE FEED · XCEED + WEEKLY + SEASONAL
-            </span>
-            <h3 className="mt-1 font-serif text-2xl font-normal text-[#F6F1E7]">{ui.suggestedEventsTitle}</h3>
-            <p className="mt-1 text-xs sm:text-sm text-[#C2B9AA]">{ui.suggestedEventsSubtitle}</p>
-          </div>
-          <div className="flex items-center gap-2">
-            <button
-              type="button"
-              onClick={() => scrollCarousel('prev')}
-              aria-label="Previous suggested event"
-              className="h-9 w-9 border border-[#F6F1E7]/20 bg-[#050505] text-[#F6F1E7] hover:border-[#F6F1E7] flex items-center justify-center"
-            >
-              ‹
-            </button>
-            <button
-              type="button"
-              onClick={() => scrollCarousel('next')}
-              aria-label="Next suggested event"
-              className="h-9 w-9 border border-[#F6F1E7]/20 bg-[#050505] text-[#F6F1E7] hover:border-[#F6F1E7] flex items-center justify-center"
-            >
-              ›
-            </button>
-          </div>
+        <div className="mb-6">
+          <span className="font-mono text-xs font-bold uppercase tracking-widest text-[#EAE3D5]">
+            LIVE FEED · XCEED + WEEKLY + SEASONAL
+          </span>
+          <h3 className="mt-1 font-serif text-2xl font-normal text-[#F6F1E7]">{ui.suggestedEventsTitle}</h3>
+          <p className="mt-1 text-xs sm:text-sm text-[#C2B9AA]">{ui.suggestedEventsSubtitle}</p>
         </div>
 
-        <div
-          ref={carouselRef}
-          className="flex gap-5 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-thin"
-        >
+        <HumanEventCarousel locale={locale} resetKey={eventFocus}>
           {suggestedEvents.map((ev) => (
             <article
               key={ev.id}
-              className="min-w-[290px] sm:min-w-[330px] max-w-[345px] snap-start flex flex-col justify-between border border-[#F6F1E7]/14 bg-[#050505] overflow-hidden hover:border-[#F6F1E7]/45 transition"
+              data-no-lightbox="true"
+              className="flex flex-col justify-between border border-[#F6F1E7]/14 bg-[#050505] overflow-hidden hover:border-[#F6F1E7]/45 transition"
             >
               <div>
                 <div data-no-lightbox="true" className="relative aspect-[4/5] w-full bg-[#050505] overflow-hidden border-b border-[#F6F1E7]/12">
@@ -245,7 +222,7 @@ export default function VerticalHubsAndEventsSection({
                     src={toCardPoster4x5(ev.imageSrc)}
                     alt={ev.title}
                     fill
-                    sizes="340px"
+                    sizes="(max-width: 640px) 78vw, 340px"
                     quality={92}
                     className="object-cover"
                   />
@@ -283,7 +260,7 @@ export default function VerticalHubsAndEventsSection({
               </div>
             </article>
           ))}
-        </div>
+        </HumanEventCarousel>
       </div>
     </section>
   );

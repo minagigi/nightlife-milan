@@ -15,6 +15,7 @@ import { getTocLabel35 } from '@/lib/i18n/contextualSilo35';
 import type { LocaleCode } from '@/lib/i18n/locales';
 import { getConciergeBookingUrl } from '@/lib/conciergeBooking';
 import { toCardPoster4x5 } from '@/lib/cardPoster4x5';
+import { HumanEventCarousel } from '@/components/HumanEventCarousel';
 
 export const revalidate = 3600;
 
@@ -418,8 +419,8 @@ export default async function EventsBestPage({ params }: Props) {
                     <h3 className="text-white/50 text-[10px] uppercase tracking-[0.25em] mb-3">
                       {tr(locale, 'Upcoming Special Events', 'Prossimi Eventi Speciali')}
                     </h3>
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                      {upcoming.slice(0, 3).map((event) => {
+                    <HumanEventCarousel locale={locale} cardSize="compact">
+                      {upcoming.slice(0, 8).map((event) => {
                         const title = getLocalizedText(event.localizedContent.title, locale);
                         const slug = getLocalizedText(event.localizedContent.slug, locale);
                         const dateStr = new Date(event.dateISO).toLocaleDateString(locale, {
@@ -446,7 +447,7 @@ export default async function EventsBestPage({ params }: Props) {
                                   alt={title}
                                   width={1080}
                                   height={1350}
-                                  sizes="(max-width: 768px) 100vw, 320px"
+                                  sizes="(max-width: 768px) 74vw, 280px"
                                   quality={92}
                                   className="h-full w-full object-cover"
                                 />
@@ -468,7 +469,7 @@ export default async function EventsBestPage({ params }: Props) {
                           </Link>
                         );
                       })}
-                    </div>
+                    </HumanEventCarousel>
                   </div>
                 )}
 

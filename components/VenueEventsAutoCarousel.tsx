@@ -1,12 +1,13 @@
 'use client';
 
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { usePathname } from 'next/navigation';
 import Image from 'next/image';
 import Link from '@/components/LocalizedLink';
 import { getConciergeBookingUrl } from '@/lib/conciergeBooking';
 import { isEnabledLocale } from '@/lib/i18n/locales';
 import { toCardPoster4x5 } from '@/lib/cardPoster4x5';
+import { HumanEventCarousel } from '@/components/HumanEventCarousel';
 import type {
   VenueUi35,
   CarouselEventCard,
@@ -53,8 +54,6 @@ export default function VenueEventsAutoCarousel({
   const firstSegment = pathname.split('/').filter(Boolean)[0] || '';
   const activeLocale = isEnabledLocale(firstSegment) ? firstSegment : 'en';
   const [activeTab, setActiveTab] = useState<TabKey>(defaultTab);
-  const [viewMode, setViewMode] = useState<'carousel' | 'grid'>('carousel');
-  const scrollRef = useRef<HTMLDivElement | null>(null);
 
   const rawItems: CarouselEventCard[] =
     activeTab === 'tonight'
@@ -68,12 +67,6 @@ export default function VenueEventsAutoCarousel({
   const showTonightFallback = activeTab === 'tonight' && tonight.length === 0;
   const activeItems: CarouselEventCard[] =
     rawItems.length > 0 ? rawItems : curatedProposals.length > 0 ? curatedProposals : future;
-
-  const handleScroll = (dir: 'prev' | 'next') => {
-    if (!scrollRef.current) return;
-    const offset = dir === 'next' ? 380 : -380;
-    scrollRef.current.scrollBy({ left: offset, behavior: 'smooth' });
-  };
 
   return (
     <div className="space-y-12 my-12">
@@ -92,54 +85,6 @@ export default function VenueEventsAutoCarousel({
               {venueName} · {ui.eventsTitle}
             </h2>
             <p className="mt-1.5 text-sm text-[#C2B9AA] max-w-3xl">{ui.eventsSubtitle}</p>
-          </div>
-
-          {/* View Mode & Carousel Arrows */}
-          <div className="flex items-center gap-2 self-start lg:self-end">
-            <div className="inline-flex border border-[#F6F1E7]/18 bg-[#050505] p-1">
-              <button
-                type="button"
-                onClick={() => setViewMode('carousel')}
-                className={`px-3 py-1.5 font-mono text-xs font-semibold uppercase tracking-wider transition ${
-                  viewMode === 'carousel'
-                    ? 'bg-[#F6F1E7] text-[#050505]'
-                    : 'text-[#C2B9AA] hover:text-[#F6F1E7]'
-                }`}
-              >
-                {ui.viewCarousel}
-              </button>
-              <button
-                type="button"
-                onClick={() => setViewMode('grid')}
-                className={`px-3 py-1.5 font-mono text-xs font-semibold uppercase tracking-wider transition ${
-                  viewMode === 'grid'
-                    ? 'bg-[#F6F1E7] text-[#050505]'
-                    : 'text-[#C2B9AA] hover:text-[#F6F1E7]'
-                }`}
-              >
-                {ui.viewGrid}
-              </button>
-            </div>
-            {viewMode === 'carousel' && (
-              <div className="flex items-center gap-1.5">
-                <button
-                  type="button"
-                  onClick={() => handleScroll('prev')}
-                  aria-label="Previous slide"
-                  className="h-9 w-9 border border-[#F6F1E7]/20 bg-[#050505] text-[#F6F1E7] hover:border-[#F6F1E7] flex items-center justify-center transition"
-                >
-                  ‹
-                </button>
-                <button
-                  type="button"
-                  onClick={() => handleScroll('next')}
-                  aria-label="Next slide"
-                  className="h-9 w-9 border border-[#F6F1E7]/20 bg-[#050505] text-[#F6F1E7] hover:border-[#F6F1E7] flex items-center justify-center transition"
-                >
-                  ›
-                </button>
-              </div>
-            )}
           </div>
         </div>
 
@@ -186,21 +131,16 @@ export default function VenueEventsAutoCarousel({
           </div>
         )}
 
-        {/* Cards Container (Carousel or Grid) */}
-        <div
-          ref={scrollRef}
-          className={
-            viewMode === 'carousel'
-              ? 'flex gap-5 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-thin'
-              : 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5'
-          }
+        {/* Horizontal Human Auto-Scrolling Event Cards */}
+        <HumanEventCarousel
+          locale={activeLocale}
+          ariaLabel={`${venueName} · ${ui.eventsTitle}`}
+          resetKey={activeTab}
         >
           {activeItems.map((ev) => (
             <article
               key={ev.id}
-              className={`${
-                viewMode === 'carousel' ? 'min-w-[295px] sm:min-w-[335px] max-w-[350px] snap-start' : ''
-              } flex flex-col justify-between border border-[#F6F1E7]/14 bg-[#050505] overflow-hidden hover:border-[#F6F1E7]/45 transition group`}
+              className="flex flex-col justify-between border border-[#F6F1E7]/14 bg-[#050505] overflow-hidden hover:border-[#F6F1E7]/45 transition group"
             >
               <div>
                 {/* Uncropped 4:5 Flyer / Image Frame */}
@@ -266,7 +206,7 @@ export default function VenueEventsAutoCarousel({
               </div>
             </article>
           ))}
-        </div>
+        </HumanEventCarousel>
       </section>
 
       {/* 2. TARGET, CROWD, DRESS CODE, MUSIC & LOGISTICS DOSSIER (30% Warm Editorial Ivory) */}

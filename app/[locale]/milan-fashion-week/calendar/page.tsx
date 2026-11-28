@@ -34,6 +34,7 @@ import {
   EntryFormulaMatrix,
   PrioritySixShowcase,
 } from '@/components/NightlifeExpansionModules';
+import { HumanEventCarousel } from '@/components/HumanEventCarousel';
 
 export const revalidate = 3600;
 
@@ -643,11 +644,12 @@ export default async function FashionWeekPage({
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-7">
+        <HumanEventCarousel locale={locale} cardSize="wide">
           {LUXURY_WEEKS.map((w) => (
             <article
               key={w.id}
               id={w.id}
+              data-no-lightbox="true"
               className="rounded-3xl border border-champagne/30 bg-gradient-to-b from-[#18130b] to-[#0c0a06] p-7 sm:p-9 flex flex-col justify-between hover:border-champagne/60 transition-all"
             >
               <div>
@@ -698,7 +700,7 @@ export default async function FashionWeekPage({
               </div>
             </article>
           ))}
-        </div>
+        </HumanEventCarousel>
       </section>
 
       {/* SEZIONE 2: I 6 CLUB PRIORITARI PER AFTER-SHOW & CAPACITÀ BUYOUT */}
@@ -716,20 +718,21 @@ export default async function FashionWeekPage({
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <HumanEventCarousel locale={locale}>
           {PRIORITY_FASHION_VENUES.map((v) => (
             <article
               key={v.slug}
+              data-no-lightbox="true"
               className="rounded-3xl border border-white/15 bg-[#14100a] overflow-hidden flex flex-col justify-between hover:border-champagne/50 transition-all"
             >
               <div>
-                <div className="relative aspect-[4/5] w-full">
+                <div data-no-lightbox="true" className="relative aspect-[4/5] w-full">
                   <Image
                     src={v.image}
                     alt={v.name}
                     fill
                     quality={92}
-                    sizes="(max-width: 1024px) 100vw, 33vw"
+                    sizes="(max-width: 1024px) 78vw, 33vw"
                     className="object-cover"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#14100a] via-black/25 to-transparent" />
@@ -771,7 +774,7 @@ export default async function FashionWeekPage({
               </div>
             </article>
           ))}
-        </div>
+        </HumanEventCarousel>
       </section>
 
       {/* SEZIONE 3: CORPORATE BUYOUT, BRAND PRIVATIZATION & MODEL AGENCY ACCREDITATION */}

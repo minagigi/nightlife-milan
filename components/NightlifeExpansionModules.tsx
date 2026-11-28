@@ -22,6 +22,7 @@ import {
 import { CONTACT } from '@/config/contact';
 import { localePrefix } from '@/lib/i18n/locales';
 import { getVenueCardPhoto4x5 } from '@/lib/siteCardAssets4x5';
+import { HumanEventCarousel } from '@/components/HumanEventCarousel';
 
 type OccasionKey = 'club-vip' | 'graduation' | 'birthday-18-30' | 'bachelorette' | 'corporate-fashion';
 type TierKey = 'luxury-flagship' | 'dinner-show-chic' | 'rooftop-skyline' | 'urban-warehouse';
@@ -737,7 +738,7 @@ export function WeeklyNightlifeNavigator({ locale }: { locale: string }) {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+      <HumanEventCarousel locale={locale} resetKey={current.labelEn}>
         {current.clubs.map((club) => (
           <div
             key={club.name}
@@ -796,7 +797,7 @@ export function WeeklyNightlifeNavigator({ locale }: { locale: string }) {
             </div>
           </div>
         ))}
-      </div>
+      </HumanEventCarousel>
     </section>
   );
 }
@@ -1036,7 +1037,7 @@ export function PrioritySixShowcase({ locale }: { locale: string }) {
         </Link>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <HumanEventCarousel locale={locale}>
         {priorityClubs.map((club) => (
           <div
             key={club.slug}
@@ -1092,7 +1093,7 @@ export function PrioritySixShowcase({ locale }: { locale: string }) {
             </div>
           </div>
         ))}
-      </div>
+      </HumanEventCarousel>
     </section>
   );
 }
@@ -1570,7 +1571,7 @@ export function SanSiroMatchAfterpartyFinder({ locale = 'it' }: { locale?: strin
           </span>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <HumanEventCarousel locale={locale} resetKey={`${compObj.labelEn}-${guests}`}>
           {orderedVenues.map((v, idx) => (
             <div
               key={v.slug}
@@ -1634,7 +1635,7 @@ export function SanSiroMatchAfterpartyFinder({ locale = 'it' }: { locale?: strin
               </div>
             </div>
           ))}
-        </div>
+        </HumanEventCarousel>
       </div>
     </section>
   );
@@ -2892,7 +2893,7 @@ export function NeighborhoodCommutePlanner({ locale }: { locale: string }) {
       </div>
 
       {/* 6 Priority Clubs Commute Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+      <HumanEventCarousel locale={locale} resetKey={origin.labelEn}>
         {origin.routes.map((route) => {
           const waTransferMsg = isIt
             ? `Ciao Concierge Nightlife Milan! Partiamo da "${origin.labelIt}" e vorremmo prenotare Tavolo VIP + eventuale Transfer NCC per ${route.name}.`
@@ -2976,7 +2977,7 @@ export function NeighborhoodCommutePlanner({ locale }: { locale: string }) {
             </div>
           );
         })}
-      </div>
+      </HumanEventCarousel>
     </section>
   );
 }
