@@ -188,14 +188,14 @@ export const weeklyEvents: WeeklyEvent[] = [
       en: 'Kick off the weekend at Milan\'s most glamorous venue. Friday Night at Just Me regularly features international guest DJs, stunning performances, and the city\'s elite crowd. Booking a table in advance is highly recommended.',
       it: 'Dai il via al weekend nel locale più glamour di Milano. Il venerdì sera al Just Me ospita regolarmente DJ internazionali, performance mozzafiato e l\'élite della città. La prenotazione anticipata del tavolo è vivamente consigliata.'
     },
-    pricing: { aperitif: 'From €15', club: 'From €20', tables: 'From €320 to €5,000' },
+    pricing: { aperitif: 'From €15', club: 'From €15', tables: 'From €320 to €5,000' },
     dressCode: {
       en: 'Strictly Elegant. Dress to impress.',
       it: 'Strettamente Elegante. Vestiti per impressionare.'
     },
     faqs: defaultFaqs('Just Me Milano', 'Via Luigi Camoens 2, Parco Sempione, Milan', '21+', 'Strictly Elegant', 'House and Electronic'),
     image: '/images/events/partenopea-2026/justme-friday-27-nov-luciani.webp',
-    xceedLink: 'https://xceed.me/en/milano/event/friday-night-727/249217/channel/nightlifemilan-1',
+    xceedLink: 'https://xceed.me/en/milano/event/friday-night-728/249246/channel/nightlifemilan-1',
     priority: 100
   },
   {
@@ -262,14 +262,14 @@ export const weeklyEvents: WeeklyEvent[] = [
       en: 'Thursday night at Pineta Club Milano brings the iconic Tr3ndy Society format under the crystal chandeliers of Via Messina 38. Expect an electric mix of Hip-Hop, Reggaeton, and commercial hits with VIP bottle service.',
       it: 'Il giovedì notte al Pineta Club Milano porta l\'iconico format Tr3ndy Society sotto i lampadari di cristallo di Via Messina 38. Un mix esplosivo di Hip-Hop, Reggaeton e hit commerciali con servizio tavoli VIP.'
     },
-    pricing: { aperitif: 'From €15', club: 'From €15', tables: 'From €250 to €1,200' },
+    pricing: { aperitif: 'From €15', club: 'From €15', tables: 'From €250' },
     dressCode: {
       en: 'Smart Elegant. Collared shirts recommended for men.',
       it: 'Smart Elegant. Camicia consigliata per gli uomini.'
     },
     faqs: defaultFaqs('Pineta Club', 'Via Messina 38, Milan', '20+', 'Smart Elegant', 'Hip-Hop, Reggaeton and Commercial'),
     image: '/images/events/october-2026/254095-partner-xceed.webp',
-    xceedLink: 'https://xceed.me/en/milano/event/tr3ndy-society-thursday-night-9/254095/channel/nightlifemilan-1',
+    xceedLink: 'https://nightlifemilan.com/clubs/pineta/channel/nightlifemilan-1',
     priority: 95
   },
   {
@@ -317,7 +317,7 @@ export const weeklyEvents: WeeklyEvent[] = [
     },
     faqs: defaultFaqs('Pineta Club', 'Via Messina 38, Milan', '25+', 'Strictly Elegant', 'Live Music and Commercial'),
     image: '/images/events/october-2026/243815-e33432d48dd4.webp',
-    xceedLink: 'https://xceed.me/en/milano/event/saturday-night-767/249139/channel/nightlifemilan-1',
+    xceedLink: 'https://xceed.me/en/milano/event/saturday-night-777/243831/channel/nightlifemilan-1',
     priority: 95
   },
 
