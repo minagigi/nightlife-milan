@@ -343,7 +343,7 @@ export default async function SinglePassPage({
         </div>
       </section>
 
-      <SeoAuthorityHub lang={loc} />
+      <SeoAuthorityHub lang={loc} pageKey="/single-pass" />
     </main>
   );
 }

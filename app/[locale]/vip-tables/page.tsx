@@ -1,4 +1,6 @@
 import EditorialPageSections from '@/components/EditorialPageSections';
+import PageContextualToc from '@/components/PageContextualToc';
+import { getTocLabel35 } from '@/lib/i18n/contextualSilo35';
 import type { LocaleCode } from '@/lib/i18n/locales';
 import type { Metadata } from 'next';
 import Link from '@/components/LocalizedLink';
@@ -635,8 +637,19 @@ export default async function VipTablesPage({ params }: { params: Promise<{ loca
         </div>
       </section>
 
+      <PageContextualToc
+        locale={locale}
+        items={[
+          { id: 'vip-tiers', label: getTocLabel35(locale, 'formulas') },
+          { id: 'vip-clubs-matrix', label: getTocLabel35(locale, 'pricing') },
+          { id: 'vip-pricing-factors', label: getTocLabel35(locale, 'rules') },
+          { id: 'vip-booking-steps', label: getTocLabel35(locale, 'booking') },
+          { id: 'silo-correlati', label: getTocLabel35(locale, 'related') },
+        ]}
+      />
+
       {/* ── WARM IVORY CHAPTER: 3-TIER BOTTLE CREDIT BAND (#F6F1E7) ──────── */}
-      <section className="border-b border-[#050505]/15 bg-[#F6F1E7] text-[#050505] px-5 py-14 sm:px-14 sm:py-20">
+      <section id="vip-tiers" className="scroll-mt-24 border-b border-[#050505]/15 bg-[#F6F1E7] text-[#050505] px-5 py-14 sm:px-14 sm:py-20">
         <div className="mx-auto max-w-[1328px]">
           <p className="mb-2 font-mono text-xs font-semibold uppercase tracking-[0.26em] text-[#3D372E]">
             {copy.tiersEyebrow}
@@ -736,7 +749,7 @@ export default async function VipTablesPage({ params }: { params: Promise<{ loca
       </section>
 
 {/* ── WHAT EVERY VIP TABLE INCLUDES (#F6F1E7 Avorio Caldo) ─────────── */}
-      <section className="px-5 py-16 sm:px-14 border-b border-[#050505]/15 bg-[#F6F1E7] text-[#050505]">
+      <section id="vip-pricing-factors" className="scroll-mt-24 px-5 py-16 sm:px-14 border-b border-[#050505]/15 bg-[#F6F1E7] text-[#050505]">
         <div className="mx-auto max-w-[1328px]">
           <p className="mb-3 font-mono text-xs font-semibold uppercase tracking-[0.14em] text-[#3D3830]">
             {copy.factorsEyebrow}
@@ -755,7 +768,7 @@ export default async function VipTablesPage({ params }: { params: Promise<{ loca
       </section>
 
       {/* ── 3-STEP BOOKING PROTOCOL ──────────────────────────────────────── */}
-      <section className="px-5 py-16 sm:px-14 border-b border-[#F6F1E7]/14 bg-[#050505]">
+      <section id="vip-booking-steps" className="scroll-mt-24 px-5 py-16 sm:px-14 border-b border-[#F6F1E7]/14 bg-[#050505]">
         <div className="mx-auto max-w-[1328px]">
           <p className="mb-3 text-center font-mono text-xs uppercase tracking-[0.14em] text-[#EAE3D5]">
             {copy.stepsEyebrow}

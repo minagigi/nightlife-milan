@@ -9,6 +9,8 @@ import { getConciergeBookingUrl } from '@/lib/conciergeBooking';
 import { VipQuoteCalculator, PrioritySixShowcase } from '@/components/NightlifeExpansionModules';
 import Image from 'next/image';
 import EditorialPageSections from '@/components/EditorialPageSections';
+import PageContextualToc from '@/components/PageContextualToc';
+import { getTocLabel35 } from '@/lib/i18n/contextualSilo35';
 import type { LocaleCode } from '@/lib/i18n/locales';
 
 export const revalidate = 86400;
@@ -290,8 +292,20 @@ export default async function BottlePricesPage({ params }: Props) {
           </p>
         </section>
 
+        <PageContextualToc
+          locale={locale}
+          variant="compact"
+          items={[
+            { id: 'listino-per-locale', label: getTocLabel35(locale, 'clubs') },
+            { id: 'tabella-bottiglie', label: getTocLabel35(locale, 'pricing') },
+            { id: 'calcolatore-bottiglie', label: getTocLabel35(locale, 'booking') },
+            { id: 'faq-bottiglie', label: getTocLabel35(locale, 'faq') },
+            { id: 'silo-correlati', label: getTocLabel35(locale, 'related') },
+          ]}
+        />
+
         {/* Per-Venue Price Tables */}
-        <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
+        <section id="listino-per-locale" className="scroll-mt-24 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
           <h2 className="font-serif text-3xl text-white mb-10">
             {tr(locale, 'Prices by Venue', 'Prezzi per Locale')}
           </h2>
@@ -363,7 +377,7 @@ export default async function BottlePricesPage({ params }: Props) {
         </section>
 
         {/* Common Bottles Reference */}
-        <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
+        <section id="tabella-bottiglie" className="scroll-mt-24 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
           <h2 className="font-serif text-3xl text-white mb-8">
             {tr(locale, 'Reference Bottle Prices', 'Prezzi di Riferimento per Bottiglia')}
           </h2>
@@ -404,13 +418,13 @@ export default async function BottlePricesPage({ params }: Props) {
         </section>
 
         {/* Interactive VIP Quote Calculator & Priority 6 */}
-        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-20 space-y-16">
+        <section id="calcolatore-bottiglie" className="scroll-mt-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-20 space-y-16">
           <VipQuoteCalculator locale={locale} />
           <PrioritySixShowcase locale={locale} />
         </section>
 
         {/* FAQ Section */}
-        <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
+        <section id="faq-bottiglie" className="scroll-mt-24 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
           <h2 className="font-serif text-3xl text-white mb-8">FAQ</h2>
           <div className="space-y-6">
             {faqSchema.mainEntity.map((faq, i) => (

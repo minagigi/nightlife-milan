@@ -1,6 +1,8 @@
 import Image from 'next/image';
 import { Metadata } from 'next';
 import EditorialPageSections from '@/components/EditorialPageSections';
+import PageContextualToc from '@/components/PageContextualToc';
+import { getTocLabel35 } from '@/lib/i18n/contextualSilo35';
 import type { LocaleCode } from '@/lib/i18n/locales';
 import { tr } from '@/lib/i18n/t';
 import { hreflangAlternates, canonicalPageUrl, localePrefix } from '@/lib/i18n/locales';
@@ -288,8 +290,20 @@ export default async function DoorPolicyPage({ params }: Props) {
           </div>
         </section>
 
+        <PageContextualToc
+          locale={locale}
+          variant="compact"
+          items={[
+            { id: 'regole-generali-ingresso', label: getTocLabel35(locale, 'rules') },
+            { id: 'dress-code-per-locale', label: getTocLabel35(locale, 'clubs') },
+            { id: 'strumenti-dress-code', label: getTocLabel35(locale, 'formulas') },
+            { id: 'faq-dress-code', label: getTocLabel35(locale, 'faq') },
+            { id: 'silo-correlati', label: getTocLabel35(locale, 'related') },
+          ]}
+        />
+
         {/* General Rules */}
-        <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
+        <section id="regole-generali-ingresso" className="scroll-mt-24 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
           <h2 className="font-serif text-2xl text-white mb-8 pb-4 border-b border-white/10">
             {tr(locale, 'General Rules', 'Regole Generali')}
           </h2>
@@ -309,7 +323,7 @@ export default async function DoorPolicyPage({ params }: Props) {
         </section>
 
         {/* Per-Venue Dress Code */}
-        <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
+        <section id="dress-code-per-locale" className="scroll-mt-24 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
           <h2 className="font-serif text-2xl text-white mb-8 pb-4 border-b border-white/10">
             {tr(locale, 'Dress Code by Venue', 'Dress Code per Locale')}
           </h2>
@@ -385,7 +399,7 @@ export default async function DoorPolicyPage({ params }: Props) {
         </section>
 
         {/* Interactive Dress Code Instant Checker, Velvet Rope Checklist, Entry Formula Matrix & Priority 6 Showcase */}
-        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16 space-y-16">
+        <section id="strumenti-dress-code" className="scroll-mt-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16 space-y-16">
           <DressCodeInstantChecker locale={locale} />
           <VelvetRopeChecklist locale={locale} />
           <EntryFormulaMatrix locale={locale} />
@@ -393,7 +407,7 @@ export default async function DoorPolicyPage({ params }: Props) {
         </section>
 
         {/* FAQ */}
-        <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
+        <section id="faq-dress-code" className="scroll-mt-24 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
           <h2 className="font-serif text-2xl text-white mb-8 pb-4 border-b border-white/10">FAQ</h2>
           <div className="space-y-6">
             {faqSchema.mainEntity.map((faq, i) => (

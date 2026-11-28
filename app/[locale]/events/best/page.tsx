@@ -10,6 +10,8 @@ import { seoRobots, seoTitle, withWhatsApp } from '@/lib/seoMetadata';
 import { getEventDiscoveryItems } from '@/lib/eventDiscovery';
 import { PrioritySixShowcase, VipQuoteCalculator } from '@/components/NightlifeExpansionModules';
 import EditorialPageSections from '@/components/EditorialPageSections';
+import PageContextualToc from '@/components/PageContextualToc';
+import { getTocLabel35 } from '@/lib/i18n/contextualSilo35';
 import type { LocaleCode } from '@/lib/i18n/locales';
 import { getConciergeBookingUrl } from '@/lib/conciergeBooking';
 import { toCardPoster4x5 } from '@/lib/cardPoster4x5';
@@ -336,8 +338,20 @@ export default async function EventsBestPage({ params }: Props) {
         </div>
       </section>
 
+      <PageContextualToc
+        locale={locale}
+        variant="compact"
+        items={[
+          { id: 'classifica-6-club', label: getTocLabel35(locale, 'clubs') },
+          { id: 'date-punta-milano', label: getTocLabel35(locale, 'special') },
+          { id: 'calcolatore-best-clubs', label: getTocLabel35(locale, 'booking') },
+          { id: 'categorie-eventi', label: getTocLabel35(locale, 'categories') },
+          { id: 'silo-correlati', label: getTocLabel35(locale, 'related') },
+        ]}
+      />
+
       {/* Venue cards */}
-      <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pb-16 space-y-12">
+      <section id="classifica-6-club" className="scroll-mt-24 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pb-16 space-y-12">
         {BEST_VENUES.map((v, index) => {
           const upcoming = upcomingByVenue[v.id] ?? [];
           return (
@@ -481,7 +495,7 @@ export default async function EventsBestPage({ params }: Props) {
       </section>
 
       {/* Grandi Eventi Speciali 2026/2027 nei 6 Club Prioritari */}
-      <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 border-t border-white/10">
+      <section id="date-punta-milano" className="scroll-mt-24 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 border-t border-white/10">
         <div className="mb-8">
           <p className="font-sans text-champagne text-[10px] font-bold uppercase tracking-[0.25em] mb-2">
             {tr(locale, 'MAJOR EVENTS 2026 / 2027', 'GRANDI EVENTI SPECIALI 2026 / 2027')}
@@ -509,7 +523,7 @@ export default async function EventsBestPage({ params }: Props) {
       </section>
 
       {/* PrioritySixShowcase & VipQuoteCalculator */}
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div id="calcolatore-best-clubs" className="scroll-mt-24 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <PrioritySixShowcase locale={locale} />
         <VipQuoteCalculator locale={locale} />
       </div>

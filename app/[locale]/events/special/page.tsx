@@ -24,6 +24,8 @@ import { resolveCardImageByHref } from '@/lib/siteCardAssets4x5';
 import { getEventDiscoveryItems, slimDiscoveryItemsForClient } from '@/lib/eventDiscovery';
 import { PrioritySixShowcase, VipQuoteCalculator } from '@/components/NightlifeExpansionModules';
 import EditorialPageSections from '@/components/EditorialPageSections';
+import PageContextualToc from '@/components/PageContextualToc';
+import { getTocLabel35 } from '@/lib/i18n/contextualSilo35';
 import VerticalHubsAndEventsSection from '@/components/VerticalHubsAndEventsSection';
 import type { LocaleCode } from '@/lib/i18n/locales';
 
@@ -370,8 +372,20 @@ export default async function SpecialEventsPage({ params }: Props) {
         </div>
       </section>
 
+      <PageContextualToc
+        locale={locale}
+        variant="compact"
+        items={[
+          { id: 'grandi-eventi-milano', label: getTocLabel35(locale, 'special') },
+          { id: 'selezione-vip-special', label: getTocLabel35(locale, 'clubs') },
+          { id: 'come-prenotare-special', label: getTocLabel35(locale, 'booking') },
+          { id: 'categorie-eventi', label: getTocLabel35(locale, 'categories') },
+          { id: 'silo-correlati', label: getTocLabel35(locale, 'related') },
+        ]}
+      />
+
       {/* Grandi Eventi Speciali di Milano 2026/2027 */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
+      <section id="grandi-eventi-milano" className="scroll-mt-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
         <div className="mb-8">
           <p className="font-sans text-champagne text-[10px] font-bold uppercase tracking-[0.28em] mb-2">
             {tr(
@@ -480,13 +494,13 @@ export default async function SpecialEventsPage({ params }: Props) {
       <DiscoveryGrid items={slimDiscoveryItemsForClient(items, locale, 24)} lang={locale} title={t.gridTitle} subtitle={t.gridSubtitle} />
 
       {/* Priority 6 Showcase & VIP Calculator */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div id="selezione-vip-special" className="scroll-mt-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <PrioritySixShowcase locale={locale} />
         <VipQuoteCalculator locale={locale} />
       </div>
 
       {/* H2: How to Book a Special Event */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 border-t border-white/5">
+      <section id="come-prenotare-special" className="scroll-mt-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 border-t border-white/5">
         <h2 className="font-serif text-3xl text-white mb-8">
           {tr(locale, 'How to Book a Special Event in Milan', 'Come Prenotare un Evento Speciale a Milano')}
         </h2>

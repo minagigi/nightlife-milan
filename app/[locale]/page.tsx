@@ -1,4 +1,6 @@
 import EditorialPageSections from '@/components/EditorialPageSections';
+import PageContextualToc from '@/components/PageContextualToc';
+import { getTocLabel35 } from '@/lib/i18n/contextualSilo35';
 import type { LocaleCode } from '@/lib/i18n/locales';
 import { Metadata } from 'next';
 import MfwEntry from '@/components/MfwEntry';
@@ -502,8 +504,19 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
           }}
         />
 
+        <PageContextualToc
+          locale={locale}
+          items={[
+            { id: 'serate-in-evidenza', label: getTocLabel35(locale, 'highlights') },
+            { id: 'dopo-partita-san-siro', label: getTocLabel35(locale, 'sanSiro') },
+            { id: 'formule-accesso', label: getTocLabel35(locale, 'formulas') },
+            { id: 'categorie-quartieri', label: getTocLabel35(locale, 'categories') },
+            { id: 'guida-milano-notte', label: getTocLabel35(locale, 'overview') },
+          ]}
+        />
+
         {/* ── 2. Quattro Caroselli Orizzontali Separati (#capodanno · #stasera · #settimana · #locali-partner) ── */}
-        <div data-cialdini="authority social-proof scarcity unity">
+        <div id="serate-in-evidenza" className="scroll-mt-24" data-cialdini="authority social-proof scarcity unity">
           <V01HomeCarousels
             locale={locale}
             localePrefix={lp}
@@ -519,7 +532,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
         </div>
 
         {/* ── 3. San Siro Banner (Alternativa 02 · Capitolo Carta Calda #F6F1E7 + Plinto #050505) ─── */}
-        <section className="w-full border-y border-[#050505] bg-[#F6F1E7] text-[#050505]">
+        <section id="dopo-partita-san-siro" className="scroll-mt-24 w-full border-y border-[#050505] bg-[#F6F1E7] text-[#050505]">
           <div className="mx-auto flex max-w-[1440px] flex-col items-start justify-between gap-6 border-x border-[#050505]/18 px-5 py-10 md:flex-row md:items-center sm:px-14 sm:py-12">
             <div>
               <p className="mb-2 font-mono text-[11px] font-bold uppercase tracking-[0.16em] text-[#4A453E]">
@@ -545,14 +558,14 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
         </section>
 
         {/* ── 4. Formule d'Accesso Rapido (Intent Cards · 1 colonna mobile) ───────────────────────── */}
-        <div data-cialdini="liking reciprocity" className="w-full border-b border-[#F6F1E7]/14 bg-[#050505]">
+        <div id="formule-accesso" data-cialdini="liking reciprocity" className="scroll-mt-24 w-full border-b border-[#F6F1E7]/14 bg-[#050505]">
           <div className="mx-auto max-w-[1440px] border-x border-[#F6F1E7]/14">
             <IntentCards locale={locale} />
           </div>
         </div>
 
         {/* ── 5. Esplora per Categoria e Quartiere (Alternativa 02 · Capitolo Carta Calda #F6F1E7 · 1 colonna mobile) ── */}
-        <section className="w-full border-y border-[#050505] bg-[#F6F1E7] text-[#050505]">
+        <section id="categorie-quartieri" className="scroll-mt-24 w-full border-y border-[#050505] bg-[#F6F1E7] text-[#050505]">
           <div className="mx-auto max-w-[1440px] border-x border-[#050505]/18 px-5 py-12 sm:px-14 sm:py-16">
             <p className="mb-2 font-mono text-[11px] font-bold uppercase tracking-[0.16em] text-[#4A453E]">
               {homeCopy.discoverLabel}

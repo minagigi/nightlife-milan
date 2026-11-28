@@ -10,6 +10,8 @@ import { getHubSeoMeta35, getAperitivoH1 } from '@/lib/i18n/hubSeoMeta35';
 import { getConciergeBookingUrl } from '@/lib/conciergeBooking';
 import { VipQuoteCalculator, PrioritySixShowcase } from '@/components/NightlifeExpansionModules';
 import EditorialPageSections from '@/components/EditorialPageSections';
+import PageContextualToc from '@/components/PageContextualToc';
+import { getTocLabel35 } from '@/lib/i18n/contextualSilo35';
 import TonightRainSpotlight from '@/components/TonightRainSpotlight';
 import type { LocaleCode } from '@/lib/i18n/locales';
 
@@ -248,10 +250,22 @@ export default async function AperitivoPage({ params }: { params: Promise<{ loca
         </div>
       </section>
 
+      <PageContextualToc
+        locale={locale}
+        variant="compact"
+        items={[
+          { id: 'consigli-aperitivo', label: getTocLabel35(locale, 'rules') },
+          { id: 'migliori-aperitivi', label: getTocLabel35(locale, 'clubs') },
+          { id: 'aperitivo-quartieri', label: getTocLabel35(locale, 'categories') },
+          { id: 'calcolatore-aperitivo', label: getTocLabel35(locale, 'booking') },
+          { id: 'silo-correlati', label: getTocLabel35(locale, 'related') },
+        ]}
+      />
+
       <TonightRainSpotlight locale={locale} section="aperitivo-cena" />
 
       {/* Quick tips */}
-      <section className="px-6 pb-20 border-t border-white/5 pt-16">
+      <section id="consigli-aperitivo" className="scroll-mt-24 px-6 pb-20 border-t border-white/5 pt-16">
         <div className="max-w-5xl mx-auto">
           <p className="font-sans text-champagne/50 text-[10px] tracking-[0.4em] uppercase mb-12 text-center">
             {tr(locale, 'WHAT YOU NEED TO KNOW')}
@@ -268,7 +282,7 @@ export default async function AperitivoPage({ params }: { params: Promise<{ loca
       </section>
 
       {/* Top bars */}
-      <section className="px-6 pb-24">
+      <section id="migliori-aperitivi" className="scroll-mt-24 px-6 pb-24">
         <div className="max-w-6xl mx-auto">
           <p className="font-sans text-champagne/50 text-[10px] tracking-[0.4em] uppercase mb-3">
             {tr(locale, 'BEST SPOTS')}
@@ -365,7 +379,7 @@ export default async function AperitivoPage({ params }: { params: Promise<{ loca
       </section>
 
       {/* Aperitivo by Zone — 3rd H2 */}
-      <section className="px-6 pb-24 border-t border-white/5 pt-16">
+      <section id="aperitivo-quartieri" className="scroll-mt-24 px-6 pb-24 border-t border-white/5 pt-16">
         <div className="max-w-5xl mx-auto">
           <h2 className="font-serif text-4xl text-white mb-4">
             {tr(locale, 'Aperitivo by Zone: Where to Go in Milan')}
@@ -426,7 +440,7 @@ export default async function AperitivoPage({ params }: { params: Promise<{ loca
       </section>
 
       {/* Interactive VIP Quote Calculator & Priority 6 */}
-      <section className="px-6 pb-20 max-w-7xl mx-auto space-y-16">
+      <section id="calcolatore-aperitivo" className="scroll-mt-24 px-6 pb-20 max-w-7xl mx-auto space-y-16">
         <VipQuoteCalculator locale={locale} />
         <PrioritySixShowcase locale={locale} />
       </section>

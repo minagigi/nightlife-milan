@@ -86,6 +86,9 @@ import OctoberEventPage from '@/components/OctoberEventPage';
 import { getOctoberEventBySlug } from '@/lib/octoberEvents';
 import { octoberEventMetadata } from '@/lib/octoberEventSeo';
 import EditorialPageSections from '@/components/EditorialPageSections';
+import SeoAuthorityHub from '@/components/SeoAuthorityHub';
+import PageContextualToc from '@/components/PageContextualToc';
+import { getTocLabel35 } from '@/lib/i18n/contextualSilo35';
 import { seoRobots } from '@/lib/seoMetadata';
 import { notFound, permanentRedirect } from 'next/navigation';
 import { tr } from '@/lib/i18n/t';
@@ -896,8 +899,19 @@ export default async function EventPage({ params }: Props) {
           </div>
         </section>
 
+        <PageContextualToc
+          locale={locale}
+          items={[
+            { id: 'tariffe-tavoli', label: getTocLabel35(locale, 'pricing') },
+            { id: 'prenota-serata', label: getTocLabel35(locale, 'booking') },
+            { id: 'programma-dettagli', label: getTocLabel35(locale, 'rules') },
+            { id: 'faq-serata', label: getTocLabel35(locale, 'faq') },
+            { id: 'silo-correlati', label: getTocLabel35(locale, 'related') },
+          ]}
+        />
+
         {/* CAPITOLO 02 — CARTA CALDA #F6F1E7: Prezzi, Tavoli VIP & Prenotazione Immediata */}
-        <section className="border-b border-[#050505] bg-[#F6F1E7] py-10 text-[#050505]">
+        <section id="tariffe-tavoli" className="scroll-mt-24 border-b border-[#050505] bg-[#F6F1E7] py-10 text-[#050505]">
           <div className="mx-auto grid max-w-5xl grid-cols-1 gap-8 px-4 sm:px-6 lg:grid-cols-12 lg:px-8">
             <div className="space-y-4 lg:col-span-7">
               <p className="font-mono text-[11px] font-bold uppercase tracking-[0.14em] text-[#4A453E]">
@@ -943,7 +957,7 @@ export default async function EventPage({ params }: Props) {
               </div>
             </div>
 
-            <aside className="border border-[#050505] bg-[#050505] p-6 text-[#F6F1E7] lg:col-span-5">
+            <aside id="prenota-serata" className="scroll-mt-24 border border-[#050505] bg-[#050505] p-6 text-[#F6F1E7] lg:col-span-5">
               <p className="font-mono text-[11px] font-bold uppercase tracking-[0.14em] text-[#EAE3D5]">
                 CONCIERGE UFFICIALE
               </p>
@@ -991,7 +1005,7 @@ export default async function EventPage({ params }: Props) {
         </section>
 
         {/* CAPITOLO 03 — CHAMPAGNE #EAE3D5: Esperienza & Dress Code */}
-        <section className="border-b border-[#050505] bg-[#EAE3D5] py-10 text-[#050505]">
+        <section id="programma-dettagli" className="scroll-mt-24 border-b border-[#050505] bg-[#EAE3D5] py-10 text-[#050505]">
           <div className="mx-auto max-w-5xl space-y-6 px-4 sm:px-6 lg:px-8">
             <h2 className="font-display text-2xl font-bold uppercase text-[#050505] sm:text-3xl">
               {tr(locale, 'The Experience', "L'Esperienza")}
@@ -1009,7 +1023,7 @@ export default async function EventPage({ params }: Props) {
         </section>
 
         {/* CAPITOLO 04 — CARTA CALDA #F6F1E7: Domande Frequenti */}
-        <section className="bg-[#F6F1E7] py-10 text-[#050505]">
+        <section id="faq-serata" className="scroll-mt-24 bg-[#F6F1E7] py-10 text-[#050505]">
           <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
             <div className="border border-[#050505] bg-[#FFFFFF] p-5 sm:p-8">
               <h2 className="font-display text-2xl font-bold uppercase text-[#050505] sm:text-3xl">
@@ -1038,6 +1052,7 @@ export default async function EventPage({ params }: Props) {
             </div>
           </div>
         </section>
+        <SeoAuthorityHub lang={locale as LocaleCode} pageKey={`/events/${slug}`} pagePath={`${localePrefix(locale)}/events/${slug}`} />
       </main>
     );
   }
@@ -1284,8 +1299,19 @@ export default async function EventPage({ params }: Props) {
           </div>
         </section>
 
+        <PageContextualToc
+          locale={locale}
+          items={[
+            { id: 'sintesi-prezzi', label: getTocLabel35(locale, 'pricing') },
+            { id: 'booking', label: getTocLabel35(locale, 'booking') },
+            { id: 'dettagli-evento', label: getTocLabel35(locale, 'overview') },
+            { id: 'club-consigliati', label: getTocLabel35(locale, 'clubs') },
+            { id: 'silo-correlati', label: getTocLabel35(locale, 'related') },
+          ]}
+        />
+
         {/* CAPITOLO 02 — CARTA CALDA #F6F1E7: Prezzi Chiari, Informazioni Rapide & Prenotazione Immediata */}
-        <section className="w-full border-b border-[#050505] bg-[#F6F1E7] py-10 text-[#050505]">
+        <section id="sintesi-prezzi" className="scroll-mt-24 w-full border-b border-[#050505] bg-[#F6F1E7] py-10 text-[#050505]">
           <div className="mx-auto grid max-w-5xl grid-cols-1 gap-8 px-4 sm:px-6 lg:grid-cols-12 lg:items-start lg:px-8">
             <div className="space-y-6 lg:col-span-7">
               {Date.parse(event.endDateISO || event.dateISO) < Date.now() && (
@@ -1450,7 +1476,7 @@ export default async function EventPage({ params }: Props) {
         </section>
 
         {/* CAPITOLO 03 — NOTTE #050505: Approfondimento Evento, Galleria Swipe & Contenuti Editoriali */}
-        <section className="mx-auto w-full max-w-5xl px-4 py-12 sm:px-6 md:px-12">
+        <section id="dettagli-evento" className="scroll-mt-24 mx-auto w-full max-w-5xl px-4 py-12 sm:px-6 md:px-12">
           <div className="max-w-none">
             <div className="not-prose mb-6 flex flex-wrap gap-2">
               {[
@@ -1573,10 +1599,11 @@ export default async function EventPage({ params }: Props) {
           </section>
         )}
         <EventMoneyPillarsStrip locale={locale} />
-        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 border-t border-white/10 space-y-12">
+        <section id="club-consigliati" className="scroll-mt-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 border-t border-white/10 space-y-12">
           <VipQuoteCalculator locale={locale} />
           <PrioritySixShowcase locale={locale} />
         </section>
+        <SeoAuthorityHub lang={locale as LocaleCode} pageKey={`/events/${slug}`} pagePath={`${localePrefix(locale)}/events/${slug}`} />
       </main>
     </>
   );

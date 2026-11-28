@@ -12,6 +12,8 @@ import { seoRobots, seoTitle, withWhatsApp } from '@/lib/seoMetadata';
 import { compareEventDiscoveryItems, getEventDiscoveryItems } from '@/lib/eventDiscovery';
 import { WeeklyNightlifeNavigator, VipQuoteCalculator } from '@/components/NightlifeExpansionModules';
 import EditorialPageSections from '@/components/EditorialPageSections';
+import PageContextualToc from '@/components/PageContextualToc';
+import { getTocLabel35 } from '@/lib/i18n/contextualSilo35';
 import type { LocaleCode } from '@/lib/i18n/locales';
 import { getConciergeBookingUrl } from '@/lib/conciergeBooking';
 import { getJustSingingRainContent, isJustSingingRainActive } from '@/lib/just-singing-rain/justme35';
@@ -310,8 +312,20 @@ export default async function EventsTonightPage({ params }: Props) {
         </div>
       </section>
 
+      <PageContextualToc
+        locale={locale}
+        variant="compact"
+        items={[
+          { id: 'programma-stasera', label: getTocLabel35(locale, 'tonight') },
+          { id: 'club-aperti-stasera', label: getTocLabel35(locale, 'clubs') },
+          { id: 'prenota-stasera', label: getTocLabel35(locale, 'booking') },
+          { id: 'categorie-eventi', label: getTocLabel35(locale, 'categories') },
+          { id: 'silo-correlati', label: getTocLabel35(locale, 'related') },
+        ]}
+      />
+
       {/* Timeline */}
-      <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
+      <section id="programma-stasera" className="scroll-mt-24 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
         {items.length === 0 ? (
           <div className="py-24 text-center border border-white/10 rounded-xl bg-white/[0.02]">
             <Calendar className="w-12 h-12 text-white/20 mx-auto mb-4" />
@@ -366,7 +380,7 @@ export default async function EventsTonightPage({ params }: Props) {
       </section>
 
       {/* Dove Ballare Stasera nei 6 Club Prioritari */}
-      <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 border-t border-white/10">
+      <section id="club-aperti-stasera" className="scroll-mt-24 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 border-t border-white/10">
         <div className="mb-8">
           <p className="font-sans text-champagne text-[10px] font-bold uppercase tracking-[0.25em] mb-2">
             {tr(
@@ -455,7 +469,7 @@ export default async function EventsTonightPage({ params }: Props) {
       </section>
 
       {/* Interactive Modules */}
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div id="prenota-stasera" className="scroll-mt-24 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <WeeklyNightlifeNavigator locale={locale} />
         <VipQuoteCalculator locale={locale} />
       </div>

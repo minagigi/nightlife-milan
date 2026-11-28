@@ -13,6 +13,8 @@ import { weeklyEvents } from '@/lib/eventsConfig';
 import { seoRobots, seoTitle, withWhatsApp } from '@/lib/seoMetadata';
 import { PrioritySixShowcase, WeeklyNightlifeNavigator, VipQuoteCalculator } from '@/components/NightlifeExpansionModules';
 import EditorialPageSections from '@/components/EditorialPageSections';
+import PageContextualToc from '@/components/PageContextualToc';
+import { getTocLabel35 } from '@/lib/i18n/contextualSilo35';
 import VerticalHubsAndEventsSection from '@/components/VerticalHubsAndEventsSection';
 import TonightRainSpotlight from '@/components/TonightRainSpotlight';
 
@@ -241,19 +243,30 @@ export default async function ClubsPage({
         </div>
       </section>
 
+      <PageContextualToc
+        locale={localeCode}
+        items={[
+          { id: 'mappa-locali-milano', label: getTocLabel35(localeCode, 'map') },
+          { id: 'club-iconici', label: getTocLabel35(localeCode, 'clubs') },
+          { id: 'guida-locali-milano', label: getTocLabel35(localeCode, 'rules') },
+          { id: 'catalogo-club-milano', label: getTocLabel35(localeCode, 'catalog') },
+          { id: 'silo-correlati', label: getTocLabel35(localeCode, 'related') },
+        ]}
+      />
+
       <TonightRainSpotlight locale={localeCode} section="discoteca" />
 
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+      <section id="mappa-locali-milano" className="scroll-mt-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <VenueMapToggle venues={allVenues} lang={localeCode} mapPins={mapPins} />
       </section>
 
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 border-t border-white/10 space-y-16">
+      <section id="club-iconici" className="scroll-mt-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 border-t border-white/10 space-y-16">
         <PrioritySixShowcase locale={localeCode} />
         <WeeklyNightlifeNavigator locale={localeCode} />
         <VipQuoteCalculator locale={localeCode} />
       </section>
 
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 border-t border-white/10">
+      <section id="guida-locali-milano" className="scroll-mt-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 border-t border-white/10">
         <div className="max-w-2xl mb-12 p-5 rounded-xl border border-champagne/20 bg-champagne/[0.04]">
           <p className="font-sans text-champagne/60 text-[9px] tracking-[0.3em] uppercase mb-3">{copy.quickLabel}</p>
           <p className="font-sans text-white/75 text-sm leading-relaxed">{copy.quickBody}</p>

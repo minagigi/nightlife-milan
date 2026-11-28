@@ -12,6 +12,8 @@ import { getConciergeBookingUrl } from '@/lib/conciergeBooking';
 import { getEventDiscoveryItems } from '@/lib/eventDiscovery';
 import { VipQuoteCalculator, EntryFormulaMatrix, PrioritySixShowcase, SanSiroMatchAfterpartyFinder } from '@/components/NightlifeExpansionModules';
 import EditorialPageSections from '@/components/EditorialPageSections';
+import PageContextualToc from '@/components/PageContextualToc';
+import { getTocLabel35 } from '@/lib/i18n/contextualSilo35';
 import type { LocaleCode } from '@/lib/i18n/locales';
 import { getVenueCardPhoto4x5 } from '@/lib/siteCardAssets4x5';
 
@@ -332,7 +334,19 @@ export default async function EventIntentLanding({ intent, locale }: { intent: E
         </div>
       </section>
 
-      <section className="max-w-6xl mx-auto px-5 sm:px-8 py-16">
+      <PageContextualToc
+        locale={locale}
+        variant="compact"
+        items={[
+          { id: 'eventi-disponibili-intent', label: getTocLabel35(locale, 'calendar') },
+          { id: 'locali-servizi-intent', label: getTocLabel35(locale, 'clubs') },
+          { id: 'programma-serata-intent', label: getTocLabel35(locale, 'rules') },
+          { id: 'faq-intent', label: getTocLabel35(locale, 'faq') },
+          { id: 'silo-correlati', label: getTocLabel35(locale, 'related') },
+        ]}
+      />
+
+      <section id="eventi-disponibili-intent" className="scroll-mt-24 max-w-6xl mx-auto px-5 sm:px-8 py-16">
         <div className="flex items-end justify-between gap-4 mb-8">
           <div>
             <p className="text-champagne/70 text-xs uppercase mb-2">{items.length} · Milan</p>
@@ -349,7 +363,7 @@ export default async function EventIntentLanding({ intent, locale }: { intent: E
         )}
       </section>
 
-      <section className="border-y border-white/10 bg-white/[0.025]">
+      <section id="locali-servizi-intent" className="scroll-mt-24 border-y border-white/10 bg-white/[0.025]">
         <div className="max-w-6xl mx-auto px-5 sm:px-8 py-16">
           <h2 className="font-serif text-3xl sm:text-4xl font-bold mb-10">{COMMON.venues[lang]}</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -394,7 +408,7 @@ export default async function EventIntentLanding({ intent, locale }: { intent: E
         </div>
       </section>
 
-      <section className="max-w-6xl mx-auto px-5 sm:px-8 py-16">
+      <section id="programma-serata-intent" className="scroll-mt-24 max-w-6xl mx-auto px-5 sm:px-8 py-16">
         <h2 className="font-serif text-3xl sm:text-4xl font-bold mb-10">{COMMON.programme[lang]}</h2>
         <div className="grid md:grid-cols-3 border-y border-white/10 divide-y md:divide-y-0 md:divide-x divide-white/10">
           {PROGRAMME_STEPS.map((step) => (
@@ -407,7 +421,7 @@ export default async function EventIntentLanding({ intent, locale }: { intent: E
         </div>
       </section>
 
-      <section className="max-w-4xl mx-auto px-5 sm:px-8 pb-16">
+      <section id="faq-intent" className="scroll-mt-24 max-w-4xl mx-auto px-5 sm:px-8 pb-16">
         <h2 className="font-serif text-3xl sm:text-4xl font-bold mb-8">{COMMON.faq[lang]}</h2>
         <div className="divide-y divide-white/10 border-y border-white/10">
           {faqs.map((faq) => (

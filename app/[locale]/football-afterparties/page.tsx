@@ -1,7 +1,9 @@
 import { Metadata } from 'next';
 
 import EventVenueMap from '@/components/EventVenueMap';
-import { getEventVenueCopy } from '@/lib/i18n/eventVenueCopy';import EditorialPageSections from '@/components/EditorialPageSections';
+import { getEventVenueCopy } from '@/lib/i18n/eventVenueCopy';
+import EditorialPageSections from '@/components/EditorialPageSections';
+import { getTocHeading35 } from '@/lib/i18n/contextualSilo35';
 import type { LocaleCode } from '@/lib/i18n/locales';
 import Link from '@/components/LocalizedLink';
 import Image from 'next/image';
@@ -684,9 +686,7 @@ export default async function FootballAfterpartiesPage({
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
         <div className="rounded-2xl border border-white/15 bg-white/[0.02] p-6 sm:p-8">
           <h2 id="indice-guida-san-siro" className="font-serif text-2xl sm:text-3xl font-bold text-champagne mb-4">
-            {isIt
-              ? 'Indice della Guida Ufficiale Dopo-Partita San Siro 2026/2027'
-              : 'Table of Contents · Official San Siro Post-Match Guide 2026/2027'}
+            {getTocHeading35(locale)}
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs sm:text-sm">
             <div>

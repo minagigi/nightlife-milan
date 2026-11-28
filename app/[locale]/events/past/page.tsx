@@ -1,4 +1,6 @@
 import EditorialPageSections from '@/components/EditorialPageSections';
+import PageContextualToc from '@/components/PageContextualToc';
+import { getTocLabel35 } from '@/lib/i18n/contextualSilo35';
 import type { LocaleCode } from '@/lib/i18n/locales';
 import Image from 'next/image';
 import { Metadata } from 'next';
@@ -81,28 +83,59 @@ export default async function PastEventsPage({ params }: Props) {
   const emptyMsg = tr(locale, 'No past events yet.', 'Ancora nessun evento passato.');
 
   return (
-    <main className="max-w-7xl mx-auto px-4 sm:px-6 py-16">
-      <div className="mb-10">
+    <main className="bg-[#050505] text-[#F6F1E7]">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 pt-16 pb-10">
         <p className="text-champagne text-xs tracking-[0.3em] uppercase mb-3">{tr(locale, 'Archive', 'Archivio')}</p>
         <h1 className="text-4xl md:text-5xl font-serif font-bold text-white mb-4">{heading}</h1>
         <p className="text-white/60 max-w-2xl leading-relaxed">{sub}</p>
       </div>
 
-      {items.length === 0 ? (
-        <p className="text-white/50">{emptyMsg}</p>
-      ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {items.map(({ event, venue }) => (
-            <EventCard key={event.id} event={event} venue={venue} lang={locale} />
-          ))}
-        </div>
-      )}
+      <PageContextualToc
+        locale={locale}
+        variant="compact"
+        items={[
+          { id: 'archivio-serate', label: getTocLabel35(locale, 'archive') },
+          { id: 'prossimi-eventi-attivi', label: getTocLabel35(locale, 'calendar') },
+          { id: 'categorie-eventi', label: getTocLabel35(locale, 'categories') },
+          { id: 'silo-correlati', label: getTocLabel35(locale, 'related') },
+        ]}
+      />
 
-      <div className="mt-14 pt-8 border-t border-white/10">
-        <Link href={`${lp}/events`} className="text-champagne hover:text-white transition-colors text-sm tracking-wide">
-          ← {tr(locale, 'Upcoming events', 'Eventi in programma')}
-        </Link>
-      </div>
+      <section id="archivio-serate" className="scroll-mt-24 max-w-7xl mx-auto px-4 sm:px-6 py-12">
+        <h2 className="font-serif text-2xl md:text-3xl text-white mb-6">
+          {getTocLabel35(locale, 'archive')}
+        </h2>
+        {items.length === 0 ? (
+          <p className="text-white/60">{emptyMsg}</p>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {items.map(({ event, venue }) => (
+              <EventCard key={event.id} event={event} venue={venue} lang={locale} />
+            ))}
+          </div>
+        )}
+      </section>
+
+      <section id="prossimi-eventi-attivi" className="scroll-mt-24 max-w-7xl mx-auto px-4 sm:px-6 py-12 border-t border-white/10">
+        <h2 className="font-serif text-2xl md:text-3xl text-white mb-4">
+          {getTocLabel35(locale, 'calendar')}
+        </h2>
+        <div className="flex flex-wrap gap-4 pt-2">
+          <Link href={`${lp}/events/tonight`} className="px-5 py-2.5 border border-champagne/40 text-champagne hover:bg-champagne hover:text-[#050505] transition-colors text-xs font-mono uppercase tracking-wider">
+            {getTocLabel35(locale, 'tonight')} →
+          </Link>
+          <Link href={`${lp}/events/this-week`} className="px-5 py-2.5 border border-white/20 text-white/80 hover:border-champagne hover:text-champagne transition-colors text-xs font-mono uppercase tracking-wider">
+            {getTocLabel35(locale, 'weekend')} →
+          </Link>
+          <Link href={`${lp}/vip-tables`} className="px-5 py-2.5 border border-white/20 text-white/80 hover:border-champagne hover:text-champagne transition-colors text-xs font-mono uppercase tracking-wider">
+            {getTocLabel35(locale, 'pricing')} →
+          </Link>
+          <Link href={`${lp}/events`} className="px-5 py-2.5 border border-white/20 text-white/80 hover:border-champagne hover:text-champagne transition-colors text-xs font-mono uppercase tracking-wider">
+            ← {tr(locale, 'Upcoming events', 'Eventi in programma')}
+          </Link>
+        </div>
+      </section>
+
       <EditorialPageSections locale={locale as LocaleCode} path={`${localePrefix(locale)}/events/past`} />
     </main>
   );

@@ -11,6 +11,7 @@ import { getConciergeBookingUrl } from '@/lib/conciergeBooking';
 import { capodannoEventPath } from '@/lib/capodanno/routes';
 import { christmasVoyaPath } from '@/lib/christmas/voya35';
 import GuideToc from '@/components/GuideToc';
+import { getTocHeading35 } from '@/lib/i18n/contextualSilo35';
 import { Sparkles, MapPin, Clock, MessageCircle, ShieldCheck, CheckCircle2 } from 'lucide-react';
 import { VipQuoteCalculator, PrioritySixShowcase } from '@/components/NightlifeExpansionModules';
 
@@ -269,7 +270,7 @@ export default async function RooftopsPage({
           </p>
         </div>
         <div className="max-w-3xl">
-          <GuideToc sections={rooftopToc} title={isIt ? 'Indice Rooftop Milano' : 'Milan Rooftops Index'} />
+          <GuideToc sections={rooftopToc} title={getTocHeading35(locale)} />
         </div>
       </section>
 

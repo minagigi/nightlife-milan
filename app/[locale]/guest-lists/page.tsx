@@ -8,6 +8,8 @@ import { Sparkles, CheckCircle2, MessageCircle, Clock, ShieldCheck } from 'lucid
 import { EntryFormulaMatrix, VipQuoteCalculator, PrioritySixShowcase } from '@/components/NightlifeExpansionModules';
 import Image from 'next/image';
 import EditorialPageSections from '@/components/EditorialPageSections';
+import PageContextualToc from '@/components/PageContextualToc';
+import { getTocLabel35 } from '@/lib/i18n/contextualSilo35';
 import TonightRainSpotlight from '@/components/TonightRainSpotlight';
 import type { LocaleCode } from '@/lib/i18n/locales';
 import { getConciergeBookingUrl } from '@/lib/conciergeBooking';
@@ -206,10 +208,22 @@ export default async function GuestListsPage({
         </div>
       </section>
 
+      <PageContextualToc
+        locale={locale}
+        variant="compact"
+        items={[
+          { id: 'orari-prezzi-liste', label: getTocLabel35(locale, 'pricing') },
+          { id: 'confronto-formule', label: getTocLabel35(locale, 'formulas') },
+          { id: 'calcolatore-tavolo', label: getTocLabel35(locale, 'booking') },
+          { id: 'faq-liste', label: getTocLabel35(locale, 'faq') },
+          { id: 'silo-correlati', label: getTocLabel35(locale, 'related') },
+        ]}
+      />
+
       <TonightRainSpotlight locale={locale} section="discoteca" />
 
       {/* Priority 6 Guest List Windows & Prices */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
+      <section id="orari-prezzi-liste" className="scroll-mt-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
         <h2 className="font-serif text-3xl text-white mb-6">
           {isIt
             ? 'Orari Chiusura Liste e Prezzi nei 6 Locali Prioritari'
@@ -263,12 +277,12 @@ export default async function GuestListsPage({
       </section>
 
       {/* Entry Formula Matrix */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
+      <section id="confronto-formule" className="scroll-mt-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
         <EntryFormulaMatrix locale={locale} />
       </section>
 
       {/* VIP Quote Calculator */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
+      <section id="calcolatore-tavolo" className="scroll-mt-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
         <VipQuoteCalculator locale={locale} />
       </section>
 
@@ -278,7 +292,7 @@ export default async function GuestListsPage({
       </section>
 
       {/* FAQs */}
-      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section id="faq-liste" className="scroll-mt-24 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="font-serif text-3xl text-champagne mb-6">
           {isIt ? 'Domande Frequenti sulle Liste Discoteche' : 'Milan Guest Lists FAQ'}
         </h2>

@@ -2,7 +2,9 @@ import { Metadata } from 'next';
 
 import EventVenueMap from '@/components/EventVenueMap';
 import { getEventVenueCopy } from '@/lib/i18n/eventVenueCopy';
-import type { LocaleCode } from '@/lib/i18n/locales';import Link from '@/components/LocalizedLink';
+import { getTocHeading35 } from '@/lib/i18n/contextualSilo35';
+import type { LocaleCode } from '@/lib/i18n/locales';
+import Link from '@/components/LocalizedLink';
 import Image from 'next/image';
 import { tr } from '@/lib/i18n/t';
 import {
@@ -589,9 +591,7 @@ export default async function ConcertAfterpartiesPage({
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
         <div className="rounded-2xl border border-white/15 bg-white/[0.02] p-6 sm:p-8">
           <h2 id="indice-afterparty-concerti" className="font-serif text-2xl sm:text-3xl font-bold text-champagne mb-4">
-            {isIt
-              ? 'Indice della Guida Ufficiale Afterparty Concerti Milano 2026/2027'
-              : 'Table of Contents: Official Milan Concert Afterparties Guide 2026/2027'}
+            {getTocHeading35(locale)}
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs sm:text-sm">
             <div>

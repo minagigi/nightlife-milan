@@ -23,6 +23,7 @@ import { getAllCalendarEvents, isUpcomingRome } from '@/lib/calendarEvents';
 import { getEventDiscoveryItems } from '@/lib/eventDiscovery';
 import { VipQuoteCalculator, EntryFormulaMatrix, SanSiroMatchAfterpartyFinder } from '@/components/NightlifeExpansionModules';
 import EditorialPageSections from '@/components/EditorialPageSections';
+import { getTocHeading35, getTocLabel35 } from '@/lib/i18n/contextualSilo35';
 import TasteMotionLayer from '@/components/TasteMotionLayer';
 import VenueEventsAutoCarousel from '@/components/VenueEventsAutoCarousel';
 import VenueWeeklyHeroCarousel from '@/components/VenueWeeklyHeroCarousel';
@@ -1978,7 +1979,8 @@ export default async function ClubPage({ params }: Props) {
 
       {/* Quick-Jump SEO Anchor Navigation */}
       <nav
-        aria-label={tr(locale, 'Venue Sections', 'Sezioni Locale')}
+        aria-label={getTocHeading35(locale)}
+        data-page-toc="true"
         className="bg-[#F6F1E7] text-[#050505]"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-wrap items-center gap-2.5 text-sm font-semibold">
@@ -1986,19 +1988,19 @@ export default async function ClubPage({ params }: Props) {
             {weeklyHeroUi.tocLabel}
           </a>
           <a href="#prices-tables" className="px-4 py-2 bg-[#050505] text-[#F6F1E7] hover:bg-[#1F1C18] transition-colors">
-            {tr(locale, 'VIP Tables & Prices', 'Tavoli VIP & Prezzi')}
+            {getTocLabel35(locale, 'pricing')}
           </a>
           <a href="#dress-code-hours" className="px-4 py-2 bg-[#EAE3D5] text-[#050505] hover:bg-[#050505] hover:text-[#F6F1E7] transition-colors">
-            {tr(locale, 'Dress Code & Info', 'Dress Code & Info')}
+            {getTocLabel35(locale, 'rules')}
           </a>
           <a href="#upcoming-events" className="px-4 py-2 bg-[#EAE3D5] text-[#050505] hover:bg-[#050505] hover:text-[#F6F1E7] transition-colors">
-            {tr(locale, 'Events Calendar', 'Calendario Eventi')}
+            {getTocLabel35(locale, 'calendar')}
           </a>
           <a href="#map-directions" className="px-4 py-2 bg-[#EAE3D5] text-[#050505] hover:bg-[#050505] hover:text-[#F6F1E7] transition-colors">
-            {tr(locale, 'Map & Metro', 'Mappa & Metro')}
+            {getTocLabel35(locale, 'map')}
           </a>
           <a href="#faq" className="px-4 py-2 bg-[#EAE3D5] text-[#050505] hover:bg-[#050505] hover:text-[#F6F1E7] transition-colors">
-            {tr(locale, 'FAQ', 'Domande Frequenti')}
+            {getTocLabel35(locale, 'faq')}
           </a>
         </div>
       </nav>

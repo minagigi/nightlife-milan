@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
 import EditorialPageSections from '@/components/EditorialPageSections';
+import PageContextualToc from '@/components/PageContextualToc';
+import { getTocLabel35 } from '@/lib/i18n/contextualSilo35';
 import OctoberCalendarClient, { type OctoberCalendarCard } from '@/components/OctoberCalendarClient';
 import { getLocaleDef, indexedLocaleCodes, localePrefix, canonicalPageUrl, hreflangAlternates, type LocaleCode } from '@/lib/i18n/locales';
 import { getLocalizedDir35 } from '@/lib/i18n/dirTokens35';
@@ -56,5 +58,5 @@ export default async function October2026EventsPage({params}:Props){
       a.id.localeCompare(b.id),
   );
   const graph={'@context':'https://schema.org','@type':'ItemList',name:copy.labels.heading,numberOfItems:cards.length,itemListElement:cards.map((c,i)=>({'@type':'ListItem',position:i+1,name:c.title,url:BASE+c.href}))};
-  return <main className="min-h-screen bg-[#050505] pb-24 text-white" data-october-hub><script type="application/ld+json" dangerouslySetInnerHTML={{__html:jsonLdString(graph)}}/><header className="mx-auto max-w-7xl px-5 py-16 lg:px-8"><p className="text-base font-semibold text-champagne">Nightlife Milan</p><h1 className="mt-4 max-w-4xl font-serif text-4xl font-bold leading-tight sm:text-5xl">{copy.labels.heading}</h1><p className="mt-6 max-w-3xl text-lg leading-relaxed text-white/80">{copy.labels.introduction}</p><p className="mt-4 max-w-3xl text-base leading-7 text-white/70">{copy.labels.sourceNotice}</p></header><OctoberCalendarClient cards={cards} labels={copy.labels}/><EditorialPageSections locale={code} path={`${localePrefix(code)}/events/october-2026`} /></main>;
+  return <main className="min-h-screen bg-[#050505] pb-24 text-white" data-october-hub><script type="application/ld+json" dangerouslySetInnerHTML={{__html:jsonLdString(graph)}}/><header className="mx-auto max-w-7xl px-5 py-16 lg:px-8"><p className="text-base font-semibold text-champagne">Nightlife Milan</p><h1 className="mt-4 max-w-4xl font-serif text-4xl font-bold leading-tight sm:text-5xl">{copy.labels.heading}</h1><p className="mt-6 max-w-3xl text-lg leading-relaxed text-white/80">{copy.labels.introduction}</p><p className="mt-4 max-w-3xl text-base leading-7 text-white/70">{copy.labels.sourceNotice}</p></header><PageContextualToc locale={code} variant="compact" items={[{ id: 'calendario-ottobre', label: getTocLabel35(code, 'calendar') }, { id: 'categorie-eventi', label: getTocLabel35(code, 'categories') }, { id: 'silo-correlati', label: getTocLabel35(code, 'related') }]} /><div id="calendario-ottobre" className="scroll-mt-24"><OctoberCalendarClient cards={cards} labels={copy.labels}/></div><EditorialPageSections locale={code} path={`${localePrefix(code)}/events/october-2026`} /></main>;
 }

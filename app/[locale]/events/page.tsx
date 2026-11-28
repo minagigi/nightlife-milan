@@ -1,4 +1,6 @@
 import EditorialPageSections from '@/components/EditorialPageSections';
+import PageContextualToc from '@/components/PageContextualToc';
+import { getTocLabel35 } from '@/lib/i18n/contextualSilo35';
 import type { LocaleCode } from '@/lib/i18n/locales';
 import type { Metadata } from 'next';
 import Image from 'next/image';
@@ -139,10 +141,21 @@ export default async function EventsHubPage({ params }: Props) {
             </Link>
           </div>
         </header>
-        <MfwEntry locale={locale} />
-        <OctoberEntry locale={locale} />
+        <PageContextualToc
+          locale={locale}
+          items={[
+            { id: 'speciali-stagione', label: getTocLabel35(locale, 'special') },
+            { id: 'calendario-eventi', label: getTocLabel35(locale, 'calendar') },
+            { id: 'categorie-eventi', label: getTocLabel35(locale, 'categories') },
+            { id: 'silo-correlati', label: getTocLabel35(locale, 'related') },
+          ]}
+        />
+        <div id="speciali-stagione" className="scroll-mt-24">
+          <MfwEntry locale={locale} />
+          <OctoberEntry locale={locale} />
+        </div>
 
-        <section className="bg-[#050505] border-b border-[#F6F1E7]/14" aria-label={labels.events}>
+        <section id="calendario-eventi" className="scroll-mt-24 bg-[#050505] border-b border-[#F6F1E7]/14" aria-label={labels.events}>
           <div className="mx-auto max-w-[1440px] border-x border-[#F6F1E7]/14 px-5 py-16 sm:px-14">
             <DateSensitiveCalendar
               events={inventory}

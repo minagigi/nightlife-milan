@@ -676,7 +676,7 @@ export default function EditorialPageSections({ locale, path }: Props) {
     <>
       <aside className="w-full border-t border-[#F6F1E7]/14 bg-[#0B0A09] text-[#F6F1E7]" aria-label="Master Directory">
         <div className="mx-auto max-w-[1280px] border-x border-[#F6F1E7]/14 divide-y divide-[#F6F1E7]/14">
-          <section className="px-6 py-14 sm:px-14">
+          <section id="catalogo-club-milano" className="scroll-mt-24 px-6 py-14 sm:px-14">
             <p className="mb-2 font-sans tabular-nums text-[13px] font-bold uppercase tracking-[0.04em] text-[#C2B9AA]">
               {isIt ? 'ATLANTE CATEGORIALE DEI 41 LOCALI VERIFICATI · 2026/2027' : 'CATEGORICAL ATLAS OF ALL 41 VERIFIED VENUES · 2026/2027'}
             </p>
@@ -945,19 +945,19 @@ export default function EditorialPageSections({ locale, path }: Props) {
     <>
       <aside className="w-full border-t border-[#F6F1E7]/14 bg-[#0B0A09] text-[#F6F1E7]" aria-label="Special & Thematic Events Hub">
         <div className="mx-auto max-w-[1280px] border-x border-[#F6F1E7]/14 divide-y divide-[#F6F1E7]/14">
-          <section className="px-6 py-14 sm:px-14" data-aiso-direct-answer="true">
+          <section id="categorie-eventi" className="scroll-mt-24 px-6 py-14 sm:px-14" data-aiso-direct-answer="true">
             <p className="mb-2 font-sans tabular-nums text-[13px] font-bold uppercase tracking-[0.04em] text-[#C2B9AA]">
               {isIt ? 'CALENDARIO GRANDI EVENTI & SERATE TEMATICHE · MILANO 2026/2027' : 'MAJOR EVENTS & THEMATIC NIGHTS CALENDAR · MILAN 2026/2027'}
             </p>
             <h2 className="mb-4 font-display text-3xl text-[#F6F1E7] sm:text-4xl">
               {isIt
-                ? 'Guida agli Eventi Speciali e Tematici a Milano: Halloween 2026, Capodanno 2027, Fashion Week, Design Week, F1 ed Erasmus'
-                : 'Milan Special & Thematic Events Guide: Halloween 2026, NYE 2027, Fashion Week, Design Week, Monza F1 & Erasmus'}
+                ? 'Eventi Speciali e Serate Tematiche a Milano: Capodanno 2027, Halloween, Fashion Week ed Erasmus'
+                : 'Milan Special & Thematic Nights: NYE 2027, Halloween, Fashion Week, Monza F1 & Erasmus'}
             </h2>
             <p className="mb-8 font-sans text-base text-[#C2B9AA] max-w-4xl">
               {isIt
-                ? 'Durante i grandi appuntamenti internazionali e le notti tematiche settimanali, la domanda per i Tavoli VIP e le liste nominali a Milano raddoppia. Qui trovi il calendario operativo diviso per evento speciale, università e fascia d’età.'
-                : 'During major international weeks and weekly thematic club nights, demand for Milan VIP Tables and guest lists doubles. Below is the complete operational breakdown by special event, university, and age bracket.'}
+                ? 'Filtra per appuntamento stagionale, fascia anagrafica o pubblico universitario nei club partner di Milano.'
+                : 'Filter Milan partner club nights by seasonal peak date, age policy, or international student format.'}
             </p>
             <div
               data-events-thematic-grid
@@ -986,8 +986,8 @@ export default function EditorialPageSections({ locale, path }: Props) {
                   </h3>
                   <p className="text-[13px] text-[#C2B9AA] leading-relaxed">
                     {isIt
-                      ? 'Tre notti di produzioni scenografiche tra JustMe, Alcatraz (3 piste Horror Show), Fabrique, Old Fashion, Tocqueville 13 e Magazzini Generali. Nei fashion club è gradito il tema Dark Elegance; nei warehouse maschere e costumi completi.'
-                      : 'Three nights of immersive productions across JustMe, Alcatraz (3-stage Horror Show), Fabrique, Old Fashion, Tocqueville 13, and Magazzini Generali. Dark Elegance in luxury clubs; full costumes at warehouse parties.'}
+                      ? 'Allestimenti a tema e Dinner Show tra Just Me Milano, Pineta, 55 Milano, Tocqueville 13 e Magazzini Generali.'
+                      : 'Themed productions and Dinner Shows across Just Me Milano, Pineta, 55 Milano, Tocqueville 13, and Magazzini Generali.'}
                   </p>
                 </div>
               </article>
@@ -1015,8 +1015,8 @@ export default function EditorialPageSections({ locale, path }: Props) {
                   </h3>
                   <p className="text-[13px] text-[#C2B9AA] leading-relaxed">
                     {isIt
-                      ? 'Cenoni di Gala, Royal Buffet e Tavoli Privé di Capodanno da JustMe (Torre Branca), Armani Privé, Il Gattopardo, Tocqueville 13, Hollywood e The Sanctuary. Prenotazione Early-Bird consigliata entro fine novembre via WhatsApp.'
-                      : 'Gala Dinners, Royal Buffets, and NYE VIP Privé Tables at JustMe (Torre Branca), Armani Privé, Il Gattopardo, Tocqueville 13, Hollywood, and The Sanctuary. Early-Bird booking recommended via WhatsApp.'}
+                      ? 'Cenoni di Gala, Royal Buffet e Tavoli Privé da Just Me, Pineta, Voya Rooftop 20° Piano, REPVBLIC e 55 Milano.'
+                      : 'Gala Dinners, Royal Buffets, and NYE VIP Tables at Just Me, Pineta, Voya Rooftop 20th Floor, REPVBLIC, and 55 Milano.'}
                   </p>
                 </div>
               </article>
@@ -1042,8 +1042,8 @@ export default function EditorialPageSections({ locale, path }: Props) {
                   </h3>
                   <p className="text-[13px] text-[#C2B9AA] leading-relaxed">
                     {isIt
-                      ? 'Gli afterparty ufficiali delle sfilate (Armani Privé, JustMe, Volt, 11Clubroom), le feste del Salone del Mobile tra Tortona, Brera e Lambrate (The Sanctuary) e i party piloti/sponsor del GP di Monza.'
-                      : 'Official runway afterparties (Armani Privé, JustMe, Volt, 11Clubroom), Salone del Mobile Design Week parties across Tortona, Brera & Lambrate, and Monza F1 GP weekend celebrations.'}
+                      ? 'Aftershow sfilate, cocktail party del Salone del Mobile e weekend GP di Monza tra Just Me, Voya Rooftop e REPVBLIC.'
+                      : 'Runway afterparties, Salone del Mobile cocktails, and Monza F1 GP nights at Just Me, Voya Rooftop, and REPVBLIC.'}
                   </p>
                 </div>
               </article>
@@ -1069,8 +1069,8 @@ export default function EditorialPageSections({ locale, path }: Props) {
                   </h3>
                   <p className="text-[13px] text-[#C2B9AA] leading-relaxed">
                     {isIt
-                      ? 'Il calendario per gli studenti di Bocconi, Cattolica, Politecnico, Statale, IULM, NABA e Marangoni: Martedì/Mercoledì International Night (The Club, Old Fashion, Hollywood), Giovedì Universitario e Venerdì Alcatraz/Magazzini.'
-                      : 'Weekly calendar for Bocconi, Cattolica, Politecnico, Statale, IULM, NABA & Marangoni students: Tue/Wed International Nights (The Club, Old Fashion, Hollywood), Thursday Student Nights & Friday Alcatraz/Magazzini.'}
+                      ? 'Serate studentesche Bocconi, Cattolica e Politecnico tra Just Me, Pineta, The Club, Hollywood e Magazzini Generali.'
+                      : 'Weekly Bocconi, Cattolica, and Politecnico student nights across Just Me, Pineta, The Club, and Magazzini Generali.'}
                   </p>
                 </div>
               </article>
@@ -1098,8 +1098,8 @@ export default function EditorialPageSections({ locale, path }: Props) {
                   </h3>
                   <p className="text-[13px] text-[#C2B9AA] leading-relaxed">
                     {isIt
-                      ? 'Confronta i locali accessibili dai 18 anni compiuti (Alcatraz, Fabrique, Magazzini Generali, Lime, serate studentesche) con i club 21+/23+ (Armani Privé, JustMe, 11Clubroom, Volt, Tocqueville 13).'
-                      : 'Compare 18+ accessible venues (Alcatraz, Fabrique, Magazzini Generali, Lime, student nights) with strict 21+/23+ luxury doors (Armani Privé, JustMe, 11Clubroom, Volt, Tocqueville 13).'}
+                      ? 'Confronta le serate accessibili dai 18 anni (Pineta, 55 Milano, Magazzini) con i club 21+ (Just Me, Tocqueville 13).'
+                      : 'Compare 18+ accessible nights (Pineta, 55 Milano, Magazzini) with strict 21+ doors (Just Me, Tocqueville 13).'}
                   </p>
                 </div>
               </article>
@@ -1125,8 +1125,8 @@ export default function EditorialPageSections({ locale, path }: Props) {
                   </h3>
                   <p className="text-[13px] text-[#C2B9AA] leading-relaxed">
                     {isIt
-                      ? 'Showcase con special guest mondiali Afro House, Melodic Techno, Hip-Hop e Reggaeton, con assistenza Concierge multilingue e fatturazione aziendale per tavoli corporate.'
-                      : 'Showcases with global Afro House, Melodic Techno, Hip-Hop, and Reggaeton headliners, complete with multilingual VIP Concierge support and corporate table invoicing.'}
+                      ? 'Showcase Afro House, Melodic Techno, Hip-Hop e Reggaeton con assistenza Concierge multilingue 7/7.'
+                      : 'Afro House, Melodic Techno, Hip-Hop, and Reggaeton showcases with 7/7 multilingual VIP Concierge desk.'}
                   </p>
                 </div>
               </article>

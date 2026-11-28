@@ -1,5 +1,6 @@
 import React from 'react';
 import type { LocaleCode } from '@/lib/i18n/locales';
+import { getTocHeading35 } from '@/lib/i18n/contextualSilo35';
 
 export type HeadingIndexEntry = Readonly<{ id: string; label: string }>;
 
@@ -20,7 +21,7 @@ export default function HeadingIndex({
   entries: readonly HeadingIndexEntry[];
 }) {
   if (!entries.length) return null;
-  const heading = locale === 'it' ? 'Indice dei contenuti' : 'On this page';
+  const heading = getTocHeading35(locale);
   return (
     <nav
       aria-label={heading}

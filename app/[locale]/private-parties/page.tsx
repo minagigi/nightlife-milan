@@ -8,6 +8,7 @@ import { getLocaleDef, hreflangAlternates, canonicalPageUrl, localePrefix } from
 import { seoRobots, seoTitle, withWhatsApp } from '@/lib/seoMetadata';
 import { getHubSeoMeta35 } from '@/lib/i18n/hubSeoMeta35';
 import GuideToc from '@/components/GuideToc';
+import { getTocHeading35 } from '@/lib/i18n/contextualSilo35';
 import { Sparkles, PartyPopper, Crown, Users, MessageCircle, CheckCircle2 } from 'lucide-react';
 import { VipQuoteCalculator, PrioritySixShowcase } from '@/components/NightlifeExpansionModules';
 import VerticalHubsAndEventsSection from '@/components/VerticalHubsAndEventsSection';
@@ -268,7 +269,7 @@ export default async function PrivatePartiesPage({
           </p>
         </div>
         <div className="max-w-3xl">
-          <GuideToc sections={partyToc} title={isIt ? 'Indice Feste ed Eventi' : 'Private Parties Index'} />
+          <GuideToc sections={partyToc} title={getTocHeading35(locale)} />
         </div>
       </section>
 

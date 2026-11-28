@@ -8,6 +8,8 @@ import { getHubSeoMeta35 } from '@/lib/i18n/hubSeoMeta35';
 import { getConciergeBookingUrl } from '@/lib/conciergeBooking';
 import { EntryFormulaMatrix, VipQuoteCalculator } from '@/components/NightlifeExpansionModules';
 import EditorialPageSections from '@/components/EditorialPageSections';
+import PageContextualToc from '@/components/PageContextualToc';
+import { getTocLabel35 } from '@/lib/i18n/contextualSilo35';
 import type { LocaleCode } from '@/lib/i18n/locales';
 
 export const revalidate = 86400;
@@ -212,23 +214,24 @@ export default async function FAQPage({ params }: Props) {
           </div>
 
           {/* Jump links */}
-          <div className="flex flex-wrap gap-2 mb-12">
-            {faqCategories.map(cat => (
-              <a
-                key={cat.category}
-                href={`#${cat.category.toLowerCase().replace(/[^a-z0-9]/g, '-')}`}
-                className="px-4 py-2 rounded-full border border-white/15 text-white/60 text-xs tracking-wider hover:border-champagne/40 hover:text-champagne transition-colors"
-              >
-                {cat.category}
-              </a>
-            ))}
-          </div>
+          <PageContextualToc
+            locale={locale}
+            variant="compact"
+            items={[
+              ...faqCategories.map((cat, idx) => ({
+                id: `faq-cat-${idx + 1}`,
+                label: cat.category,
+              })),
+              { id: 'faq-formule', label: getTocLabel35(locale, 'formulas') },
+              { id: 'silo-correlati', label: getTocLabel35(locale, 'related') },
+            ]}
+          />
         </section>
 
         {/* FAQ Categories */}
         <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
-          {faqCategories.map(cat => (
-            <div key={cat.category} id={cat.category.toLowerCase().replace(/[^a-z0-9]/g, '-')}>
+          {faqCategories.map((cat, idx) => (
+            <div key={cat.category} id={`faq-cat-${idx + 1}`} className="scroll-mt-24">
               <h2 className="font-serif text-2xl text-white mb-8 pb-4 border-b border-white/10">
                 {cat.category}
               </h2>
@@ -249,7 +252,7 @@ export default async function FAQPage({ params }: Props) {
         </section>
 
         {/* Entry Formula Matrix & VIP Quote Calculator */}
-        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 space-y-16">
+        <section id="faq-formule" className="scroll-mt-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 space-y-16">
           <EntryFormulaMatrix locale={locale} />
           <VipQuoteCalculator locale={locale} />
         </section>

@@ -1,5 +1,7 @@
 import { Metadata } from 'next';
 import EditorialPageSections from '@/components/EditorialPageSections';
+import PageContextualToc from '@/components/PageContextualToc';
+import { getTocLabel35 } from '@/lib/i18n/contextualSilo35';
 import type { LocaleCode } from '@/lib/i18n/locales';
 import { tr } from '@/lib/i18n/t';
 import { getLocaleDef, hreflangAlternates, canonicalPageUrl, localePrefix } from '@/lib/i18n/locales';
@@ -324,8 +326,19 @@ export default async function ConciergePage({ params }: { params: Promise<{ loca
           </div>
         </section>
 
+        <PageContextualToc
+          locale={locale}
+          items={[
+            { id: 'come-funziona-concierge', label: getTocLabel35(locale, 'booking') },
+            { id: 'servizi-concierge', label: getTocLabel35(locale, 'formulas') },
+            { id: 'faq-concierge', label: getTocLabel35(locale, 'faq') },
+            { id: 'club-coperti-concierge', label: getTocLabel35(locale, 'clubs') },
+            { id: 'silo-correlati', label: getTocLabel35(locale, 'related') },
+          ]}
+        />
+
         {/* How it works (Warm Ivory Chapter #F6F1E7) */}
-        <section className="px-6 py-20 bg-[#F6F1E7] text-[#050505] border-b border-[#050505]/15">
+        <section id="come-funziona-concierge" className="scroll-mt-24 px-6 py-20 bg-[#F6F1E7] text-[#050505] border-b border-[#050505]/15">
           <div className="max-w-5xl mx-auto">
             <p className="font-mono text-[#3D372E] text-xs font-semibold tracking-[0.28em] uppercase mb-10 text-center">
               {tr(locale, 'N° 01 · HOW IT WORKS IN 3 STEPS', 'N° 01 · COME FUNZIONA IN 3 PASSI')}
@@ -371,7 +384,7 @@ export default async function ConciergePage({ params }: { params: Promise<{ loca
         </section>
 
         {/* Services */}
-        <section className="px-6 py-20 border-b border-[#F6F1E7]/14">
+        <section id="servizi-concierge" className="scroll-mt-24 px-6 py-20 border-b border-[#F6F1E7]/14">
           <div className="max-w-5xl mx-auto">
             <p className="font-mono text-[#EAE3D5] text-xs tracking-[0.28em] uppercase mb-3">
               {tr(locale, 'N° 02 · CONCIERGE SERVICES', 'N° 02 · SERVIZI CONCIERGE')}
@@ -424,7 +437,7 @@ export default async function ConciergePage({ params }: { params: Promise<{ loca
         </section>
 
         {/* FAQ */}
-        <section className="px-6 py-20 border-b border-[#F6F1E7]/14">
+        <section id="faq-concierge" className="scroll-mt-24 px-6 py-20 border-b border-[#F6F1E7]/14">
           <div className="max-w-3xl mx-auto">
             <p className="font-mono text-[#EAE3D5] text-xs tracking-[0.28em] uppercase mb-10 text-center">
               FAQ
@@ -441,7 +454,7 @@ export default async function ConciergePage({ params }: { params: Promise<{ loca
         </section>
 
         {/* Venues we cover */}
-        <section className="px-6 py-20 border-b border-[#F6F1E7]/14">
+        <section id="club-coperti-concierge" className="scroll-mt-24 px-6 py-20 border-b border-[#F6F1E7]/14">
           <div className="max-w-5xl mx-auto">
             <h2 className="font-serif text-4xl text-[#F6F1E7] mb-3">
               {tr(locale, '20 Verified Milan Clubs Covered', 'I 20 Club di Milano Coperti dal Servizio')}
@@ -470,7 +483,7 @@ export default async function ConciergePage({ params }: { params: Promise<{ loca
               ))}
             </div>
             <div className="flex flex-wrap gap-2">
-              {['Just Me', 'Pineta Club', 'Aria Club', '55 Milano', 'Voya Rooftop', 'Repvblic', 'Armani Privé', 'Volt Club', 'Magazzini Generali', 'Hollywood', 'Gattopardo', 'Tocqueville 13', 'Alcatraz', 'Fabrique', 'Ceresio 7', 'Terrazza Duomo 21'].map((v) => (
+              {['Just Me', 'Pineta Club', 'Voya Rooftop', 'Repvblic', '55 Milano', 'Carlsberg ØL', 'Magazzini Generali', 'Bobino', 'The Club', 'Tocqueville 13', 'TOM.', 'MIB Milano', 'Dazi', 'Hollywood', 'Gattopardo', 'Terrazza Duomo 21'].map((v) => (
                 <span key={v} className="px-3.5 py-1.5 border border-[#F6F1E7]/14 bg-[#0B0A09] text-[#E4DDD0] text-xs font-mono tracking-wider">
                   {v}
                 </span>
