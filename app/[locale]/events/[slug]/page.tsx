@@ -126,6 +126,7 @@ import { getConciergeBookingUrl } from '@/lib/conciergeBooking';
 import { CONTACT } from '@/config/contact';
 import { getPublicImageDimensions } from '@/lib/imageDimensions';
 import { toCardPoster4x5 } from '@/lib/cardPoster4x5';
+import { getCapodannoCategoryCardPoster4x5 } from '@/lib/siteCardAssets4x5';
 import { compareEventDiscoveryItems, getEventDiscoveryItems } from '@/lib/eventDiscovery';
 import {
   buildEventQuickAnswer,
@@ -214,7 +215,7 @@ function buildCapodannoCategoryMetadata(catId: string, locale: string): Metadata
   const def = getCapodannoCategoryPageDef(catId);
   const modeEvents = getCapodannoEventsForMode(catId);
   const eventsCount = modeEvents.length;
-  const heroImage = toCardPoster4x5(modeEvents[0]?.image || '/images/just-me-milano.webp');
+  const heroImage = getCapodannoCategoryCardPoster4x5(catId);
   const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
   const canonical = `${baseUrl}${capodannoCategoryPath(catId, locale)}`;
   const isMasterHub = catId === 'capodanno-2027';

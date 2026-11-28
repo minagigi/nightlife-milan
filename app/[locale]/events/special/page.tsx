@@ -57,6 +57,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
   const canonical = canonicalPageUrl(baseUrl, locale, '/events/special');
+  const heroPoster = isJustSingingRainActive()
+    ? toCardPoster4x5(JUST_SINGING_RAIN_POSTER_SRC)
+    : toCardPoster4x5(THANKSGIVING_JUSTME_POSTER_SRC);
 
   return {
     title,
@@ -83,13 +86,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title,
       description,
       url: canonical,
-      images: [{ url: `${baseUrl}/images/pillars/events-special-01.webp` }],
+      images: [{ url: `${baseUrl}${heroPoster}` }],
     },
   twitter: {
       card: 'summary_large_image',
       title,
       description,
-      images: [`${baseUrl}/images/pillars/events-special-01.webp`],
+      images: [`${baseUrl}${heroPoster}`],
     },
   };
 }

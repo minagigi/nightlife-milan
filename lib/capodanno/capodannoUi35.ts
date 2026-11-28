@@ -1293,8 +1293,8 @@ export function getCapodannoHubFaqs35(params: {
       q: w.hubFaqQ1Tpl.replace('{label}', label),
       a: w.hubFaqA1Tpl.replace('{count}', String(eventsCount)),
     },
-    { q: w.hubFaqQ2, a: w.hubFaqA2 },
-    { q: w.hubFaqQ3, a: `${w.freeAdviceTpl}. ${paymentSteps.join(' ')}` },
+    { q: w.hubFaqQ2, a: `${label} (${eventsCount}): ${w.hubFaqA2}` },
+    { q: w.hubFaqQ3, a: `${label}: ${w.freeAdviceTpl}. ${paymentSteps.join(' ')}` },
   ];
 }
 
@@ -1329,7 +1329,7 @@ export function getCapodannoDetailFaqs35(params: {
     },
     {
       q: w.detailFaqQ3Tpl.replace('{venue}', params.venueName),
-      a: `${w.freeAdviceTpl}. ${params.paymentSteps.join(' ')}`,
+      a: `${params.venueName} (${params.address}, ${params.city} · ${params.priceSummary}): ${w.freeAdviceTpl}. ${params.paymentSteps.join(' ')}`,
     },
   ];
 }

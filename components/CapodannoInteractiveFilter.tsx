@@ -119,7 +119,10 @@ export default function CapodannoInteractiveFilter({
           </div>
         </div>
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
-          {categoryPages.map((cat) => {
+          {[
+            ...categoryPages.filter((c) => c.slug === activeSlug),
+            ...categoryPages.filter((c) => c.slug !== activeSlug),
+          ].map((cat) => {
             const isCurrent = cat.slug === activeSlug;
             const catLabel = getCapodannoCategoryShortLabel35(cat.slug, locale, cat.shortLabelIt, cat.shortLabelEn);
             const catBadge = getCapodannoCategoryBadge35(cat.slug, locale, cat.badgeIt, cat.badgeEn);
