@@ -477,7 +477,7 @@ export function getOccasionsCatalog(locale: string): VerticalCardItem[] {
           ],
       href: `/${locale}/private-parties`,
       whatsappText: 'Ciao Nightlife Milan, vorrei organizzare una Festa a Sorpresa / Festa Nuovo Inizio a Milano',
-      imageSrc: '/images/venues/voya-milano/voya-milano-interior-01.webp',
+      imageSrc: '/images/venues/voya-rooftop-milan/voya-rooftop-milan-interior-01.webp',
     },
     {
       id: 'occ-aziendali-cena-show',

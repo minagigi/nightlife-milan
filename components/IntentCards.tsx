@@ -26,7 +26,7 @@ export default function IntentCards({ locale }: { locale: string }) {
       title: copy.vipTitle,
       subtitle: copy.vipSubtitle,
       href: `${lp}/vip-tables`,
-      imageSrc: '/images/events/cards-4x5/pillars/guide-03.webp',
+      imageSrc: '/images/events/cards-4x5/pillars/vip-tables-bottle-card.webp',
       isGold: true,
     },
     {
@@ -48,7 +48,7 @@ export default function IntentCards({ locale }: { locale: string }) {
       title: copy.conciergeTitle,
       subtitle: copy.conciergeSubtitle,
       href: waLink,
-      imageSrc: '/images/events/cards-4x5/pillars/guide-01.webp',
+      imageSrc: '/images/events/cards-4x5/pillars/concierge-7x7-card.webp',
       isWhatsApp: true,
     },
   ];

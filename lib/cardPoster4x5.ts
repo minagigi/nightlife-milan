@@ -839,6 +839,7 @@ const CARD_POSTER_4X5_MAP: Readonly<Record<string, string>> = {
   "/images/events/weekly-posters/terrazza-triennale-resident-weekly.webp": "/images/events/cards-4x5/weekly-posters/terrazza-triennale-resident-weekly.webp",
   "/images/events/weekly-posters/the-roof-resident-weekly.webp": "/images/events/cards-4x5/weekly-posters/the-roof-resident-weekly.webp",
   "/images/events/weekly-posters/volt-club-resident-weekly.webp": "/images/events/cards-4x5/weekly-posters/volt-club-resident-weekly.webp",
+  "/images/events/flagship-weekly/justme-weekly.webp": "/images/events/cards-4x5/flagship-weekly/justme-weekly.webp",
 };
 
 export function toCardPoster4x5(src: string | undefined | null): string {

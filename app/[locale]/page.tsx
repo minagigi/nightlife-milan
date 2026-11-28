@@ -562,14 +562,14 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
             </h2>
             <div className="grid grid-cols-1 border-l border-t border-[#050505]/20 bg-[#FFFFFF] md:grid-cols-2 lg:grid-cols-4">
               {[
-                { label: homeCopy.categoryLabels[0], href: `${lp}/genres/techno`, img: '/images/events/cards-4x5/genres/techno.webp' },
-                { label: homeCopy.categoryLabels[1], href: `${lp}/vip-tables`, img: '/images/events/cards-4x5/pillars/guide-03.webp' },
-                { label: homeCopy.categoryLabels[2], href: `${lp}/aperitivo`, img: '/images/events/cards-4x5/partner-clubs/terrazza-duomo-21.webp' },
-                { label: homeCopy.categoryLabels[3], href: `${lp}/zones/navigli`, img: '/images/events/cards-4x5/zones/navigli.webp' },
-                { label: homeCopy.categoryLabels[4], href: `${lp}/zones/corso-como`, img: '/images/events/cards-4x5/zones/corso-como.webp' },
-                { label: homeCopy.categoryLabels[5], href: `${lp}/guides`, img: '/images/events/cards-4x5/pillars/guide-04.webp' },
-                { label: homeCopy.categoryLabels[6], href: `${lp}/concierge`, img: '/images/events/cards-4x5/pillars/guide-05.webp' },
-                { label: homeCopy.categoryLabels[7], href: `${lp}/clubs`, img: '/images/events/cards-4x5/partner-clubs/pineta-milano.webp' },
+                { label: homeCopy.categoryLabels[0], href: `${lp}/genres/techno`, img: '/images/events/cards-4x5/genres/techno-underground-card.webp' },
+                { label: homeCopy.categoryLabels[1], href: `${lp}/vip-tables`, img: '/images/events/cards-4x5/pillars/vip-prive-card.webp' },
+                { label: homeCopy.categoryLabels[2], href: `${lp}/aperitivo`, img: '/images/events/cards-4x5/partner-clubs/terrazza-21.webp' },
+                { label: homeCopy.categoryLabels[3], href: `${lp}/zones/navigli`, img: '/images/events/cards-4x5/zones/navigli-district-card.webp' },
+                { label: homeCopy.categoryLabels[4], href: `${lp}/zones/corso-como`, img: '/images/events/cards-4x5/zones/corso-como-district-card.webp' },
+                { label: homeCopy.categoryLabels[5], href: `${lp}/guides`, img: '/images/events/cards-4x5/pillars/guides-official-card.webp' },
+                { label: homeCopy.categoryLabels[6], href: `${lp}/concierge`, img: '/images/events/cards-4x5/pillars/concierge-desk-card.webp' },
+                { label: homeCopy.categoryLabels[7], href: `${lp}/clubs`, img: '/images/events/cards-4x5/partner-clubs/pineta-club-milano.webp' },
               ].map((tag, idx) => (
                 <Link
                   key={tag.label}

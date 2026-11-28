@@ -44,35 +44,22 @@ export function getEnhancedVenueGallery(venue: Venue): string[] {
   const map: Record<string, string[]> = {
     'v-tocqueville': [
       '/images/pillars/venue-tocqueville.webp',
-      '/images/seo-events/master/tocqueville-01.webp',
-      '/images/seo-events/master/tocqueville-02.webp',
-      '/images/seo-events/master/tocqueville-03.webp',
-      '/images/seo-events/master/tocqueville-04.webp',
-      '/images/venues/11-clubroom/11-clubroom-interior-01.webp',
+      '/images/seo-events/master/tocqueville-13.webp',
     ],
     'v-alcatraz': [
       '/images/pillars/venue-alcatraz.webp',
-      '/images/seo-events/master/alcatraz-01.webp',
-      '/images/seo-events/master/alcatraz-02.webp',
-      '/images/seo-events/master/alcatraz-03.webp',
-      '/images/seo-events/master/alcatraz-04.webp',
-      '/images/venues/magazzini-generali/magazzini-generali-interior-01.webp',
+      '/images/seo-events/master/alcatraz-milano.webp',
+      '/images/seo-events/master/v-alcatraz-2.webp',
     ],
     'v-fabrique': [
       '/images/pillars/venue-fabrique.webp',
-      '/images/seo-events/master/fabrique-01.webp',
-      '/images/seo-events/master/fabrique-02.webp',
-      '/images/seo-events/master/fabrique-03.webp',
-      '/images/seo-events/master/fabrique-04.webp',
-      '/images/venues/repvblic-milano/repvblic-milano-interior-01.webp',
+      '/images/seo-events/master/fabrique-milano.webp',
+      '/images/seo-events/master/v-fabrique-2.webp',
     ],
     'v-amnesia': [
       '/images/pillars/venue-amnesia.webp',
-      '/images/seo-events/master/amnesia-01.webp',
-      '/images/seo-events/master/amnesia-02.webp',
-      '/images/seo-events/master/amnesia-03.webp',
-      '/images/seo-events/master/amnesia-04.webp',
-      '/images/venues/volt-club-milano/volt-club-milano-interior-01.webp',
+      '/images/seo-events/master/amnesia-milano.webp',
+      '/images/seo-events/master/v-amnesia-2.webp',
     ],
     'v-philipps': [
       '/images/venues/philipps-milano/philipps-milano-01.webp',
@@ -1170,7 +1157,7 @@ export function resolveVenueEventsForCarousel(
     const dStr = ev.startISO.slice(0, 10);
     const tStr = ev.startISO.slice(11, 16) || '23:00';
     const endStr = ev.endISO ? ev.endISO.slice(11, 16) : '05:00';
-    const fallbackImg = '/images/events/weekly-posters/justme-saturday.webp';
+    const fallbackImg = '/images/events/cards-4x5/flagship-weekly/justme-weekly.webp';
     const cardHref = toHref(`/events/${slug}`);
     return {
       id: ev.id,
@@ -1238,7 +1225,7 @@ export function resolveVenueEventsForCarousel(
     return cleanVenue.length >= 4 && cleanWeekly.length >= 4 && (wLoc.includes(cleanVenue) || venueNameLower.includes(cleanWeekly));
   });
 
-  const fallbackImg = '/images/events/weekly-posters/justme-saturday.webp';
+  const fallbackImg = '/images/events/cards-4x5/flagship-weekly/justme-weekly.webp';
   const curatedProposals: CarouselEventCard[] = matchedWeekly.map((w) => {
     const weeklyHref = toHref(`/events/${w.clubSlug}-${w.day}-${w.eventSlug}`);
     const refSun = new Date(Date.UTC(2026, 10, 22 + (w.dayOfWeek || 0), 12, 0, 0));

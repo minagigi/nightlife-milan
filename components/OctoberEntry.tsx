@@ -391,7 +391,7 @@ export function HomeHalloweenAndCapodannoSections({
               {
                 href: capodannoCategoryPath('capodanno-speciale', locale),
                 label: isIt ? '16 Speciali, Tram & Terme ↗' : '16 Special, Tram & Spa ↗',
-                img: '/images/events/cards-4x5/capodanno-2027-posters/capodanno-tram-storico-milano.webp',
+                img: '/images/events/cards-4x5/capodanno-2027-posters/capodanno-tram-storico-milano-atmosfera.webp',
               },
               {
                 href: capodannoCategoryPath('capodanno-lombardia', locale),

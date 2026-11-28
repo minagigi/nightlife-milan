@@ -32,7 +32,7 @@ export default function GlobalPriorityRecommendations({
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {topEvents.map((ev) => {
-            const poster = toCardPoster4x5(ev.image || '/images/events/cards-4x5/weekly-posters/justme-saturday.webp');
+            const poster = toCardPoster4x5(ev.image || '/images/events/cards-4x5/flagship-weekly/justme-weekly.webp');
             return (
               <article key={ev.id} className="border border-[#F6F1E7]/14 bg-[#0B0A09] overflow-hidden flex flex-col justify-between">
                 <div>

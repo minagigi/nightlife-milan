@@ -368,6 +368,13 @@ const ENGLISH_SECTIONS_TEXT: readonly [
 ];
 
 const PAGE_KEY_SEO_IMAGES: Record<string, readonly string[]> = {
+  '/': [
+    '/images/guides-editorial/just-me-dancefloor.webp',
+    '/images/guides-editorial/repvblic-vip-lounge.webp',
+    '/images/guides-editorial/fiftyfive-loft.webp',
+    '/images/guides-editorial/terrazza-duomo-skyline.webp',
+    '/images/guides-editorial/carlsberg-ol-stage-candles.webp',
+  ],
   '/guest-lists': [
     '/images/pillars/guest-lists-01.webp',
     '/images/pillars/guest-lists-02.webp',

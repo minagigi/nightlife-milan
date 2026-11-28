@@ -1179,7 +1179,7 @@ export default function EditorialPageSections({ locale, path }: Props) {
             {
               href: `${lp}/vip-tables`,
               label: `${v01.formulaVip} ↗`,
-              img: '/images/events/cards-4x5/pillars/guide-03.webp',
+              img: '/images/events/cards-4x5/pillars/vip-prive-bottles-card.webp',
             },
             {
               href: `${lp}/bottle-prices`,
@@ -1189,12 +1189,12 @@ export default function EditorialPageSections({ locale, path }: Props) {
             {
               href: `${lp}/guides/${isIt ? 'speakeasy-nascosti-navigli' : 'hidden-speakeasies-navigli'}`,
               label: isIt ? '12 Speakeasy Segreti ↗' : '12 Secret Speakeasies ↗',
-              img: '/images/events/cards-4x5/pillars/guide-02.webp',
+              img: '/images/events/cards-4x5/pillars/speakeasy-secret-card.webp',
             },
             {
               href: `${lp}/guides/${isIt ? 'intervista-sound-of-milan' : 'interview-sound-of-milan'}`,
               label: isIt ? '7 Interviste Insider ↗' : '7 Insider Interviews ↗',
-              img: '/images/events/cards-4x5/pillars/guide-04.webp',
+              img: '/images/events/cards-4x5/pillars/insider-interviews-card.webp',
             },
             {
               href: `${lp}/events/special`,

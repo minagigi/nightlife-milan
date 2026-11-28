@@ -54,7 +54,7 @@ export default function VenueEventDates({
               const poster = toCardPoster4x5(
                 event.image && !event.image.startsWith('/images/venues/')
                   ? event.image
-                  : '/images/events/cards-4x5/weekly-posters/justme-saturday.webp',
+                  : '/images/events/cards-4x5/flagship-weekly/justme-weekly.webp',
               );
               return (
                 <Link

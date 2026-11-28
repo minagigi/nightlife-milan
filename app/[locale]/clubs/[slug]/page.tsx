@@ -2249,7 +2249,7 @@ export default async function ClubPage({ params }: Props) {
                   const timeStr = new Intl.DateTimeFormat(locale, {
                     hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Rome',
                   }).format(new Date(ev.dateISO));
-                  const fallbackPoster = weeklyHeroSchedule.cards[0]?.imageSrc || '/images/events/cards-4x5/weekly-posters/justme-saturday.webp';
+                  const fallbackPoster = weeklyHeroSchedule.cards[0]?.imageSrc || '/images/events/cards-4x5/flagship-weekly/justme-weekly.webp';
                   const evPoster = toCardPoster4x5(ev.image && !ev.image.startsWith('/images/venues/') ? ev.image : fallbackPoster);
                   return (
                     <Link
