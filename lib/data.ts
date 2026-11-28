@@ -14,6 +14,7 @@ import { applyGscCapodannoBatch20261125 } from '@/lib/guidesGscCapodannoBatch202
 import { applyTop1SeoBatch20261125 } from '@/lib/guidesTop1SeoBatch20261125';
 import { applyGscGuidesBatch20261126 } from '@/lib/guidesGscBatch20261126';
 import { applyGscGuidesBatch20261127 } from '@/lib/guidesGscBatch20261127';
+import { applyGscGuidesBatch20261128 } from '@/lib/guidesGscBatch20261128';
 import { renderVoyaNyeMenuEditorialHtml } from '@/lib/capodanno/voya35';
 
 // Mock Data for Zones
@@ -2854,6 +2855,7 @@ applyGscCapodannoBatch20261125(mockGuides);
 applyTop1SeoBatch20261125(mockGuides);
 applyGscGuidesBatch20261126(mockGuides);
 applyGscGuidesBatch20261127(mockGuides);
+applyGscGuidesBatch20261128(mockGuides);
 populateGuideSlugs35(mockGuides);
 for (const g of mockGuides) {
   if (GUIDE_HERO_IMAGES_114[g.id]) {

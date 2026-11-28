@@ -97,8 +97,8 @@ test('Terme di Sirmione confirms 198 EUR, non-partner status, JustMe Garda Lake 
   }
 });
 
-test('GSC Pillar & Upgraded Guides in mockGuides (total 134): >= 2,000 words, 6 H2 sections, >= 18 H3, 0 inner H2, 6 FAQs, clean limits & images <= 300 KB across all 35 locales', () => {
-  assert.equal(mockGuides.length, 134, `Expected 134 total guides, got ${mockGuides.length}`);
+test('GSC Pillar & Upgraded Guides in mockGuides (total 135): >= 2,000 words, 6 H2 sections, >= 18 H3, 0 inner H2, 6 FAQs, clean limits & images <= 300 KB across all 35 locales', () => {
+  assert.equal(mockGuides.length, 135, `Expected 135 total guides, got ${mockGuides.length}`);
 
   for (const id of [
     'g-117',
@@ -140,6 +140,11 @@ test('GSC Pillar & Upgraded Guides in mockGuides (total 134): >= 2,000 words, 6 
     'g-134',
     'g-45',
     'g-40',
+    'g-135',
+    'g-dress-code',
+    'g-75',
+    'g-35',
+    'g-103',
   ] as const) {
     const guide = mockGuides.find((g) => g.id === id);
     assert.ok(guide, `Missing guide ${id}`);
@@ -297,7 +302,7 @@ test('Zero duplicate -vip-guide-vip-guide slugs and legacy guide alias resolutio
   );
 });
 
-test('PILLAR_HEADLINE_35 & buildTasteExplorerData preserve SEO headlines, honest TBA, 18 partners, and zero forbidden copy across 35 locales', () => {
+test('PILLAR_HEADLINE_35 & buildTasteExplorerData preserve SEO headlines, honest TBA, 19 partners, and zero forbidden copy across 35 locales', () => {
   for (const gid of ['g-117', 'g-118'] as const) {
     for (const loc of ALL_35_LOCALES) {
       const h1 = getPillarDisplayHeadline(gid, loc);
@@ -393,6 +398,11 @@ test('V2 Curated Editorial Media & Reusable 118-Guide Template invariants', () =
     'g-134',
     'g-45',
     'g-40',
+    'g-135',
+    'g-dress-code',
+    'g-75',
+    'g-35',
+    'g-103',
   ] as const) {
     const hero = GUIDE_HERO_IMAGES_114[gid];
     const inlines = GUIDE_INLINE_IMAGES_114[gid] || [];

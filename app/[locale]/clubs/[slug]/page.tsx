@@ -1785,6 +1785,9 @@ export default async function ClubPage({ params }: Props) {
     'v-volt': ['g-23', 'g-134'],
     'v-amnesia': ['g-26', 'g-134'],
     'v-gate': ['g-119', 'g-134'],
+    'v-magazzini': ['g-35', 'g-135'],
+    'v-bobino': ['g-38', 'g-103'],
+    'v-apollo': ['g-34', 'g-103'],
   };
   const reciprocalGuideIds = Array.from(
     new Set([...(venueDedicatedGuides[venue.id] || []), 'g-dress-code', 'g-vip-bottle-prices', 'g-new-years-eve-2027', 'g-115', 'g-116', 'g-118']),

@@ -690,6 +690,14 @@ const LANG6_NAMES: Record<string, Record<Lang6, { name: string; shortName: strin
     de: { name: 'Techno Clubs Mailand 2026/2027: Volt, Amnesia, Gate, Tunnel & Super Club', shortName: 'Techno Clubs', zone: 'Vetra M4, Forlanini, Scalo Farini, Centrale & Tortona' },
     pt: { name: 'Clubes Techno em Milão 2026/2027: Volt, Amnesia, Gate, Tunnel e Super Club', shortName: 'Clubes Techno', zone: 'Vetra M4, Forlanini, Scalo Farini, Centrale & Tortona' },
   },
+  'g-135': {
+    en: { name: 'Magazine Milano Nightclub & Magazzini Generali 2027 Club Guide', shortName: 'Magazine Club', zone: 'Ripamonti, Porta Romana, Quadrilatero & Tortona' },
+    it: { name: 'Magazine Milano Discoteca e Magazzini Generali: Guida Club 2027', shortName: 'Magazine Club', zone: 'Ripamonti, Porta Romana, Quadrilatero & Tortona' },
+    es: { name: 'Magazine Milano Discoteca y Magazzini Generali: Guía Club 2027', shortName: 'Magazine Milán', zone: 'Ripamonti, Porta Romana, Quadrilatero & Tortona' },
+    fr: { name: 'Magazine Milano Discothèque et Magazzini Generali : Guide 2027', shortName: 'Magazine Club', zone: 'Ripamonti, Porta Romana, Quadrilatero & Tortona' },
+    de: { name: 'Magazine Milano Diskothek & Magazzini Generali Guide 2026/2027', shortName: 'Magazine Club', zone: 'Ripamonti, Porta Romana, Quadrilatero & Tortona' },
+    pt: { name: 'Magazine Milano Discoteca e Magazzini Generali: Guia Club 2027', shortName: 'Magazine Milão', zone: 'Ripamonti, Porta Romana, Quadrilatero & Tortona' },
+  },
 };
 
 const CLEAN_15_40_IT_PARENS: Record<string, { en: string }> = {
